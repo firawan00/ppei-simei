@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lb": "rm -rf ../be/public/static/* && set PUBLIC_URL=/public&& npm run build && mv build/index.html build/app.blade.php && cp -a build/* ../be/public"
+    "lb": "rm -rf ../be/public/static/* && set PUBLIC_URL=/public&& npm run build && mv dist/index.html dist/app.blade.php && cp -a dist/* ../be/public"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
