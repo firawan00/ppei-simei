@@ -32,7 +32,7 @@ class AddPaidToUsersTable extends Migration
             $table->string('password')->nullable()->change();
 
             // $table->foreignId('status_id')->after('id')->default(1)->constrained('status')->cascadeOnDelete();
-            $table->foreignId('role_id')->after('id')->default(1)->constrained('user_role')->cascadeOnDelete();
+            // $table->foreignId('role_id')->after('id')->default(1)->constrained('user_role')->cascadeOnDelete();
 
             $table->boolean('gender')->nullable()->after('password');
             $table->string('img_path')->nullable()->after('password');
