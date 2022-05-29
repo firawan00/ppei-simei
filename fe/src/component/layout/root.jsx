@@ -6,10 +6,10 @@ import Stack from "@mui/material/Stack";
 
 export default function App({ children }) {
   return (
-    <Stack minHeight={"100vh"}>
+    <>
       {children}
       <Loader />
       <SnakBar />
-    </Stack>
+    </>
   );
 }
