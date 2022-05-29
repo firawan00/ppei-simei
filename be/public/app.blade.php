@@ -9,10 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="/public/site.webmanifest" />
     <title>Genesha DEV</title>
-    <script type="module" crossorigin src="/assets/index.8807ee23.js"></script>
-    <link rel="stylesheet" href="/assets/index.dfab9494.css">
+    <script type="module" crossorigin src="/public/assets/index.8807ee23.js"></script>
+    <link rel="stylesheet" href="/public/assets/index.dfab9494.css">
   </head>
   <body>
     <div id="root"></div>
