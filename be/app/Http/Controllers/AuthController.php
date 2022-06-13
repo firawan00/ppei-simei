@@ -12,8 +12,6 @@ use Illuminate\Support\Carbon;
 class AuthController extends Controller
 {
 
-
-
     public function signin(Request $request)
     {
         $request->validate([
@@ -23,24 +21,33 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
+
+            if ($user->status_id == 1) return response()->json([
+                'error' => 'invalid login',
+            ], 400);
+
             $token = ['token' => ($user->createToken($user->email . '-' . now()))->accessToken];
             $data = (object)array_merge((array)json_decode($user), (array)$token);
             return response()->json($data);
         } else
             return response()->json([
-                'error' => 'invalid login'
+                'error' => 'invalid login',
             ], 400);
     }
 
     public function signup(Request $r)
     {
-        $user = User::firstOrCreate(['email' => $r->email], $r->all());
-        $user->status_id = 1;
-        $user->save();
+        User::firstOrCreate(['email' => $r->email], $r->all());
+        $user = User::whereEmail($r->email)->first()->makeVisible(['status_id']);
 
-        $email = new EmailController;
-        $email->email_verification($r->email);
-        return response()->json($r);
+        if ($user->status_id  == 1) {
+            $email = new EmailController;
+            $email->email_verification($r->email);
+            return response()->json($r);
+        }
+        return response()->json([
+            'error' => 'user registered',
+        ], 400);
     }
 
     public function emailverification(Request $r)
@@ -68,6 +75,19 @@ class AuthController extends Controller
         $email = new EmailController;
         $email->email_verification($r->email);
         return response()->json($r);
+    }
+
+    public function register(Request $r)
+    {
+        $user = Auth::user();
+        $user->update($r->except(['id']));
+        $user->save();
+        // $token = ['token' => ($user->createToken($user->email . '-' . now()))->accessToken];
+        // $data = (object)array_merge((array)json_decode($user), (array)$token);
+        // return response()->json($data);
+
+        return response()->json($user);
+        # code...
     }
 
     public function emailcheck(Request $r)

@@ -45,6 +45,7 @@ class dev_reset extends Command
         echo $devider;
 
         Artisan::call('migrate:fresh --seed', [], $this->getOutput());
+        Artisan::call('passport:install', [], $this->getOutput());
         Artisan::call('optimize', [], $this->getOutput());
         echo $devider;
 

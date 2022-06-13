@@ -16,9 +16,9 @@ export default function App({ children }) {
     <Context.Provider
       value={{
         setisLoading: app.setisLoading,
-        auth,
         app,
         snackbar,
+        auth,
       }}
     >
       <ThemeProvider>{children}</ThemeProvider>

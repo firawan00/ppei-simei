@@ -28,7 +28,6 @@ class UserStore extends Migration
             $table->string('website')->nullable();
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
-
             $table->text('opportunities')->nullable();
         });
 

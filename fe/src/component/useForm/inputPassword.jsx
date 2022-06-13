@@ -1,9 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Stack, TextField, Typography } from "@mui/material";
+import {
+  Stack,
+  TextField,
+  Typography,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import Context from "@/component/context";
 import { min } from "./helper";
 
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
 export default function App({ val, setval }) {
+  const [showPwd, setshowPwd] = useState(false);
   // const { isLoading } = useContext(Context);
   // const [state, setstate] = useState({
   //   val: "",
@@ -24,16 +34,36 @@ export default function App({ val, setval }) {
   // useEffect(() => {
   //   if (!state.err) v({ password: state.val });
   // }, [state]);
+  const handleClickShowPassword = () => {
+    setshowPwd(!showPwd);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <>
       <TextField
         fullWidth
         label="password"
-        type={"password"}
+        type={showPwd ? "text" : "password"}
         name="password"
         value={val || ""}
         onChange={setval}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {showPwd ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
         // error={state.err && state.isDiry}
       />
       {/* <Typography

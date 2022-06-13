@@ -107,71 +107,14 @@ export default function App({ refdata }) {
             >
               {`${selectedtemplate.name} Tags`}
             </Typography>
-            <SelectGroup
+            <Input.SelectTag
               asString
-              val={(v) => fornmsetresult({ ...fornmresult, tags: v })}
+              setval={(v) => fornmsetresult({ ...fornmresult, tags: v })}
             />
           </Stack>
         )}
         {selectedtemplate && selectedtemplate.element}
       </Stack>
-    </Stack>
-  );
-}
-
-function SelectGroup({ val, asString }) {
-  const [option, setoption] = React.useState();
-  const [selected, setselected] = React.useState([]);
-  const { snackbar } = React.useContext(Context);
-
-  React.useEffect(() => {
-    fetching();
-  }, []);
-
-  async function fetching() {
-    setoption(
-      await fetcher({
-        method: "get",
-        url: `tags`,
-      })
-    );
-  }
-  React.useEffect(() => {
-    asString && val(JSON.stringify(selected));
-    !asString && val(selected);
-  }, [selected]);
-
-  function handleClick(e) {
-    let input = e.target.getAttribute("data-name");
-    let temp = selected;
-
-    if (!temp.includes(input)) {
-      selected.length >= 3
-        ? snackbar.setWarning("max 3 tag")
-        : temp.push(input);
-    } else temp = temp.filter((d) => d != input);
-
-    setselected([...temp]);
-  }
-
-  if (!option) return <Input.Loader />;
-
-  return (
-    <Stack direction="row" flexWrap="wrap">
-      {option.map((d) => (
-        <Stack m={0.5} key={d.id}>
-          <Button
-            key={d.id}
-            variant={selected.includes(d.name) ? "contained" : "outlined"}
-            data-name={d.name}
-            onClick={handleClick}
-            size="small"
-            sx={{ borderRadius: 4, px: 2 }}
-          >
-            {d.name}
-          </Button>
-        </Stack>
-      ))}
     </Stack>
   );
 }

@@ -3,8 +3,9 @@ import Context from "@context";
 
 import { Stack, Typography, Button } from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
-import useForm, { Input, fetcher } from "@/component/useForm";
+import useForm, { Input } from "@/component/useForm";
 import { Link, useNavigate } from "react-router-dom";
+import useAxios from "@component/gip-useAxios";
 
 export default function Login(params) {
   return (
@@ -29,8 +30,12 @@ export function LoginForm(params) {
   async function handleSubmit(e) {
     e.preventDefault();
     let res = await auth.login(form.payload);
-    res.err ? seterr(res.msg) : navigate("/");
-    navigate(0);
+    res.err && seterr(res.msg);
+
+    if (!res.err) {
+      navigate("/");
+      navigate(0);
+    }
   }
 
   return (
@@ -44,6 +49,9 @@ export function LoginForm(params) {
       <Input.Email val={form.payload.email} setval={form.handleInput} />
       <Input.Pass val={form.payload.password} setval={form.handleInput} />
       <Input.Submit t="signin" />
+      <Typography variant="caption" align="center" color="error" minHeight={24}>
+        {err}
+      </Typography>
       <Stack direction={"row"} justifyContent="space-between">
         <Typography
           variant="caption"
@@ -61,6 +69,7 @@ export function LoginForm(params) {
             {` reset`}
           </Typography>
         </Typography>
+
         <Typography variant="caption" align="left" color="primary">
           have an account ?
           <Typography
@@ -74,10 +83,6 @@ export function LoginForm(params) {
         </Typography>
       </Stack>
       <SocialLogin />
-
-      <Typography variant="caption" align="center" color="error">
-        {err}
-      </Typography>
     </Stack>
   );
 }

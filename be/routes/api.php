@@ -24,8 +24,12 @@ use App\Http\Controllers\UserController;
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signin', [AuthController::class, 'signin']);
     Route::post('signup', [AuthController::class, 'signup']);
+
     Route::post('emailverification', [AuthController::class, 'emailverification']);
     Route::post('reverification', [AuthController::class, 'reverification']);
+
+    Route::post('register', [AuthController::class, 'register'])->middleware('auth:api');;
+
     Route::post('emailcheck', [AuthController::class, 'emailcheck']);
     Route::post('forgetpassword', [AuthController::class, 'forgetpassword']);
     Route::post('passwordreset', [AuthController::class, 'passwordreset']);

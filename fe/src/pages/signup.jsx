@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
+import Context from "@context";
+
 import { Stack, Typography, Button } from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
-import useForm, { Input, fetcher } from "@/component/useForm";
+import useForm, { Input } from "@/component/useForm";
+import useFetch from "@/component/gip-useAxios";
+
 import { Link } from "react-router-dom";
 import Circle from "@ui/circle";
 
 export default function App(props) {
+  const { snackbar } = React.useContext(Context);
+  const [err, seterr] = useState();
+  const { fetcher } = useFetch();
   const form = useForm();
   const [hasRegister, sethasRegister] = React.useState(false);
 
   async function handleRegister(e) {
     e.preventDefault();
     const payload = form.payload;
-    await fetcher({
+    const res = await fetcher({
       method: "post",
       url: `auth/signup`,
       data: payload,
     });
-    sethasRegister(true);
+    res.error ? seterr(res.error) : sethasRegister(true);
   }
 
   if (hasRegister) return <RegisterResponse email={form.payload.email} />;
@@ -52,6 +59,15 @@ export default function App(props) {
               {` reset`}
             </Typography>
           </Typography>
+          <Typography
+            variant="caption"
+            align="center"
+            color="error"
+            minHeight={24}
+            className="center"
+          >
+            {err}
+          </Typography>
           <Typography variant="caption" align="left" color="primary">
             have an account ?
             <Typography
@@ -71,14 +87,18 @@ export default function App(props) {
 }
 
 function RegisterResponse({ email }) {
+  const { fetcher } = useFetch();
+  const { setisLoading } = React.useContext(Context);
   const [hasResend, sethasResend] = React.useState(false);
   async function resend() {
     const payload = { email: email };
+    setisLoading(true);
     await fetcher({
       method: "post",
       url: `auth/signup`,
       data: payload,
     });
+    setisLoading(false);
     sethasResend(true);
   }
 

@@ -31,7 +31,7 @@ export default function PostList({ title = "posts" }) {
         }}
       >
         {!post.data && <Loader />}
-        {post.data && post.data.map((d, ix) => <Card data={d} idx={ix} />)}
+        {post.data && post.data.map((d, ix) => <Card data={d} key={ix} />)}
       </Stack>
     </Stack>
   );

@@ -51,7 +51,7 @@ function Profile() {
     <Box>
       <IconButton onClick={handleClick}>
         <Circle bg="primary.main">
-          {auth.user.name ? auth.user.name[0] : ""}
+          {auth.user.name ? auth.user.name[0] : "-"}
         </Circle>
       </IconButton>
       <Menu
@@ -67,10 +67,10 @@ function Profile() {
             <Circle w={48} />
             <Stack>
               <Typography variant="body1" color="initial">
-                {`Hi, ${auth.user.name}`}
+                {`Hi, ${auth.user.name || "-"}`}
               </Typography>
               <Typography variant="caption" color="initial">
-                [some title]
+                New born
               </Typography>
             </Stack>
           </Stack>

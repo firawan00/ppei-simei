@@ -13,6 +13,19 @@ class AddPaidToUsersTable extends Migration
      */
     public function up()
     {
+        //
+        Schema::create('status', function (Blueprint $table) {
+            //
+            $table->id();
+            $table->string('name')->nullable();
+        });
+
+        Schema::create('user_role', function (Blueprint $table) {
+            //
+            $table->id();
+            $table->string('name')->nullable();
+        });
+
 
         Schema::table('users', function (Blueprint $table) {
             //
@@ -28,6 +41,7 @@ class AddPaidToUsersTable extends Migration
             $table->boolean('phone')->nullable()->after('password');
 
             $table->string('provider')->nullable()->after('password');
+            $table->text('preference')->nullable();
             $table->text('about')->nullable()->after('password');;
 
             $table->softDeletes();

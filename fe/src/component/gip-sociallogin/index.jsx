@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Context from "@context";
 import { IconButton, Menu, Typography, Stack } from "@mui/material";
-import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
+
+import GoogleLogin from "./google";
 
 export default function SocialLogin(params) {
   return (
@@ -11,9 +12,7 @@ export default function SocialLogin(params) {
         Signin with your social account
       </Typography>
       <Stack direction={"row"} spacing={4} className="center">
-        <IconButton>
-          <GoogleIcon />
-        </IconButton>
+        <GoogleLogin />
         <IconButton>
           <FacebookIcon />
         </IconButton>

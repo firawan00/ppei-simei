@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { fetcher } from "@/component/useForm";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
+// import useAxios from "@component/gip-useAxios";
 
 export default function useApp() {
   let navigate = useNavigate();
+  // const { fetcher } = useAxios();
   const [user, setData] = useState(
     JSON.parse(localStorage.getItem("AuthUser")) || {}
   );
@@ -23,6 +25,11 @@ export default function useApp() {
     } else return { err: true, msg: "Invalid Login" };
   }
 
+  async function update(res) {
+    await setData(res);
+    await localStorage.setItem("AuthUser", JSON.stringify(res));
+  }
+
   function logout() {
     localStorage.clear();
     setData({});
@@ -34,5 +41,6 @@ export default function useApp() {
     user,
     login,
     logout,
+    update,
   };
 }

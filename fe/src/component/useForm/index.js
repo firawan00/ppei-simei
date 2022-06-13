@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import InputEmail from "@/component/useForm/inputEmail";
 import InputPass from "@/component/useForm/inputPassword";
 import InputText from "@/component/useForm/inputText";
 import InputNumber from "@/component/useForm/inputNumber";
-// import InputCurrency from "@/component/useForm/inputCurrency";
 import InputHidden from "@/component/useForm/inputHidden";
 import InputSelect from "@/component/useForm/inputSelect";
 import InputRole from "@/component/useForm/inputRole";
@@ -12,6 +11,7 @@ import InputCustomer from "@/component/useForm/inputCustomer";
 import TextArea from "./textArea";
 import ArrayObject from "./arrayObject";
 import URL from "./url";
+import SelectTag from "./selectTag";
 
 import { Loader } from "@/component/ui/loaderFs";
 
@@ -21,7 +21,7 @@ import BtnSubmit from "@/component/useForm/btnSubmit";
 import Context from "@/component/context";
 import { useNavigate } from "react-router-dom";
 
-export default function useForm(
+export default function useFormModel(
   model = "",
   defaultValue = {},
   routecallback = null
@@ -29,6 +29,8 @@ export default function useForm(
   const router = useNavigate();
   const { setisLoading, snackbar } = React.useContext(Context);
   const [payload, setpayload] = React.useState(defaultValue);
+  const [isDirty, setisDirty] = useState(false);
+  const [error, seterror] = useState([]);
 
   function handleInput(e) {
     setpayload({ ...payload, [e.target.name]: e.target.value });
@@ -36,6 +38,10 @@ export default function useForm(
 
   function setval(v) {
     setpayload({ ...payload, ...v });
+  }
+
+  function handleError(v) {
+    seterror([...error, { ...v }]);
   }
 
   async function handleSubmit(e) {
@@ -57,6 +63,11 @@ export default function useForm(
     handleInput,
     setval,
     handleSubmit,
+    isDirty,
+    setisDirty,
+    error,
+    handleError,
+    hasError: error.length > 0,
   };
 }
 
@@ -75,6 +86,7 @@ export const Input = {
   TextArea,
   ArrayObject,
   URL,
+  SelectTag,
 };
 
 export const fetcher = async (param) => {

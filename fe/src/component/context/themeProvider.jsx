@@ -31,6 +31,11 @@ const ButtonPallet = {
   red: {
     main: "#ff0000",
   },
+  test: {
+    r: "#e76f51",
+    b: "#264653",
+    y: "e9c46a",
+  },
   error: {
     light: "#BB1C2A",
     main: "#BB1C2A",
