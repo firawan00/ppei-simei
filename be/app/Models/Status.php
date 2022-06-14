@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\NewModel;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Model4NF;
 
-class Status extends Model
+class Status extends Model4NF
 {
 	protected $table = 'status';
 

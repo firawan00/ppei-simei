@@ -7,7 +7,7 @@ import Form from "./form";
 import * as yup from "yup";
 import { Stack, TextField } from "@mui/material";
 
-export default function App({ next, back }) {
+export default function App({ next, back, refpayload }) {
   const { auth } = React.useContext(Context);
   const config = {
     field: [
@@ -38,11 +38,21 @@ export default function App({ next, back }) {
       {
         name: "nilai_kinerja",
         label: "Nilai Kinerja",
-        validation: yup.number().required("this field required"),
+        validation: yup
+          .number("input number 1-10")
+          .min(0)
+          .required("this field required"),
         type: TextField,
       },
     ],
   };
 
-  return <Form config={config} next={(v) => next(v)} back={back} />;
+  return (
+    <Form
+      config={config}
+      next={(v) => next(v)}
+      back={back}
+      refpayload={refpayload}
+    />
+  );
 }

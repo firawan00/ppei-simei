@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ModelDefault extends Model
+class Model4NF extends Model
 {
-
 	protected $guarded = [];
 	protected $hidden = [
 		'updated_at',

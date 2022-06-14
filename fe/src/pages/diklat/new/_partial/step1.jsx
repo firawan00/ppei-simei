@@ -7,8 +7,9 @@ import Form from "./form";
 import * as yup from "yup";
 import { Stack, TextField } from "@mui/material";
 
-export default function App({ next, back }) {
+export default function App({ next, back, refpayload }) {
   const { auth } = React.useContext(Context);
+  console.log("refdsada", refpayload);
   const config = {
     field: [
       {
@@ -17,7 +18,7 @@ export default function App({ next, back }) {
         type: TextField,
         disabled: true,
         validation: yup.string("Enter your name").required("required"),
-        initialValues: "Genesha",
+        initialValues: auth.user.name,
       },
 
       {
@@ -28,7 +29,7 @@ export default function App({ next, back }) {
         validation: yup
           .string("Enter your name")
           .required("this field required"),
-        initialValues: "1111111111",
+        initialValues: auth.user.nip,
       },
 
       {
@@ -77,7 +78,13 @@ export default function App({ next, back }) {
 
   return (
     <Stack>
-      <Form config={config} next={(v) => next(v)} back={back} disableBack />
+      <Form
+        config={config}
+        next={(v) => next(v)}
+        back={back}
+        disableBack
+        refpayload={refpayload}
+      />
     </Stack>
   );
 }

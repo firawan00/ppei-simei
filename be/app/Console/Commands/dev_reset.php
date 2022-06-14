@@ -43,10 +43,9 @@ class dev_reset extends Command
 
         echo "GENESHA INITIALIZATION\n";
         echo $devider;
-
         Artisan::call('migrate:fresh --seed', [], $this->getOutput());
         Artisan::call('passport:install', [], $this->getOutput());
-        Artisan::call('optimize', [], $this->getOutput());
+        Artisan::call('optimize:clear', [], $this->getOutput());
         echo $devider;
 
 

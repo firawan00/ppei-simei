@@ -1,3 +1,5 @@
+import React from "react";
+
 import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import { config } from "./config";
@@ -7,6 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import Circle from "@ui/circle";
 import { logo } from "@ui/logo";
+
+import Context from "@context";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -30,6 +34,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function App({ open, setOpen }) {
+  const { auth } = React.useContext(Context);
   return (
     <AppBar position="absolute" open={open}>
       <Stack
@@ -71,7 +76,17 @@ export default function App({ open, setOpen }) {
           </Stack>
         </Stack>
 
-        <Circle w={42}>G</Circle>
+        <Stack direction={"row"} spacing={2}>
+          <Stack>
+            <Typography variant="overline" align="right" color="initial">
+              {auth.user.name}
+            </Typography>
+            <Typography variant="caption" color="initial" align="right">
+              {auth.user.role || "user"}
+            </Typography>
+          </Stack>
+          <Circle w={42}>{auth.user.name[0]}</Circle>
+        </Stack>
       </Stack>
     </AppBar>
   );

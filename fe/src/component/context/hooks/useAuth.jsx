@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { hrisfetcher } from "@/component/useForm";
+import { fetcher, hrisfetcher } from "@/component/useForm";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
+
+//superadmin - B@k@ml@K3p3g4w414n!!!
 
 export default function useApp() {
   let navigate = useNavigate();
@@ -9,13 +11,13 @@ export default function useApp() {
   );
 
   async function login(paylaod) {
-    let res = await hrisfetcher({
-      url: `hcdp/auth`,
+    let res = await fetcher({
+      url: `auth/signin`,
       method: "post",
       data: paylaod,
     });
 
-    if (res.id) {
+    if (res.nip) {
       await setData(res);
       await localStorage.setItem("AuthUser", JSON.stringify(res));
       await localStorage.setItem("AuthToken", res.token);

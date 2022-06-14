@@ -7,7 +7,7 @@ import Form from "./form";
 import * as yup from "yup";
 import { Stack, TextField } from "@mui/material";
 
-export default function App({ next, back }) {
+export default function App({ next, back, refpayload }) {
   const { auth } = React.useContext(Context);
   const config = {
     field: [
@@ -37,7 +37,12 @@ export default function App({ next, back }) {
 
   return (
     <Stack>
-      <Form config={config} next={(v) => next(v)} back={back} disableBack />
+      <Form
+        config={config}
+        next={(v) => next(v)}
+        back={back}
+        refpayload={refpayload}
+      />
     </Stack>
   );
 }

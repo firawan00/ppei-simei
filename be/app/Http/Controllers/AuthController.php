@@ -7,32 +7,57 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
-
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
 
-    public function signin(Request $request)
+    private $hris;
+
+    public function __construct()
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required'
-        ]);
+        $this->hris = 'http://localhost/bakamlahris/be/api/hcdp/auth';
+    }
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
 
-            if ($user->status_id == 1) return response()->json([
-                'error' => 'invalid login',
-            ], 400);
+    public function signin(Request $r)
+    {
 
-            $token = ['token' => ($user->createToken($user->email . '-' . now()))->accessToken];
-            $data = (object)array_merge((array)json_decode($user), (array)$token);
-            return response()->json($data);
-        } else
-            return response()->json([
-                'error' => 'invalid login',
-            ], 400);
+        $res = Http::withoutVerifying()
+            ->withOptions(["verify" => false])
+            ->withHeaders([
+                'Accept' => 'application/json',
+            ])
+            ->post($this->hris, $r->all());
+
+        // $data = ['status' => $res->status(), 'data' => json_decode($res->body())];
+
+        return response()->json(
+            json_decode($res->body()),
+            $res->status()
+        );
+
+
+
+        // $request->validate([
+        //     'email' => 'required|email|exists:users,email',
+        //     'password' => 'required'
+        // ]);
+
+        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        //     $user = Auth::user();
+
+        //     if ($user->status_id == 1) return response()->json([
+        //         'error' => 'invalid login',
+        //     ], 400);
+
+        //     $token = ['token' => ($user->createToken($user->email . '-' . now()))->accessToken];
+        //     $data = (object)array_merge((array)json_decode($user), (array)$token);
+        //     return response()->json($data);
+        // } else
+        //     return response()->json([
+        //         'error' => 'invalid login',
+        //     ], 400);
     }
 
     public function signup(Request $r)

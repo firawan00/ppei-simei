@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\testcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{any}', 'app')->where('any', '.*');
-
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('/hcdp/be', function () {
+// 	return view('welcome');
 // });
 
+// Route::get('/', function () {
+// 	return view('welcome');
+// });
+// Route::view('/{any}', 'app')->where('any', '.*');
+// Route::view('/{any}', 'app')->where('any', '.*');
 
-// Route::get('/jagokuliner/be', function () {
+Route::group(['prefix' => 'test'], function () {
+	Route::get('apicall', [testcontroller::class, 'apicall']);
+});
+// Route::get('/', function () {
 //     return view('welcome');
 // });

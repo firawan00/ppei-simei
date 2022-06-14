@@ -25,7 +25,12 @@ export default function App(props) {
     <Stack>
       {step == -1 && <S1_pengantar next={() => setstep(0)} back={handleBack} />}
       {step >= 0 && (
-        <Steper activeStep={step} next={handleNext} back={handleBack} />
+        <Steper
+          activeStep={step}
+          next={handleNext}
+          back={handleBack}
+          payload={payload}
+        />
       )}
     </Stack>
   );

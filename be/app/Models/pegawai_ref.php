@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\NewModel;
+use App\Models\Model3NF;
 
-class TagGroup extends NewModel
+class pegawai_ref extends Model3NF
 {
     use HasFactory;
 }

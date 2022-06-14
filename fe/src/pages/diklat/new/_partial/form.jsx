@@ -9,10 +9,19 @@ import * as yup from "yup";
 
 import InputRadio from "@component/gip-useForm/inputRadio";
 
-export default function useForm({ config, disableBack = false, next, back }) {
+export default function useForm({
+  config,
+  disableBack = false,
+  next,
+  back,
+  refpayload,
+}) {
   const formik = useFormik({
     initialValues: config.field.reduce(
-      (acc, cur) => ({ ...acc, [cur.name]: cur.initialValues }),
+      (acc, cur) => ({
+        ...acc,
+        [cur.name]: (refpayload && refpayload[cur.name]) || cur.initialValues,
+      }),
       {}
     ),
     validationSchema: yup.object(
@@ -27,7 +36,7 @@ export default function useForm({ config, disableBack = false, next, back }) {
   });
 
   return (
-    <Stack component={"form"} onSubmit={formik.handleSubmit} spacing={1}>
+    <Stack component={"form"} onSubmit={formik.handleSubmit} spacing={0}>
       {config.field.map((d, ix) => (
         <Fragment key={ix}>
           {!d.isCustom && (

@@ -24,10 +24,10 @@ export function LoginForm(params) {
 
     console.log(res);
 
-    // if (!res.err) {
-    //   navigate("/");
-    //   navigate(0);
-    // }
+    if (!res.err) {
+      navigate("/", { replace: true });
+      // navigate(0);
+    }
   }
 
   return (

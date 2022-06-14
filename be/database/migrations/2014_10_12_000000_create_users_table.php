@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
         });
 
-        Schema::create('user_role', function (Blueprint $table) {
+        Schema::create('role', function (Blueprint $table) {
             //
             $table->id();
             $table->string('name')->nullable();
@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->primary();
 
             $table->foreignId('status_id')->default(1)->constrained('status')->cascadeOnDelete();
-            $table->foreignId('role_id')->default(1)->constrained('user_role')->cascadeOnDelete();
+            $table->foreignId('role_id')->default(1)->constrained('role')->cascadeOnDelete();
 
             $table->string('email')->unique();
             $table->string('password')->nullable();

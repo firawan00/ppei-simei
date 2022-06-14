@@ -19,13 +19,12 @@ export default function Test(params) {
   }
 
   React.useEffect(() => {
-    if (isPrivateRoute(loc.pathname)) navigate("/signin");
+    if (isPrivateRoute(loc.pathname) && !auth.user.token) navigate("/signin");
   }, [loc]);
 
   React.useEffect(() => {
     app.set({ isLarge: isLarge });
-
-    if (auth.user.id && !auth.user.name) navigate("/user/register");
+    if (auth.user.nip && !auth.user.name) navigate("/signin");
   }, []);
 
   return (

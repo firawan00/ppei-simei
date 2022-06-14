@@ -18,8 +18,6 @@ class DatabaseSeeder extends Seeder
             UserRole::class,
             StatusSeeder::class,
             UserSeeder::class,
-            TagSeeder::class,
-
         ]);
     }
 }

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\UserRole as Model;
+use App\Models\Role as Model;
 
 class UserRole extends Seeder
 {
