@@ -4,12 +4,23 @@ import { Outlet } from "react-router-dom";
 import Layout from "@ly";
 import Context from "@context";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+const PrivatePath = ["/diklat", "/"];
 
 export default function Test(params) {
+  const loc = useLocation();
   const { app, auth } = React.useContext(Context);
   const isLarge = useMediaQuery((theme) => theme.breakpoints.up("md"));
   let navigate = useNavigate();
+
+  function isPrivateRoute(path) {
+    return PrivatePath.find((p) => path.includes(p));
+  }
+
+  React.useEffect(() => {
+    if (isPrivateRoute(loc.pathname)) navigate("/signin");
+  }, [loc]);
 
   React.useEffect(() => {
     app.set({ isLarge: isLarge });
@@ -18,8 +29,8 @@ export default function Test(params) {
   }, []);
 
   return (
-    <Layout.Type2>
+    <Layout.Type>
       <Outlet />
-    </Layout.Type2>
+    </Layout.Type>
   );
 }

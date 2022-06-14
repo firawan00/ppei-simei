@@ -56,9 +56,7 @@ const darkPallet = {
 const lightPallet = {
   mode: "light",
   background: {
-    default: "#f5f5f5",
-    bgdrawer: "#102737",
-    paper: "#ffffff",
+    default: "#ecf0f5",
   },
   ...ButtonPallet,
 };
@@ -69,7 +67,7 @@ export default function App(props) {
   let themeLoader = createTheme({
     palette: theme === "dark" ? darkPallet : lightPallet,
     typography: {
-      fontFamily: "Lato",
+      // fontFamily: "Lato",
       h1: {
         fontWeight: 600,
       },
@@ -147,6 +145,10 @@ export default function App(props) {
         },
       },
       MuiButton: {
+        defaultProps: {
+          variant: "contained",
+          color: "primary",
+        },
         styleOverrides: {
           containedSecondary: {
             fontWeight: "bold",

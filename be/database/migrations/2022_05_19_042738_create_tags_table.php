@@ -13,6 +13,14 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
+        Schema::create('tag_groups', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('desc')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -31,5 +39,6 @@ class CreateTagsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tags');
+        Schema::dropIfExists('tag_groups');
     }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import noimg from "@img/logo.webp";
+import noimg from "@img/logo32.png";
 import { useState } from "react";
 import Circle from "@ui/circle";
 import { Stack } from "@mui/material";

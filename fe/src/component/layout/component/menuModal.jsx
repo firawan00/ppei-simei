@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, IconButton, Modal, Typography, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Slide from "@mui/material/Slide";
-import Logo from "@img/logo.webp";
+import Logo from "@img/logo32.png";
 import MainNav from "@ly/component/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 

@@ -1,0 +1,34 @@
+
+HCDP 
+-- user tier : 
+admin platform -> auth on hcdp 	-> ahs permisison 
+admin unit kerja  -> auth on hcdp  	-> ahs permisison 
+karyawan -> login with simpeg 
+
+caching nip + nama 
+
+-- diklat head -> has karyawan  , has absen
+-- diklat list ->  see own 
+-- perencanaan & pengajuan kebutuhan diklat -> form + 
+-- approval -> by admin hcd -> then admin unit kerja (not mandatory)
+
+-- diklat pelaksanan -> pelaksanaan, what kind of data -> report ( what format), form (what input) , img ?  
+-- diklat evaluation (has many) -> form , doc + ttd (basah on document),  
+
+
+SIMPEG NEW
+add diklat -> to reporting 
+
+
+technology 	: react + laravel + postgree 
+
+timeline 	: 2 bulan
+
+design 	: template standart 
+
+- status 
+- draft -> print for approval draft apporval
+- pending approval unit 
+- pending approval kepegawaian
+- approved
+

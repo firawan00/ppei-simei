@@ -1,0 +1,31 @@
+title Authentication
+
+participant Karyawan
+participant Admin Unit Kerja
+participant Admin HCDP
+participant Sistem HCDP
+participant Simpeg
+participant Database HCDP
+
+
+==Karyawan==
+Karyawan->Sistem HCDP:Request login terintegrasi simpeg
+Sistem HCDP->Simpeg:Request login form terinterasi
+Simpeg-->>Sistem HCDP:Url login form
+Sistem HCDP-->>Karyawan:Form login integrasi simpeg
+Karyawan->Sistem HCDP:Isi login form yang terintegrasi dengan simpeg
+Sistem HCDP->Simpeg:Login simpeg
+Simpeg-->>Sistem HCDP:Login sukses
+Sistem HCDP-->>Karyawan:Login sukses, redirect ke dashboard
+
+==Admin Unit Kerja==
+Admin Unit Kerja->Sistem HCDP:Isi login form HCDP
+Sistem HCDP->Database HCDP:Cek credentials
+Database HCDP-->>Sistem HCDP:Login sukses
+Sistem HCDP-->>Admin Unit Kerja:Login sukses, redirect ke dashboard
+
+==Admin HCDP==
+Admin HCDP->Sistem HCDP:Isi login form HCDP
+Sistem HCDP->Database HCDP:Cek credentials
+Database HCDP-->>Sistem HCDP:Login sukses
+Sistem HCDP-->>Admin HCDP:Login Sukses, redirect ke dashboard

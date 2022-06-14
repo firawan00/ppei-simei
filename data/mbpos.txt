@@ -1,0 +1,7 @@
+mbpos 
+- supplier pricing : table caching, reference price crud 
+- report jual beli per barang
+- 
+
+
+BPOT

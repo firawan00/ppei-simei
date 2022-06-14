@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { fetcher } from "@/component/useForm";
+import { hrisfetcher } from "@/component/useForm";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
-// import useAxios from "@component/gip-useAxios";
 
 export default function useApp() {
   let navigate = useNavigate();
-  // const { fetcher } = useAxios();
   const [user, setData] = useState(
     JSON.parse(localStorage.getItem("AuthUser")) || {}
   );
 
   async function login(paylaod) {
-    let res = await fetcher({
-      url: `auth/signin`,
+    let res = await hrisfetcher({
+      url: `hcdp/auth`,
       method: "post",
       data: paylaod,
     });

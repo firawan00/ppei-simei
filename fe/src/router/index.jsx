@@ -13,7 +13,7 @@ import {
 //ref :: https://omarelhawary.me/blog/file-based-routing-with-react-router
 
 const ROUTESLIST = import.meta.globEager("@/pages/**/[a-z[]*.jsx");
-const PRESERVED = import.meta.globEager("/src/pages/(_app|404).jsx");
+const PRESERVED = import.meta.globEager("/src/pages/(_app|404|signin).jsx");
 
 const router = Object.keys(ROUTESLIST).map((route) => {
   const path = route
@@ -32,20 +32,25 @@ const preserved = Object.keys(PRESERVED).reduce((preserved, file) => {
   return { ...preserved, [key]: PRESERVED[file].default };
 }, {});
 
+console.log(PRESERVED);
+
 export default function App(params) {
   const App = preserved?.["_app"] || Fragment;
+  const Signin = preserved?.["signin"] || Fragment;
   const NotFound = preserved?.["404"] || Fragment;
 
   return (
     <BrowserRouter>
       <AppProvider>
         <Routes>
+          <Route path="/signin" element={<Signin />} />
+
           <Route element={<App />}>
             {router.map((d, ix) => (
               <Route key={ix} path={d.path} element={<d.component />} />
             ))}
           </Route>
-
+          {/* <Signin /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AppProvider>

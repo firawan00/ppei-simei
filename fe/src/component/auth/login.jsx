@@ -8,17 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAxios from "@component/gip-useAxios";
 
 export default function Login(params) {
-  return (
-    <Stack spacing={2} mt={5}>
-      <Typography variant="h4" color="initial">
-        Signup
-      </Typography>
-      <Typography variant="body1" color="initial">
-        Lets join with Jago Kuliner now
-      </Typography>
-      <LoginForm />
-    </Stack>
-  );
+  return <LoginForm />;
 }
 
 export function LoginForm(params) {
@@ -32,10 +22,12 @@ export function LoginForm(params) {
     let res = await auth.login(form.payload);
     res.err && seterr(res.msg);
 
-    if (!res.err) {
-      navigate("/");
-      navigate(0);
-    }
+    console.log(res);
+
+    // if (!res.err) {
+    //   navigate("/");
+    //   navigate(0);
+    // }
   }
 
   return (
@@ -46,43 +38,18 @@ export function LoginForm(params) {
       component="form"
       spacing={2}
     >
-      <Input.Email val={form.payload.email} setval={form.handleInput} />
+      {/* <Input.Email val={form.payload.email} setval={form.handleInput} /> */}
+      <Input.Text
+        name="username"
+        val={form.payload.username}
+        setval={form.handleInput}
+      />
+
       <Input.Pass val={form.payload.password} setval={form.handleInput} />
       <Input.Submit t="signin" />
       <Typography variant="caption" align="center" color="error" minHeight={24}>
         {err}
       </Typography>
-      <Stack direction={"row"} justifyContent="space-between">
-        <Typography
-          variant="caption"
-          align="left"
-          color="primary"
-          to="/reset-password"
-        >
-          forget password ?
-          <Typography
-            variant={"caption"}
-            color="secondary"
-            component={Link}
-            to="/reset-password"
-          >
-            {` reset`}
-          </Typography>
-        </Typography>
-
-        <Typography variant="caption" align="left" color="primary">
-          have an account ?
-          <Typography
-            variant={"caption"}
-            color="secondary"
-            component={Link}
-            to="/signup"
-          >
-            {` signup`}
-          </Typography>
-        </Typography>
-      </Stack>
-      <SocialLogin />
     </Stack>
   );
 }

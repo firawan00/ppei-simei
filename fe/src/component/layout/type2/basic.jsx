@@ -23,9 +23,9 @@ export default function App({ children }) {
           <Stack flexGrow={1} px={{ xs: 2, md: 3 }}>
             {children}
           </Stack>
-          <FullWidth h={300}>
+          <Stack my={2}>
             <UI.Footer />
-          </FullWidth>
+          </Stack>
         </Stack>
       </Stack>
     </Root>

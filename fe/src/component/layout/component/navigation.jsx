@@ -4,12 +4,10 @@ import Context from "@/component/context";
 import React from "react";
 import { Link } from "react-router-dom";
 import { nav } from "@/component/layout/nav";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
   const [open, setopen] = React.useState();
   const { auth } = React.useContext(Context);
-  const isSmall = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
   React.useEffect(() => {
     open && isOpen(true);
@@ -94,6 +92,7 @@ function RenderSingle({ data, isWhiteColor }) {
     <Link to={`${data.path}` || "/"}>
       <ListItem button>
         <Stack
+          pl={"4px"}
           direction={"row"}
           spacing={2}
           overflow="hidden"

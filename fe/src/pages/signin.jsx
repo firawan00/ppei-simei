@@ -1,5 +1,27 @@
 import Login from "@component/auth/login";
+import { Stack, Typography } from "@mui/material";
+import { logo } from "@ui/logo";
 
 export default function App(params) {
-  return <Login mt={5} />;
+  return (
+    <Stack className="center" height={"100vh"}>
+      <Stack width={"100vw"} maxWidth={480}>
+        <Stack height={200}>
+          <img src={logo.S256} alt="" className="img-contain h100" />
+        </Stack>
+        <Typography
+          variant="h3"
+          fontWeight="900"
+          textAlign={"center"}
+          width={"100%"}
+          color="primary"
+        >
+          HCDP
+        </Typography>
+        <Stack flexGrow={1} mt={2}>
+          <Login />
+        </Stack>
+      </Stack>
+    </Stack>
+  );
 }

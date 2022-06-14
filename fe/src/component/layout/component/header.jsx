@@ -10,7 +10,7 @@ export default function App(props) {
     <AppBar>
       <Stack
         height={48}
-        bgcolor="secondary.main"
+        bgcolor="white.main"
         direction={"row"}
         justifyContent="space-between"
         alignItems={"center"}
