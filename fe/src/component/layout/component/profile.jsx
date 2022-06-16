@@ -9,7 +9,7 @@ export default function App(props) {
 
   return (
     <Stack direction={"row"} spacing={2}>
-      <Circle w={42}>{auth.user.name[0]}</Circle>
+      <Circle w={42}>{auth.user.name && auth.user.name[0]}</Circle>
       <Stack>
         <Typography variant="overline" color="initial">
           {auth.user.name}

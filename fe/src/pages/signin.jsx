@@ -16,7 +16,16 @@ export default function App(params) {
           width={"100%"}
           color="primary"
         >
-          HCDP
+          SIMEI
+        </Typography>
+        <Typography
+          variant="overline"
+          fontWeight="900"
+          textAlign={"center"}
+          width={"100%"}
+          color="primary"
+        >
+          Simulasi Export Import
         </Typography>
         <Stack flexGrow={1} mt={2}>
           <Login />

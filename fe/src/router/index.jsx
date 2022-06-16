@@ -32,8 +32,6 @@ const preserved = Object.keys(PRESERVED).reduce((preserved, file) => {
   return { ...preserved, [key]: PRESERVED[file].default };
 }, {});
 
-console.log(PRESERVED);
-
 export default function App(params) {
   const App = preserved?.["_app"] || Fragment;
   const Signin = preserved?.["signin"] || Fragment;
