@@ -12,21 +12,21 @@ use App\Http\Controllers\testcontroller;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 // Route::get('/hcdp/be', function () {
-// 	return view('welcome');
+//     return view('welcome');
 // });
 
 // Route::get('/', function () {
-// 	return view('welcome');
+//     return view('welcome');
 // });
 // Route::view('/{any}', 'app')->where('any', '.*');
-// Route::view('/{any}', 'app')->where('any', '.*');
+Route::view('/{any}', 'app')->where('any', '.*');
 
-Route::group(['prefix' => 'test'], function () {
-	Route::get('apicall', [testcontroller::class, 'apicall']);
-});
+// Route::group(['prefix' => 'test'], function () {
+//     Route::get('apicall', [testcontroller::class, 'apicall']);
+// });
 // Route::get('/', function () {
 //     return view('welcome');
 // });
