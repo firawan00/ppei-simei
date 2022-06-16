@@ -7,10 +7,7 @@ import { IconButton, Stack, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import Circle from "@ui/circle";
 import { logo } from "@ui/logo";
-
-import Context from "@context";
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -34,7 +31,6 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function App({ open, setOpen }) {
-  const { auth } = React.useContext(Context);
   return (
     <AppBar position="absolute" open={open}>
       <Stack
@@ -43,7 +39,6 @@ export default function App({ open, setOpen }) {
         alignItems={"center"}
         justifyContent="space-between"
         width={"100%"}
-        pr={3}
         bgcolor={config.appBarBGC}
         position="relative"
       >
@@ -53,26 +48,6 @@ export default function App({ open, setOpen }) {
           height={config.appBarHeigt}
           position="relative"
         >
-          <Stack
-            width={open ? config.drawerWidth : "64px"}
-            height={64}
-            direction="row"
-            alignItems={"center"}
-            bgcolor="red"
-            overflow={"hidden"}
-            p={1}
-            spacing={1}
-          >
-            <img src={logo.S256} alt="" className="img-contain h100" />
-            <Stack>
-              <Typography variant="h6" color="black" fontWeight={"bold"}>
-                KEMENDAG
-              </Typography>
-              <Typography variant="body" color="primary" fontWeight={"bold"}>
-                {import.meta.env.VITE_APPNAME}
-              </Typography>
-            </Stack>
-          </Stack>
           <Stack mx={2}>
             <IconButton color="primary" onClick={() => setOpen(!open)}>
               {!open && <MenuIcon />}
@@ -81,18 +56,29 @@ export default function App({ open, setOpen }) {
           </Stack>
         </Stack>
 
-        <Stack direction={"row"} spacing={2}>
+        <Stack
+          height={64}
+          direction="row"
+          alignItems={"center"}
+          overflow={"hidden"}
+          p={1}
+          spacing={1}
+        >
           <Stack>
-            <Typography variant="overline" align="right" color="initial">
-              {auth.user.name}
+            <Typography variant="h6" color="black" fontWeight={"bold"}>
+              KEMENDAG
             </Typography>
-            <Typography variant="caption" color="initial" align="right">
-              {auth.user.role || "user"}
+            <Typography variant="body" color="primary" fontWeight={"bold"}>
+              {import.meta.env.VITE_APPNAME}
             </Typography>
           </Stack>
-          <Circle w={42}>{auth.user.name[0]}</Circle>
+          <img src={logo.S256} alt="" className="img-contain h100" />
         </Stack>
       </Stack>
     </AppBar>
   );
+}
+
+function name(params) {
+  return;
 }

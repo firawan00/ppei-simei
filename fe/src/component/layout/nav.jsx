@@ -1,92 +1,146 @@
-import GridViewIcon from "@mui/icons-material/GridView";
-import StickyNote2Icon from "@mui/icons-material/StickyNote2";
-import AssessmentIcon from "@mui/icons-material/Assessment";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import StyleIcon from "@mui/icons-material/Style";
-import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import PostAddIcon from "@mui/icons-material/PostAdd";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import AlarmOnIcon from "@mui/icons-material/AlarmOn";
-import TextSnippetIcon from "@mui/icons-material/TextSnippet";
-const nav = [
+import AppsIcon from "@mui/icons-material/Apps";
+const importir = [
   {
-    name: "Dashboard",
-    path: "/",
-    icon: GridViewIcon,
+    name: "Importir Menu",
+    isText: true,
+    // path: "#",
   },
 
   {
-    name: "Pengajuan Rencana Diklat",
-    path: "/diklat/new",
-    icon: AddCircleOutlineIcon,
+    name: "Create Introduction Letter",
+    path: "/importir/introductionletter",
     // role: ["user"],
   },
 
   {
-    name: "Pelaksanaan  Diklat",
-    path: "/",
-    icon: AlarmOnIcon,
+    name: "Create Offering Letter",
+    path: "/importir/offeringletter",
+
+    // role: ["user"],
   },
 
   {
-    name: "Evaluasi  Diklat",
-    path: "/",
-    icon: TextSnippetIcon,
+    name: "Create Invoive",
+    path: "/importir/invoice",
+    // role: ["user"],
+  },
+  {
+    name: "Create Packing List",
+    path: "/importir/packinglist",
+
+    // role: ["user"],
   },
 
   {
-    name: "Users",
-    icon: PeopleAltIcon,
-    path: "/admin/users",
-    role: ["admin"],
-    child: [
-      {
-        name: "List",
-        path: "/admin/user",
-        // role: ["admin"],
-      },
-      {
-        name: "Create",
-        path: "/admin/user/create",
-      },
-    ],
+    name: "Create Delivery Order",
+    path: "/importir/deliveryorder",
+
+    // role: ["user"],
   },
 
   {
-    name: "Tags ",
-    path: "/admin/tags",
-    icon: StyleIcon,
-    role: ["admin"],
-  },
+    name: "Create Bill of LADING ",
+    path: "/importir/billoflanding",
 
-  {
-    name: "Post ",
-    path: "/post",
-    icon: FeaturedPlayListIcon,
-    role: ["admin"],
+    // role: ["user"],
   },
   {
-    name: "My Store",
+    name: "Create SKA-COO ",
     path: "#",
-    icon: StorefrontIcon,
-    role: ["user"],
+    // role: ["user"],
   },
   {
-    name: "New Post ",
-    path: "/post",
-    icon: PostAddIcon,
-    role: ["user"],
+    name: "Create DRAFT Wesel ",
+    path: "#",
+    // role: ["user"],
+  },
+];
+
+const exportir = [
+  {
+    name: "Exportir Menu",
+    isText: true,
+    // path: "#",
   },
   {
-    name: "Profile",
-    path: "/post",
-    icon: AccountCircleIcon,
-    role: ["user"],
+    name: "Create Inquiry Letter",
+    path: "#",
   },
+
+  {
+    name: "Create Lembar Kerja Negosiasi",
+    path: "#",
+    // role: ["user"],
+  },
+
+  {
+    name: "Create ORDERING LETTER",
+    path: "#",
+    // role: ["user"],
+  },
+
+  {
+    name: "Create PEB",
+    path: "#",
+    // role: ["user"],
+  },
+  {
+    name: "Create Salaes Contract",
+    path: "#",
+    // role: ["user"],
+  },
+
+  {
+    name: "Create permintaan pembukaan LC",
+    path: "#",
+    // role: ["user"],
+  },
+
+  {
+    name: "Create SKA-COO ",
+    path: "#",
+    // role: ["user"],
+  },
+  {
+    name: "Create DRAFT Wesel ",
+    path: "#",
+    // role: ["user"],
+  },
+];
+
+const fasilator = [
+  {
+    name: "Fasilitator Menu",
+    isText: true,
+    // path: "#",
+  },
+  {
+    name: "Create xxxxx",
+    path: "#",
+  },
+  {
+    name: "Create xxxxx",
+    path: "#",
+  },
+  {
+    name: "Create xxxxx",
+    path: "#",
+  },
+  {
+    name: "Create xxxxx",
+    path: "#",
+  },
+];
+
+const nav = [
+  {
+    name: "Dashboard",
+    path: "/",
+    icon: AppsIcon,
+  },
+  ...importir,
+  ...exportir,
+  ...fasilator,
 ];
 
 export { nav };

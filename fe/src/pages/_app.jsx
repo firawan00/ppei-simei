@@ -28,8 +28,8 @@ export default function Test(params) {
   }, []);
 
   return (
-    <Layout.Type>
+    <Layout.Type3>
       <Outlet />
-    </Layout.Type>
+    </Layout.Type3>
   );
 }

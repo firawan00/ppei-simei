@@ -1,8 +1,8 @@
 import React from "react";
-import MainNav from "../component/navigation";
+import MainNav from "./navigation";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { IconButton, Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import AppBar from "./appBar";
 import { styled } from "@mui/material/styles";
@@ -53,7 +53,7 @@ export default function Dashboard({ isFull = true, children }) {
         pt={`${config.appBarHeigt}px`}
         height="100vh"
         maxHeight={"calc(100vh)"}
-        overflow={"hidden"}
+        overflow={"auto"}
       >
         <Stack px={2} justifyContent={"space-between"} pt={3} flexGrow={1}>
           {children}
@@ -64,7 +64,7 @@ export default function Dashboard({ isFull = true, children }) {
       <Drawer
         variant={"permanent"}
         onClose={() => setOpen(!open)}
-        open={true}
+        open={open}
         sx={{ position: "absolute" }}
         left={0}
       >

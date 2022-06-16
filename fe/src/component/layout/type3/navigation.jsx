@@ -5,6 +5,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { nav } from "@/component/layout/nav";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import Profile from "@ly/component/profile";
 
 export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
   const [open, setopen] = React.useState();
@@ -27,6 +28,9 @@ export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
   return (
     <Stack spacing={1} py={3} height={"100vh"} justifyContent="space-between">
       <Stack>
+        <Stack pl={3} mb={3}>
+          <Profile />
+        </Stack>
         {nav.map((d, ix) => (
           <Stack key={ix}>
             {!d.path && d.isText && (
@@ -42,7 +46,7 @@ export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
             )}
 
             {d.path && hasRole(d.role) && (
-              <Stack onClick={handleNav}>
+              <Stack>
                 <RenderSingle data={d} />
               </Stack>
             )}
