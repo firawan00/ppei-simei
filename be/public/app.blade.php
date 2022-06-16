@@ -11,7 +11,7 @@
     />
     <link rel="manifest" href="/public/site.webmanifest" />
     <title>Genesha DEV</title>
-    <script type="module" crossorigin src="/public/assets/index.64f2dea4.js"></script>
+    <script type="module" crossorigin src="/public/assets/index.4def92bd.js"></script>
     <link rel="stylesheet" href="/public/assets/index.dfab9494.css">
   </head>
   <body>
