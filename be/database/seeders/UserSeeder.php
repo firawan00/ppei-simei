@@ -14,29 +14,27 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
         User::create([
+            'username' => 'admin',
             'name' => 'admin',
             'password' => 'password',
-            'email' => 'admin@admin.com',
-            'status_id' => 3,
-
-        ],);
+            'role' => 'admin',
+        ], );
 
         User::create([
-            'name' => 'genesha admin',
+            'username' => 'user-import',
+            'name' => 'user-import',
             'password' => 'password',
-            'email' => 'genesha@admin.com',
-            'role_id' => 2,
-            'status_id' => 3,
-
-
-        ]);
+            'role' => 'user-import',
+        ], );
 
         User::create([
-            'name' => 'genesha user',
+            'username' => 'user-export',
+            'name' => 'user-export',
             'password' => 'password',
-            'email' => 'genesha@user.com',
-            'status_id' => 3,
-        ]);
+            'role' => 'user-export',
+        ], );
+
     }
 }

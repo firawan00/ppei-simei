@@ -101,18 +101,6 @@ export const fetcher = async (param) => {
   }
 };
 
-export const hrisfetcher = async (param) => {
-  try {
-    const res = await axios({
-      ...param,
-      url: `${import.meta.env.VITE_HRISURL}/api/${param.url}`,
-    });
-    return res.data;
-  } catch (error) {
-    return error;
-  }
-};
-
 export const fetcherMultipart = async (param) => {
   const config = {
     ...param,

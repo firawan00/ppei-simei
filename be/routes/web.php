@@ -14,15 +14,15 @@ use App\Http\Controllers\testcontroller;
 |
  */
 
-// Route::get('/hcdp/be', function () {
-//     return view('welcome');
-// });
+Route::get('/simei/be', function () {
+    return view('welcome');
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 // Route::view('/{any}', 'app')->where('any', '.*');
-Route::view('/{any}', 'app')->where('any', '.*');
+// Route::view('/{any}', 'app')->where('any', '.*');
 
 // Route::group(['prefix' => 'test'], function () {
 //     Route::get('apicall', [testcontroller::class, 'apicall']);

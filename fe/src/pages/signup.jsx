@@ -1,10 +1,10 @@
-import Login from "@component/auth/login";
-import { Stack, Typography, Divider } from "@mui/material";
+import Signup from "@component/auth/signup";
+import { Stack, Typography } from "@mui/material";
 import { logo } from "@ui/logo";
 
 export default function App(params) {
   return (
-    <Stack height={"100vh"} alignItems="center" mt={"20vh"}>
+    <Stack alignItems="center" mt={"20vh"} height={"100vh"}>
       <Stack width={"100vw"} maxWidth={480}>
         <Stack height={200}>
           <img src={logo.S256} alt="" className="img-contain h100" />
@@ -28,7 +28,7 @@ export default function App(params) {
           Simulasi Export Import
         </Typography>
         <Stack flexGrow={1} mt={2}>
-          <Login />
+          <Signup />
         </Stack>
       </Stack>
     </Stack>

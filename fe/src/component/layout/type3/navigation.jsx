@@ -101,6 +101,7 @@ export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
           </Stack>
         ))}
       </Stack>
+      <Logout />
     </Stack>
   );
 }
@@ -128,5 +129,24 @@ function RenderSingle({ data, isWhiteColor }) {
         </Stack>
       </ListItem>
     </Link>
+  );
+}
+
+function Logout({ data, isWhiteColor }) {
+  const { auth } = React.useContext(Context);
+
+  return (
+    <ListItem button onClick={() => auth.logout()}>
+      <Stack
+        pl={"4px"}
+        direction={"row"}
+        spacing={2}
+        overflow="hidden"
+        color={isWhiteColor ? "white.main" : "dark.main"}
+      >
+        <LogoutIcon />
+        <Typography variant="body1">Logout</Typography>
+      </Stack>
+    </ListItem>
   );
 }

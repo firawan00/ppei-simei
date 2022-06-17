@@ -14,42 +14,12 @@ class CreateUsersTable extends Migration
     public function up()
     {
 
-        //
-        Schema::create('status', function (Blueprint $table) {
-            //
-            $table->id();
-            $table->string('name')->nullable();
-        });
-
-        Schema::create('role', function (Blueprint $table) {
-            //
-            $table->id();
-            $table->string('name')->nullable();
-        });
-
-
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            $table->foreignId('status_id')->default(1)->constrained('status')->cascadeOnDelete();
-            $table->foreignId('role_id')->default(1)->constrained('role')->cascadeOnDelete();
-
-            $table->string('email')->unique();
-            $table->string('password')->nullable();
-
+            $table->string('username')->unique();
             $table->string('name')->nullable();
-            $table->boolean('gender')->nullable();
-            $table->string('img_path')->nullable();
-            $table->string('address')->nullable();
-            $table->boolean('phone')->nullable();
-
-
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('provider')->nullable();
-            $table->text('preference')->nullable();
-            $table->text('about')->nullable();;
-            // $table->rememberToken();
-
+            $table->string('role')->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -63,7 +33,5 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('status');
-        Schema::dropIfExists('user_role');
     }
 }

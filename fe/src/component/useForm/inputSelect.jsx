@@ -11,7 +11,7 @@ import Context from "@/component/context";
 import { isEmail, min } from "./helper";
 import { dataFind } from "@/component/helper/objectParsing";
 
-export default function App({ val, setval, name = "unknown", options }) {
+export default function App({ val, setval, name = "unknown", options, label }) {
   // const { isLoading } = useContext(Context);
   // const [state, setstate] = useState({
   //   val: refdata && refdata != null ? dataFind(refdata, fname) : "",
@@ -38,10 +38,11 @@ export default function App({ val, setval, name = "unknown", options }) {
       <TextField
         fullWidth
         select
-        label={name}
+        label={label || name}
         name={name}
         value={val || ""}
         onChange={setval}
+        margin="normal"
         // error={state.err && state.isDiry}
       >
         {/* <MenuItem value={-1}>{`Select ${name}`}</MenuItem> */}

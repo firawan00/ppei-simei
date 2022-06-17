@@ -1,11 +1,13 @@
 import React from "react";
 import Context from "@context";
 
-import { Stack, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button, TextField } from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
 import useForm, { Input } from "@/component/useForm";
 import { Link, useNavigate } from "react-router-dom";
-import useAxios from "@component/gip-useAxios";
+
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 export default function Login(params) {
   return <LoginForm />;
@@ -15,41 +17,86 @@ export function LoginForm(params) {
   let navigate = useNavigate();
   const [err, seterr] = React.useState("");
   const { auth } = React.useContext(Context);
-  const form = useForm();
+  const form = useForm({ username: "", password: "" });
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    let res = await auth.login(form.payload);
-    res.err && seterr(res.msg);
-
-    console.log(res);
-
-    if (!res.err) {
-      navigate("/", { replace: true });
-      // navigate(0);
-    }
-  }
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      role: "",
+      password: "",
+      passcode: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (payload) => {
+      const res = await fetcher({
+        method: "post",
+        url: "auth/signin",
+        data: payload,
+      });
+      if (res.error) seterr(res.error);
+      else {
+        await auth.update(res);
+        navigate("/", true);
+      }
+    },
+  });
 
   return (
     <Stack
-      onSubmit={handleSubmit}
+      component={"form"}
+      onSubmit={formik.handleSubmit}
       noValidate
       autoComplete="off"
-      component="form"
-      spacing={2}
     >
-      {/* <Input.Email val={form.payload.email} setval={form.handleInput} /> */}
-      <Input.Text
+      <TextField
+        fullWidth
         name="username"
-        val={form.payload.username}
-        setval={form.handleInput}
+        label="Username"
+        value={formik.values.username}
+        onChange={formik.handleChange}
+        error={formik.touched.username && Boolean(formik.errors.username)}
+        helperText={(formik.touched.username && formik.errors.username) || " "}
+      />
+      <TextField
+        fullWidth
+        name="password"
+        label="Password"
+        type="password"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={(formik.touched.password && formik.errors.password) || " "}
       />
 
-      <Input.Pass val={form.payload.password} setval={form.handleInput} />
-      <Input.Submit t="signin" />
-      <Typography variant="caption" align="center" color="error" minHeight={24}>
-        {err}
-      </Typography>
+      <Stack spacing={2}>
+        <Input.Submit t="signin" />
+        <Typography
+          variant="overline"
+          align="center"
+          minHeight={24}
+          component={Link}
+          to="/signup"
+        >
+          user Register
+        </Typography>
+
+        <Typography
+          variant="caption"
+          align="center"
+          color="error"
+          minHeight={24}
+        >
+          {err}
+        </Typography>
+      </Stack>
     </Stack>
   );
 }
+
+const validationSchema = yup.object({
+  username: yup.string("Enter your email").required("This field is required"),
+  password: yup
+    .string("Enter your password")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("This field is required"),
+});

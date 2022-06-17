@@ -12,67 +12,42 @@ use Illuminate\Support\Facades\Http;
 class AuthController extends Controller
 {
 
-    private $hris;
-
-    public function __construct()
-    {
-        $this->hris = 'http://localhost/bakamlahris/be/api/hcdp/auth';
-    }
-
-
     public function signin(Request $r)
     {
+        $r->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
 
-        $res = Http::withoutVerifying()
-            ->withOptions(["verify" => false])
-            ->withHeaders([
-                'Accept' => 'application/json',
-            ])
-            ->post($this->hris, $r->all());
+        if (Auth::attempt(['username' => $r->username, 'password' => $r->password])) {
+            $user = Auth::user();
+            return response()->json($user);
+        } else {
+            return response()->json([
+                'error' => 'invalid login',
+            ], 400);
+        }
 
-        // $data = ['status' => $res->status(), 'data' => json_decode($res->body())];
-
-        return response()->json(
-            json_decode($res->body()),
-            $res->status()
-        );
-
-
-
-        // $request->validate([
-        //     'email' => 'required|email|exists:users,email',
-        //     'password' => 'required'
-        // ]);
-
-        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        //     $user = Auth::user();
-
-        //     if ($user->status_id == 1) return response()->json([
-        //         'error' => 'invalid login',
-        //     ], 400);
-
-        //     $token = ['token' => ($user->createToken($user->email . '-' . now()))->accessToken];
-        //     $data = (object)array_merge((array)json_decode($user), (array)$token);
-        //     return response()->json($data);
-        // } else
-        //     return response()->json([
-        //         'error' => 'invalid login',
-        //     ], 400);
     }
 
     public function signup(Request $r)
     {
-        User::firstOrCreate(['email' => $r->email], $r->all());
-        $user = User::whereEmail($r->email)->first()->makeVisible(['status_id']);
 
-        if ($user->status_id  == 1) {
-            $email = new EmailController;
-            $email->email_verification($r->email);
-            return response()->json($r);
+        if ($r->passcode != '1234') {
+            return response()->json([
+                'error' => 'passcode missmatch',
+            ], 400);
         }
-        return response()->json([
-            'error' => 'user registered',
-        ], 400);
+
+        if (User::whereUsername($r->username)->first()) {
+            return response()->json([
+                'error' => 'username registered, please try user another username',
+            ], 400);
+        }
+
+        $user = User::firstOrCreate(['username' => $r->username], $r->except(['passcode']));
+        return response()->json($user);
+
     }
 
     public function emailverification(Request $r)
@@ -91,7 +66,7 @@ class AuthController extends Controller
             }
         }
         return response()->json([
-            'error' => 'invalid varification'
+            'error' => 'invalid varification',
         ], 400);
     }
 
@@ -118,10 +93,12 @@ class AuthController extends Controller
     public function emailcheck(Request $r)
     {
         $user = User::whereEmail($r->email)->first();
-        if ($user)
+        if ($user) {
             return response()->json('email exist');
-        else
+        } else {
             return response()->json('ok');
+        }
+
     }
 
     public function forgetpassword(Request $r)
@@ -130,14 +107,16 @@ class AuthController extends Controller
 
         $user = User::whereEmail($r->email)->first();
         if ($user) {
-            $token = \Str::random(40);;
+            $token = \Str::random(40);
             $user->reset_token = $token;
             $user->save();
             $email = new EmailController;
             $email->email_forgetpassword($r->email, $token);
             return response()->json('ok');
-        } else
+        } else {
             return response()->json('not ok');
+        }
+
     }
     public function passwordreset(Request $r)
     {
@@ -147,8 +126,10 @@ class AuthController extends Controller
             $user->password = $r->password;
             $user->save();
             return response()->json('ok');
-        } else
+        } else {
             return response()->json('not ok');
+        }
+
     }
 
     public function edit(Request $r)
@@ -162,9 +143,11 @@ class AuthController extends Controller
             $user->save();
 
             $token = ['token' => ($user->createToken($user->email . '-' . now()))->accessToken];
-            $data = (object)array_merge((array)json_decode($user), (array)$token);
+            $data = (object) array_merge((array) json_decode($user), (array) $token);
             return response()->json($data);
-        } else
+        } else {
             return response()->json('not ok');
+        }
+
     }
 }

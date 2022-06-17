@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Layout from "@ly";
 import Context from "@context";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 const PrivatePath = ["/diklat", "/"];
 
@@ -26,6 +26,9 @@ export default function Test(params) {
     app.set({ isLarge: isLarge });
     if (auth.user.nip && !auth.user.name) navigate("/signin");
   }, []);
+
+  if (isPrivateRoute(loc.pathname) && !auth.user.token)
+    <Navigate to="/signin" />;
 
   return (
     <Layout.Type3>

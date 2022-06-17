@@ -18,56 +18,26 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     protected $table = 'users';
-    // protected $appends = array('status');
-
+    protected $appends = ['token'];
 
     protected $guarded = [];
     protected $hidden = [
         'password',
-        'remember_token', 'deleted_at', 'created_at', 'status_id'
+        'remember_token', 'deleted_at', 'created_at', 'status_id', 'updated_at',
     ];
-
-    protected $role = [
-        'user',
-        'admin',
-    ];
-
-    public $with = ['store', 'status', 'role'];
-
-
-    public function getRoleAttribute($val)
-    {
-        return $this->role[$val];
-    }
-
-
 
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
     }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    public function getTokenAttribute()
+    {
+        return ($this->createToken($this->email . '-' . now()))->accessToken;
+    }
 
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function store()
-    {
-        return $this->hasOne(UserStore::class, 'id', 'user_id');
-    }
-
-    public function status()
-    {
-        return $this->hasOne(Status::class, 'id', 'status_id')->select(['name', 'id']);
-    }
-    public function role()
-    {
-        return $this->hasOne(UserRole::class, 'id', 'role_id');
-    }
 }
