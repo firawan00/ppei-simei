@@ -54,14 +54,14 @@ export default function App({ data, meta, isRefetch }) {
         order={order}
         onOrderChange={handleOrderChange}
       />
-      <RenderData
+      {/* <RenderData
         data={data}
         col={meta.col}
         sf={sf}
         order={order}
         model={meta.model}
         isRefetch={isRefetch}
-      />
+      /> */}
     </Stack>
   );
 }
