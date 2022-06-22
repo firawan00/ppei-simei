@@ -13,13 +13,14 @@ export default function App(props) {
         <Divider />
 
         <Typography variant="h6" align="center" color="initial">
-          Introduction Letter
+          OFFERING LETTER
         </Typography>
 
         <Stack direction={"row"} justifyContent="space-between">
           <Stack spacing={1}>
             <InputInline lb={"Our Ref"} />
             <InputInline lb={"To"} />
+            <InputInline lb={"Cc"} />
           </Stack>
           <Stack>
             <Typography color="initial">
@@ -29,26 +30,24 @@ export default function App(props) {
         </Stack>
 
         <Stack>
-          Dear Sir, Allow us herewith to introduce our company as an export
-          company that produce and export frozen seafood. With this letter, we
-          would like to offer our best selling items as following details.
+          Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
+          would like to submit our offers are as follows:
         </Stack>
 
         <Stack spacing={1}>
-          <InputInline lb={"Desc. of goods "} lbw={180} />
-          <InputInline lb={"Type"} lbw={180} />
-          <InputInline lb={"Price FOB Tg Priok"} lbw={180} />
+          <InputInline lb={"Commodity"} lbw={180} />
+          <InputInline lb={"Quantity"} lbw={180} />
+          <InputInline lb={"Unit FOB Price"} lbw={180} />
+          <InputInline lb={"Packing"} lbw={180} />
+          <InputInline lb={"Shipment"} lbw={180} />
+          <InputInline lb={"Term of Payment "} lbw={180} />
+          <InputInline lb={"Validity"} lbw={180} />
         </Stack>
 
         <Stack>
-          Enclosed we are sending some brochure about our product, according to
-          our survey that this product have a good prospect inside your market.
-        </Stack>
-
-        <Stack>
-          We do hope you will be interested and we shall be pleased to have your
-          inquiry and trial order in due time. In case you need information,
-          please do not hesitate to contact us by fax or email. Thank you.
+          Please be advised that we prefer to sell in FOB Basis Price. We hope
+          our offers are favorable to you, if you have any question do not
+          hesitate to contact us.
         </Stack>
 
         <Stack>

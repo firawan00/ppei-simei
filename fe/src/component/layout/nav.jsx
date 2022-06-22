@@ -20,7 +20,7 @@ const importir = [
   },
 
   {
-    name: "Invoive",
+    name: "Invoice",
     path: "/importir/invoice",
     // role: ["user"],
   },
