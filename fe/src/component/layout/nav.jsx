@@ -7,51 +7,52 @@ const importir = [
   },
 
   {
-    name: "Create Introduction Letter",
+    name: "Introduction Letter",
     path: "/importir/introductionletter",
     // role: ["user"],
   },
 
   {
-    name: "Create Offering Letter",
+    name: "Offering Letter",
     path: "/importir/offeringletter",
 
     // role: ["user"],
   },
 
   {
-    name: "Create Invoive",
+    name: "Invoive",
     path: "/importir/invoice",
     // role: ["user"],
   },
   {
-    name: "Create Packing List",
+    name: "Packing List",
     path: "/importir/packinglist",
 
     // role: ["user"],
   },
 
   {
-    name: "Create Delivery Order",
+    name: "Delivery Order",
     path: "/importir/deliveryorder",
 
     // role: ["user"],
   },
 
   {
-    name: "Create Bill of LADING ",
+    name: "Bill of LADING ",
     path: "/importir/billoflanding",
 
     // role: ["user"],
   },
   {
     name: "Create SKA-COO ",
-    path: "#",
+    path: "/importir/ska",
+
     // role: ["user"],
   },
   {
     name: "Create DRAFT Wesel ",
-    path: "#",
+    path: "/importir/wessel",
     // role: ["user"],
   },
 ];

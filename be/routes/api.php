@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\IntroductionLetterController;
+use App\Http\Controllers\SkaController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,10 +35,13 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('edit', [AuthController::class, 'edit'])->middleware('auth:api');
 });
 
-Route::resources([
-    'users' => UserController::class,
-
-]);
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::resources([
+        'users' => UserController::class,
+        'ska' => SkaController::class,
+        'imp-il' => IntroductionLetterController::class,
+    ]);
+});
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

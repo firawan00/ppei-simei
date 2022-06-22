@@ -47,9 +47,8 @@ export default function Dashboard({ isFull = true, children }) {
   return (
     <Stack height={"100vh"} overflow="hidden">
       <AppBar open={open} setOpen={setOpen} />
-
       <Stack
-        pl={isLarge ? (open ? `${config.drawerWidth}px` : "64px") : 0}
+        pl={isLarge ? (open ? `${config.drawerWidth}px` : 0) : 0}
         pt={`${config.appBarHeigt}px`}
         height="100vh"
         maxHeight={"calc(100vh)"}

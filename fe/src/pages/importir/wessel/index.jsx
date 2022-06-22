@@ -14,16 +14,9 @@ export default function AdminPage(params) {
     setfirst(
       await fetcher({
         method: "get",
-        url: `${meta.model}`,
+        url: `${meta.endpoint}`,
       })
     );
   }
-  return (
-    <Datatable
-      data={data}
-      col={meta.col}
-      model={meta.model}
-      isRefetch={fetching}
-    />
-  );
+  return <Datatable data={data} meta={meta} isRefetch={fetching} />;
 }

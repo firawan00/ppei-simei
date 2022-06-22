@@ -21,8 +21,6 @@ const AppBar = styled(MuiAppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    // marginLeft: config.drawerWidth,
-    // width: `calc(100% - ${config.drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -64,9 +62,9 @@ export default function App({ open, setOpen }) {
           p={1}
           spacing={1}
         >
-          <Stack>
+          <Stack textAlign={"right"}>
             <Typography variant="h6" color="black" fontWeight={"bold"}>
-              KEMENDAG
+              KEMENDAG PPEI
             </Typography>
             <Typography variant="body" color="primary" fontWeight={"bold"}>
               {import.meta.env.VITE_APPNAME}

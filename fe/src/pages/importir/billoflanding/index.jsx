@@ -21,8 +21,10 @@ export default function AdminPage(params) {
   return (
     <Datatable
       data={data}
-      col={meta.col}
-      model={meta.model}
+      meta={meta}
+      // col={meta.col}
+      // model={meta.modelName || meta.model}
+      // modelTitle={meta.modelTitle}
       isRefetch={fetching}
     />
   );

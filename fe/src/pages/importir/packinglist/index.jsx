@@ -18,12 +18,5 @@ export default function AdminPage(params) {
       })
     );
   }
-  return (
-    <Datatable
-      data={data}
-      col={meta.col}
-      model={meta.model}
-      isRefetch={fetching}
-    />
-  );
+  return <Datatable data={data} meta={meta} isRefetch={fetching} />;
 }

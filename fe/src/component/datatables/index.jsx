@@ -9,10 +9,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-export default function App({ data, col, model, isRefetch }) {
+export default function App({ data, meta, isRefetch }) {
   const [sf, setsf] = React.useState("");
   const [order, setorder] = useState({
-    col: col[0].name,
+    col: meta.col[0].name,
     isAsc: true,
   });
 
@@ -29,7 +29,7 @@ export default function App({ data, col, model, isRefetch }) {
       });
   }
 
-  if (!data || !col)
+  if (!data || !meta.col)
     return (
       <Stack width={"100%"} className="center">
         <CircularProgress />
@@ -38,22 +38,28 @@ export default function App({ data, col, model, isRefetch }) {
 
   return (
     <Stack width={"100%"}>
+      <Typography variant="h2" color="primary" className="f-capitalize">
+        {meta.modelTitle} List
+      </Typography>
       <Stack direction={"row"} justifyContent="space-between">
         <Link to={`create`}>
-          <Button startIcon={<AddCircleOutlineIcon />}>Add New {model}</Button>
+          <Button startIcon={<AddCircleOutlineIcon />}>
+            Add New {meta.modelTitle}
+          </Button>
         </Link>
         <Search value={(v) => setsf(v)} />
       </Stack>
-      <Typography variant="h2" color="primary" className="f-capitalize">
-        {model} List
-      </Typography>
-      <RenderCol col={col} order={order} onOrderChange={handleOrderChange} />
+      <RenderCol
+        col={meta.col}
+        order={order}
+        onOrderChange={handleOrderChange}
+      />
       <RenderData
         data={data}
-        col={col}
+        col={meta.col}
         sf={sf}
         order={order}
-        model={model}
+        model={meta.model}
         isRefetch={isRefetch}
       />
     </Stack>
@@ -124,6 +130,7 @@ function RenderCol({ col, order, onOrderChange }) {
       borderTop={`1px solid `}
       borderColor="accgrey.c"
       my={2}
+      width="100%"
     >
       {col.map((d, i) => (
         <Stack width={d.w ? d.w : "10%"} key={i} py={1}>
@@ -134,6 +141,7 @@ function RenderCol({ col, order, onOrderChange }) {
             endIcon={renderIcon(d)}
             onClick={() => onOrderChange(d.name)}
             color="primary"
+            variant="text"
           >
             <Typography
               variant="body1"
@@ -147,12 +155,13 @@ function RenderCol({ col, order, onOrderChange }) {
         </Stack>
       ))}
 
-      <Stack py={1} width="5%">
+      <Stack py={1} width="10%">
         <Button
           sx={{
             justifyContent: "flex-start",
           }}
           color="primary"
+          variant="text"
         >
           <Typography
             variant="body1"

@@ -5,6 +5,7 @@ import { Stack, Typography, Button, TextField } from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
 import useForm, { Input } from "@/component/useForm";
 import { Link, useNavigate } from "react-router-dom";
+import { fetcher } from "@component/gip-useForm/fetcher";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -17,7 +18,6 @@ export function LoginForm(params) {
   let navigate = useNavigate();
   const [err, seterr] = React.useState("");
   const { auth } = React.useContext(Context);
-  const form = useForm({ username: "", password: "" });
 
   const formik = useFormik({
     initialValues: {
@@ -28,11 +28,14 @@ export function LoginForm(params) {
     },
     validationSchema: validationSchema,
     onSubmit: async (payload) => {
+      console.log(payload);
+
       const res = await fetcher({
         method: "post",
         url: "auth/signin",
         data: payload,
       });
+      console.log(res);
       if (res.error) seterr(res.error);
       else {
         await auth.update(res);
@@ -97,6 +100,5 @@ const validationSchema = yup.object({
   username: yup.string("Enter your email").required("This field is required"),
   password: yup
     .string("Enter your password")
-    .min(8, "Password should be of minimum 8 characters length")
     .required("This field is required"),
 });

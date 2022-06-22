@@ -10,7 +10,7 @@ import Context from ".";
 
 const ButtonPallet = {
   primary: {
-    main: "#2f4858",
+    main: "#1a57a0",
     dark: "#131e24",
   },
   secondary: {

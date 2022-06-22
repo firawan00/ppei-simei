@@ -28,6 +28,7 @@ export default function useApp() {
   async function update(res) {
     await setData(res);
     await localStorage.setItem("AuthUser", JSON.stringify(res));
+    await localStorage.setItem("AuthToken", res.token);
   }
 
   function logout() {
