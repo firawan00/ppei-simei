@@ -1,5 +1,5 @@
 export const meta = {
-  model: "bol",
+  model: "import_billoflading",
   modelTitle: "bill of landing",
   col: [
     { name: "name", label: "Submited By", w: "100%" },

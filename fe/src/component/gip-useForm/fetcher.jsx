@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+export { useNavigate };
 
 export const fetcher = async (param) => {
   const token = localStorage.getItem("AuthToken");

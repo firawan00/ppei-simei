@@ -10,12 +10,18 @@ export default function App(props) {
       direction={props.dcol ? "column" : "row"}
       alignItems={props.dcol ? "left" : "center"}
       my={props.dcol ? 0 : 0.5}
+      justifyContent="space-between"
     >
-      <Typography width={getWidth()} color="initial">
+      <Typography
+        width={getWidth()}
+        color="initial"
+        variant={props.var || "body1"}
+      >
         {props.lb}
       </Typography>
       <TextField
         {...props}
+        name={props.name ? props.name.toLowerCase() : props.lb.toLowerCase()}
         sx={{
           input: {
             py: "1px",

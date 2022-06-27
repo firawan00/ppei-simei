@@ -30,6 +30,8 @@ export default function Test(params) {
   if (isPrivateRoute(loc.pathname) && !auth.user.token)
     <Navigate to="/signin" />;
 
+  if (auth.user && !auth.user.id) return "";
+
   return (
     <Layout.Type3>
       <Outlet />

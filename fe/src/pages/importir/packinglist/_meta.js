@@ -1,5 +1,5 @@
 export const meta = {
-  model: "packinglist",
+  model: "import_packinglist",
   modelTitle: "Packing List",
   col: [
     { name: "name", label: "Submited By", w: "100%" },

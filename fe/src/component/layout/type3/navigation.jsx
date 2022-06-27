@@ -33,7 +33,7 @@ export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
         </Stack>
         {nav.map((d, ix) => (
           <Stack key={ix}>
-            {!d.path && d.isText && (
+            {!d.path && d.isText && hasRole(d.role) && (
               <Typography
                 pl={3}
                 variant="overline"

@@ -25,7 +25,7 @@ class UserController extends Controller
     public function store(Request $r)
     {
         $data = Cmodel::updateOrCreate(
-            ['id' => $r->id || ""],
+            ['id' => $r->id],
             $r->all()
         );
 

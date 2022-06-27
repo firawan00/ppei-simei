@@ -1,65 +1,68 @@
 import { Stack, Typography, Divider, TextField } from "@mui/material";
 import PaperA4 from "@component/paperA4";
 import { logo } from "@ui/logo";
-import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
+import SenttoExportir from "@/component/apps/sentto";
 
 export default function App(props) {
   return (
-    <PaperA4>
-      <Stack spacing={3}>
-        <Header />
-        <Divider />
+    <Stack>
+      <PaperA4>
+        <Stack spacing={3}>
+          <Header />
+          <Divider />
 
-        <Typography variant="h6" align="center" color="initial">
-          OFFERING LETTER
-        </Typography>
+          <Typography variant="h6" align="center" color="initial">
+            OFFERING LETTER
+          </Typography>
 
-        <Stack direction={"row"} justifyContent="space-between">
-          <Stack spacing={1}>
-            <InputInline lb={"Our Ref"} />
-            <InputInline lb={"To"} />
-            <InputInline lb={"Cc"} />
+          <Stack direction={"row"} justifyContent="space-between">
+            <Stack spacing={1}>
+              <InputInline lb={"Our Ref"} />
+              <InputInline lb={"To"} />
+              <InputInline lb={"Cc"} />
+            </Stack>
+            <Stack>
+              <Typography color="initial">
+                Jakata, {fdate.format(fdate.today)}
+              </Typography>
+            </Stack>
           </Stack>
+
           <Stack>
-            <Typography color="initial">
-              Jakata, {fdate.format(fdate.today)}
-            </Typography>
+            Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
+            would like to submit our offers are as follows:
+          </Stack>
+
+          <Stack spacing={1}>
+            <InputInline lb={"Commodity"} lbw={180} />
+            <InputInline lb={"Quantity"} lbw={180} />
+            <InputInline lb={"Unit FOB Price"} lbw={180} />
+            <InputInline lb={"Packing"} lbw={180} />
+            <InputInline lb={"Shipment"} lbw={180} />
+            <InputInline lb={"Term of Payment "} lbw={180} />
+            <InputInline lb={"Validity"} lbw={180} />
+          </Stack>
+
+          <Stack>
+            Please be advised that we prefer to sell in FOB Basis Price. We hope
+            our offers are favorable to you, if you have any question do not
+            hesitate to contact us.
+          </Stack>
+
+          <Stack>
+            Faithfully Yours.
+            <br />
+            <br />
+            <br />
+            <br />
+            Export Manager
           </Stack>
         </Stack>
-
-        <Stack>
-          Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
-          would like to submit our offers are as follows:
-        </Stack>
-
-        <Stack spacing={1}>
-          <InputInline lb={"Commodity"} lbw={180} />
-          <InputInline lb={"Quantity"} lbw={180} />
-          <InputInline lb={"Unit FOB Price"} lbw={180} />
-          <InputInline lb={"Packing"} lbw={180} />
-          <InputInline lb={"Shipment"} lbw={180} />
-          <InputInline lb={"Term of Payment "} lbw={180} />
-          <InputInline lb={"Validity"} lbw={180} />
-        </Stack>
-
-        <Stack>
-          Please be advised that we prefer to sell in FOB Basis Price. We hope
-          our offers are favorable to you, if you have any question do not
-          hesitate to contact us.
-        </Stack>
-
-        <Stack>
-          Faithfully Yours.
-          <br />
-          <br />
-          <br />
-          <br />
-          Export Manager
-        </Stack>
-      </Stack>
-    </PaperA4>
+      </PaperA4>
+      <SenttoExportir />
+    </Stack>
   );
 }
 

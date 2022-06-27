@@ -1,16 +1,28 @@
-import React from "react";
-import { Stack, Button } from "@mui/material";
-import useForm, { Input, fetcher } from "@/component/useForm";
+import React, { useState } from "react";
+import { Stack, Button, TextField, MenuItem } from "@mui/material";
 import BackIcon from "@/component/ui/backIcon";
 import { meta } from "./_meta";
+import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
 
 export default function App({ refdata }) {
-  const defval = { role: "", name: "", email: "" };
-  const form = useForm(meta.model, refdata ? refdata : defval);
+  const [payload, setpayload] = useState(refdata || {});
+  const nav = useNavigate();
 
-  React.useEffect(() => {
-    refdata && form.setpayload(refdata);
-  }, []);
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  async function formSubmit(e) {
+    e.preventDefault();
+    delete payload.token;
+
+    let res = await fetcher({
+      url: `users`,
+      method: "post",
+      data: payload,
+    });
+    nav(-1, true);
+  }
 
   return (
     <Stack
@@ -18,60 +30,47 @@ export default function App({ refdata }) {
       width="100%"
       noValidate
       autoComplete="off"
-      onSubmit={form.handleSubmit}
+      onSubmit={formSubmit}
     >
       <BackIcon
         title={refdata ? `${meta.model} Edit` : `${meta.model} Create`}
       />
-      {refdata && (
-        <Input.Hidden v={form.handleInput} refdata={refdata} fname="id" />
-      )}
-
       <Stack spacing={2}>
-        <Input.Text val={form.payload.name} setval={form.setval} name="name" />
+        <TextField
+          label="username"
+          name="username"
+          value={payload.username || ""}
+          onChange={handlePayload}
+          disabled
+        />
 
-        {!refdata && (
-          <Input.Pass
-            val={form.payload.name}
-            setval={form.setval}
-            name="name"
-          />
-        )}
+        <TextField
+          label="name"
+          name="name"
+          value={payload.name || ""}
+          onChange={handlePayload}
+        />
 
-        <Input.Email val={form.payload.email} setval={form.setval} />
-        <Input.Role val={form.payload.role} setval={form.setval} />
+        <TextField
+          label="password"
+          name="password"
+          value={payload.password || ""}
+          onChange={handlePayload}
+        />
+        <TextField
+          label="role"
+          name="role"
+          value={payload.role || ""}
+          onChange={handlePayload}
+          select
+        >
+          <MenuItem value="admin">admin</MenuItem>
+          <MenuItem value="user-import">user import</MenuItem>
+          <MenuItem value="user-export">user export</MenuItem>
+        </TextField>
 
-        <Input.Submit />
+        <Button type="submit">Submit</Button>
       </Stack>
     </Stack>
-  );
-}
-
-function SelectGroup({ val, setval }) {
-  const [option, setoption] = React.useState();
-
-  React.useEffect(() => {
-    fetching();
-  }, []);
-
-  async function fetching() {
-    setoption(
-      await fetcher({
-        method: "get",
-        url: `tagsgroup`,
-      })
-    );
-  }
-
-  if (!option) return <Input.Loader />;
-
-  return (
-    <Input.Select
-      options={option}
-      name="group_id"
-      val={val}
-      setval={setval}
-      newOption
-    />
   );
 }

@@ -6,7 +6,8 @@ import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
-import Table from "./productList";
+import SenttoExportir from "@/component/apps/sentto";
+import ProductList from "@/component/ui/productList";
 
 export default function App(props) {
   const [data, setdata] = useState([
@@ -26,52 +27,56 @@ export default function App(props) {
   ];
 
   return (
-    <PaperA4>
-      <Stack spacing={3}>
-        <Header />
-        <Divider />
-        <Typography variant="h6" align="center" color="initial">
-          INVOICE
-        </Typography>
-        <Stack direction={"row"} justifyContent="space-between">
-          <Stack spacing={1}>
-            <InputInline lb={"No"} />
+    <Stack>
+      <PaperA4>
+        <Stack spacing={3}>
+          <Header />
+          <Divider />
+          <Typography variant="h6" align="center" color="initial">
+            INVOICE
+          </Typography>
+          <Stack direction={"row"} justifyContent="space-between">
+            <Stack spacing={1}>
+              <InputInline lb={"No"} />
+            </Stack>
+            <Stack>
+              <Typography color="initial">
+                Jakata, {fdate.format(fdate.today)}
+              </Typography>
+            </Stack>
           </Stack>
           <Stack>
-            <Typography color="initial">
-              Jakata, {fdate.format(fdate.today)}
-            </Typography>
+            <Stack direction={"row"} justifyContent="space-between">
+              <InputInline lb={"From"} />
+              <InputInline lb={"To"} />
+            </Stack>
+            <Stack direction={"row"} justifyContent="space-between">
+              <InputInline lb={"L/C No."} />
+              <InputInline lb={"Issuing Bank"} />
+            </Stack>
+            <InputInline lb={"Date"} />
+          </Stack>
+          <Stack>
+            Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
+            would like to submit our offers are as follows:
+          </Stack>
+          <ProductList />
+
+          <Stack>
+            <InputInline lb={"Shipping Marks"} lbw={180} />
+          </Stack>
+          <Stack>
+            Faithfully Yours.
+            <br />
+            <br />
+            <br />
+            <br />
+            Export Manager
           </Stack>
         </Stack>
-        <Stack>
-          <Stack direction={"row"} justifyContent="space-between">
-            <InputInline lb={"From"} />
-            <InputInline lb={"To"} />
-          </Stack>
-          <Stack direction={"row"} justifyContent="space-between">
-            <InputInline lb={"L/C No."} />
-            <InputInline lb={"Issuing Bank"} />
-          </Stack>
-          <InputInline lb={"Date"} />
-        </Stack>
-        <Stack>
-          Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
-          would like to submit our offers are as follows:
-        </Stack>
-        <Table header={header} data={data} />
-        <Stack>
-          <InputInline lb={"Shipping Marks"} lbw={180} />
-        </Stack>
-        <Stack>
-          Faithfully Yours.
-          <br />
-          <br />
-          <br />
-          <br />
-          Export Manager
-        </Stack>
-      </Stack>
-    </PaperA4>
+      </PaperA4>
+      <SenttoExportir />
+    </Stack>
   );
 }
 

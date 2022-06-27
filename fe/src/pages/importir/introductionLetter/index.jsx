@@ -14,7 +14,7 @@ export default function AdminPage(params) {
     setfirst(
       await fetcher({
         method: "get",
-        url: `${meta.endpoint}`,
+        url: `${meta.model}`,
       })
     );
   }

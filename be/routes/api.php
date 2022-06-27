@@ -6,8 +6,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 
-use App\Http\Controllers\IntroductionLetterController;
-use App\Http\Controllers\SkaController;
+use App\Http\Controllers\import_introductionletter_controller;
+use App\Http\Controllers\import_offeringletter_controller;
+use App\Http\Controllers\import_invoice_controller;
+use App\Http\Controllers\import_packinglist_controller;
+use App\Http\Controllers\import_deliveryorder_controller;
+use App\Http\Controllers\import_billoflading_controller;
+use App\Http\Controllers\import_ska_controller;
+use App\Http\Controllers\import_wessel_controller;
+
+use App\Http\Controllers\export_inquiry_controller;
+use App\Http\Controllers\export_lkn_controller;
+use App\Http\Controllers\export_ordering_controller;
+use App\Http\Controllers\export_peb_controller;
+use App\Http\Controllers\export_salescontract_controller;
+use App\Http\Controllers\export_lc_controller;
+use App\Http\Controllers\export_ska_controller;
+use App\Http\Controllers\export_wessel_controller;
+
+use App\Http\Controllers\inbox_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,10 +53,33 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
+
+    Route::group(['prefix' => 'inbox'], function () {
+        Route::get('from', [inbox_controller::class, 'from']);
+        Route::get('to', [inbox_controller::class, 'to']);
+    });
+
     Route::resources([
         'users' => UserController::class,
-        'ska' => SkaController::class,
-        'imp-il' => IntroductionLetterController::class,
+
+        'import_introductionletter' => import_introductionletter_controller::class,
+        'import_offeringletter' => import_offeringletter_controller::class,
+        'import_invoice' => import_invoice_controller::class,
+        'import_packinglist' => import_packinglist_controller::class,
+        'import_deliveryorder' => import_deliveryorder_controller::class,
+        'import_billoflading' => import_billoflading_controller::class,
+        'import_ska' => import_ska_controller::class,
+        'import_wessel' => import_wessel_controller::class,
+
+        'export_inquiry' => export_inquiry_controller::class,
+        'export_lkn' => export_lkn_controller::class,
+        'export_ordering' => export_ordering_controller::class,
+        'export_peb' => export_peb_controller::class,
+        'export_salescontract' => export_salescontract_controller::class,
+        'export_lc' => export_lc_controller::class,
+        'export_ska' => export_ska_controller::class,
+        'export_wessel' => export_wessel_controller::class,
+
     ]);
 });
 

@@ -1,8 +1,10 @@
 export const meta = {
   model: "users",
+  modelTitle: "User ",
+
   col: [
-    { name: "name", label: "Names", w: "100%" },
-    { name: "email", label: "Email", w: "20%" },
+    { name: "username", label: "username", w: "30%" },
+    { name: "name", label: "Names", w: "30%" },
     { name: "role", label: "Role", w: "20%" },
   ],
 };

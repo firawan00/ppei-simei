@@ -15,6 +15,11 @@ class UserSeeder extends Seeder
     public function run()
     {
 
+        $data = [
+            'user-export1', 'user-export2', 'user-export3', 'user-export4', 'user-export5',
+            'user-import1', 'user-import2', 'user-import3', 'user-import4', 'user-import5',
+        ];
+
         User::create([
             'username' => 'admin',
             'name' => 'admin',
@@ -22,19 +27,16 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ], );
 
-        User::create([
-            'username' => 'user-import',
-            'name' => 'user-import',
-            'password' => 'password',
-            'role' => 'user-import',
-        ], );
+        foreach ($data as $d) {
+            # code...
+            User::create([
+                'username' => $d,
+                'name' => $d,
+                'password' => 'password',
+                'role' => str_contains($d, 'import') ? 'user-import' : 'user-export',
+            ], );
 
-        User::create([
-            'username' => 'user-export',
-            'name' => 'user-export',
-            'password' => 'password',
-            'role' => 'user-export',
-        ], );
+        }
 
     }
 }

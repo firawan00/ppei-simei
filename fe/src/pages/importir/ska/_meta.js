@@ -1,5 +1,5 @@
 export const meta = {
-  model: "ska",
+  model: "import_ska",
   modelTitle: "ska",
   col: [
     { name: "name", label: "Submited By", w: "100%" },

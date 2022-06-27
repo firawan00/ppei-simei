@@ -6,15 +6,19 @@ import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
+import SenttoExportir from "@/component/apps/sentto";
 
 export default function App(props) {
   return (
-    <PaperA4>
-      <Stack spacing={3}>
-        <Wessel id={1} />
-        <Wessel id={2} />
-      </Stack>
-    </PaperA4>
+    <Stack>
+      <PaperA4>
+        <Stack spacing={3}>
+          <Wessel id={1} />
+          <Wessel id={2} />
+        </Stack>
+      </PaperA4>
+      <SenttoExportir />
+    </Stack>
   );
 }
 

@@ -35,6 +35,9 @@ a {
   font-weight: bold;
 }
 
+.f-ul {
+  text-decoration: underline;
+}
 .f-uppercase {
   text-transform: uppercase;
 }
@@ -67,4 +70,14 @@ form {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+@media print {
+  .hide_on_print {
+    display: none;
+  }
+
+  .print-margin {
+    margin-top: -16px;
+  }
 }
