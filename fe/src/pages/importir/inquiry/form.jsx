@@ -8,12 +8,11 @@ import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
 
-import SenttoImportir from "@component/apps/senttoImportir";
+import Sentto from "@component/apps/sentto";
 import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
-import context from "@/component/context";
 
 export default function App({ refdata }) {
-  const { auth } = useContext(context);
+  const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
   const [payload, setpayload] = useState(
     refdata ? { ...refdata, to: refdata.to.id } : {}
@@ -28,11 +27,11 @@ export default function App({ refdata }) {
     e.preventDefault();
     delete payload.from;
     let res = await fetcher({
-      url: `export_inquiry`,
+      url: `md_inquiry`,
       method: "post",
       data: payload,
     });
-    nav("/exportir/inquiry", true);
+    nav("/importir/inquiry", true);
   }
 
   return (
@@ -141,13 +140,13 @@ export default function App({ refdata }) {
         </Stack>
       </PaperA4>
       {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
-        <SenttoImportir
+        <Sentto
           value={payload.to || ""}
           name="to"
           onChange={handlePayload}
-          formdisabled={formdisabled}
+          disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
-          filter="user-import"
+          filter="user-export"
         />
       )}
     </Stack>

@@ -9,7 +9,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-export default function App({ data, meta, isRefetch }) {
+export default function App({ data, meta, isRefetch, disableNew = false }) {
   const [sf, setsf] = React.useState("");
   const [order, setorder] = useState({
     col: meta.col[0].name,
@@ -42,11 +42,14 @@ export default function App({ data, meta, isRefetch }) {
         {meta.modelTitle} List
       </Typography>
       <Stack direction={"row"} justifyContent="space-between">
-        <Link to={`create`}>
-          <Button startIcon={<AddCircleOutlineIcon />}>
-            Add New {meta.modelTitle}
-          </Button>
-        </Link>
+        {!disableNew && (
+          <Link to={`create`}>
+            <Button startIcon={<AddCircleOutlineIcon />}>
+              Add New {meta.modelTitle}
+            </Button>
+          </Link>
+        )}
+
         <Search value={(v) => setsf(v)} />
       </Stack>
       <RenderCol

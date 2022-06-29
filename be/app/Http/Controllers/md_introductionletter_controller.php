@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\export_inquiry;
+use App\Models\MD_introductionletter;
 use App\Models\inbox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class export_inquiry_controller extends CustomController
+class md_introductionletter_controller extends CustomController
 {
-    public function __construct(export_inquiry $model)
+    public function __construct(MD_introductionletter $model)
     {
         $this->model = $model;
     }
 
     public function store(Request $r)
     {
+        //
+
         $payload = $r->all();
         $payload['from'] = Auth::user()->id;
-        $data = export_inquiry::updateOrCreate(
+        $data = MD_introductionletter::updateOrCreate(
             [
                 'id' => $r->id,
             ],
@@ -33,10 +35,11 @@ class export_inquiry_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Inquery Letter from ' . Auth::user()->name,
-            'link' => '/exportir/inquiry/' . $data->id,
+            'title' => 'Introduction Letter from ' . Auth::user()->name,
+            'link' => '/exportir/introductionletter/' . $data->id,
         ]
         );
         return response()->json($data);
+
     }
 }

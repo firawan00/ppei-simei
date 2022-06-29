@@ -28,7 +28,7 @@ export function LoginForm(params) {
     },
     validationSchema: validationSchema,
     onSubmit: async (payload) => {
-      console.log(payload);
+      // console.log(payload);
 
       const res = await fetcher({
         method: "post",

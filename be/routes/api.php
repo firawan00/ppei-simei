@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminConfigController;
 
-use App\Http\Controllers\import_introductionletter_controller;
+use App\Http\Controllers\md_inquiry_controller;
+use App\Http\Controllers\md_introductionletter_controller;
+
 use App\Http\Controllers\import_offeringletter_controller;
 use App\Http\Controllers\import_invoice_controller;
 use App\Http\Controllers\import_packinglist_controller;
@@ -15,7 +18,6 @@ use App\Http\Controllers\import_billoflading_controller;
 use App\Http\Controllers\import_ska_controller;
 use App\Http\Controllers\import_wessel_controller;
 
-use App\Http\Controllers\export_inquiry_controller;
 use App\Http\Controllers\export_lkn_controller;
 use App\Http\Controllers\export_ordering_controller;
 use App\Http\Controllers\export_peb_controller;
@@ -61,8 +63,11 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::resources([
         'users' => UserController::class,
+        'config' => AdminConfigController::class,
 
-        'import_introductionletter' => import_introductionletter_controller::class,
+        'md_introductionletter' => md_introductionletter_controller::class,
+        'md_inquiry' => md_inquiry_controller::class,
+
         'import_offeringletter' => import_offeringletter_controller::class,
         'import_invoice' => import_invoice_controller::class,
         'import_packinglist' => import_packinglist_controller::class,
@@ -70,8 +75,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         'import_billoflading' => import_billoflading_controller::class,
         'import_ska' => import_ska_controller::class,
         'import_wessel' => import_wessel_controller::class,
-
-        'export_inquiry' => export_inquiry_controller::class,
         'export_lkn' => export_lkn_controller::class,
         'export_ordering' => export_ordering_controller::class,
         'export_peb' => export_peb_controller::class,

@@ -23,25 +23,42 @@ export default function App(props) {
     }
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     <Stack alignItems={"center"} mt={3}>
       <Stack width={"210mm"} spacing={2}>
-        {data.length && (
-          <TextField select label="Sent To" {...props}>
-            {data.map((d) => (
-              <MenuItem key={d.id} value={d.id}>
-                {d.name}
-              </MenuItem>
-            ))}
-          </TextField>
+        {!props.formdisabled && (
+          <>
+            {data.length && (
+              <TextField
+                select
+                label="Sent To"
+                value={props.value}
+                name={props.name}
+                onChange={props.onChange}
+                disabled={props.disabled}
+              >
+                {data
+                  .filter((d) => d.role == props.filter)
+                  .map((d) => (
+                    <MenuItem key={d.id} value={d.id}>
+                      {d.name}
+                    </MenuItem>
+                  ))}
+              </TextField>
+            )}
+            <Button fullWidth type="submit">
+              Submit
+            </Button>
+          </>
         )}
-        <Button fullWidth>Submit</Button>
-
-        <Button fullWidth variant="text">
-          Print this document
-        </Button>
+        {props.formdisabled && (
+          <>
+            <Button fullWidth onClick={props.setEdit}>
+              Edit this Document
+            </Button>
+          </>
+        )}
       </Stack>
     </Stack>
   );

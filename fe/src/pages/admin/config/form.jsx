@@ -3,6 +3,7 @@ import { Stack, Button, TextField, MenuItem } from "@mui/material";
 import BackIcon from "@/component/ui/backIcon";
 import { meta } from "./_meta";
 import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
+import InputFile from "@component/gip-useForm/inputFile";
 
 export default function App({ refdata }) {
   const [payload, setpayload] = useState(refdata || {});
@@ -10,6 +11,10 @@ export default function App({ refdata }) {
 
   function handlePayload(e) {
     setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  function handlePayloadValue(e) {
+    setpayload({ ...payload, e });
   }
 
   async function formSubmit(e) {
@@ -37,27 +42,30 @@ export default function App({ refdata }) {
       />
       <Stack spacing={2}>
         <TextField
-          label="username"
-          name="username"
-          value={payload.username || ""}
-          onChange={handlePayload}
-          disabled
-        />
-
-        <TextField
           label="name"
           name="name"
           value={payload.name || ""}
           onChange={handlePayload}
+          disabled
         />
+        {payload.type == "file" && (
+          <InputFile
+            btnText="Upload Document"
+            value={(v) => {
+              handlePayloadValue({ file: v });
+            }}
+          />
+        )}
+        {payload.type == "text" && (
+          <TextField
+            label="password"
+            name="password"
+            value={payload.value || ""}
+            onChange={handlePayload}
+          />
+        )}
 
-        <TextField
-          label="password"
-          name="password"
-          value={payload.password || ""}
-          onChange={handlePayload}
-        />
-        <TextField
+        {/* <TextField
           label="role"
           name="role"
           value={payload.role || ""}
@@ -73,9 +81,13 @@ export default function App({ refdata }) {
           <MenuItem value="fasilitator-bank">fasilitator bank</MenuItem>
           <MenuItem value="fasilitator-cargo">fasilitator cargo</MenuItem>
           <MenuItem value="fasilitator-ska">fasilitator ska</MenuItem>
-        </TextField>
+        </TextField> */}
 
-        <Button type="submit">Submit</Button>
+        <Button
+        // type="submit"
+        >
+          Submit
+        </Button>
       </Stack>
     </Stack>
   );

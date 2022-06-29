@@ -20,6 +20,13 @@ class UserSeeder extends Seeder
             'user-import1', 'user-import2', 'user-import3', 'user-import4', 'user-import5',
         ];
 
+        $data2 = [
+            'fasilitator-kepabeanan',
+            'fasilitator-bank',
+            'fasilitator-cargo',
+            'fasilitator-ska',
+        ];
+
         User::create([
             'username' => 'admin',
             'name' => 'admin',
@@ -31,9 +38,20 @@ class UserSeeder extends Seeder
             # code...
             User::create([
                 'username' => $d,
-                'name' => $d,
+                'name' => "PT." . $d,
                 'password' => 'password',
                 'role' => str_contains($d, 'import') ? 'user-import' : 'user-export',
+            ], );
+
+        }
+
+        foreach ($data2 as $d) {
+            # code...
+            User::create([
+                'username' => $d,
+                'name' => $d,
+                'password' => 'password',
+                'role' => $d,
             ], );
 
         }

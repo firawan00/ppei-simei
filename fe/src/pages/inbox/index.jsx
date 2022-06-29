@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Divider, Typography } from "@mui/material";
 import { fetcher } from "@component/gip-useForm/fetcher";
 import { Link } from "react-router-dom";
 
@@ -26,15 +26,26 @@ export default function App(props) {
   }, []);
 
   return (
-    <Stack>
+    <Stack spacing={2}>
+      <Typography variant="h4" className="f-uppercase f-bold" color="primary">
+        INBOX
+      </Typography>
       <Stack>
-        <Stack direction="row">
+        <Divider />
+        <Stack direction="row" my={1}>
           {field.map((d) => (
-            <Stack key={d.label} width={d.w}>
+            <Typography
+              key={d.label}
+              width={d.w}
+              variant="subtitle1"
+              className="f-uppercase f-bold"
+              color="primary"
+            >
               {d.label}
-            </Stack>
+            </Typography>
           ))}
         </Stack>
+        <Divider />
       </Stack>
       {data.length &&
         data.map((d) => (

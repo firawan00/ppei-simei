@@ -9,51 +9,41 @@ const importir = [
   },
 
   {
-    name: "Introduction Letter",
-    path: "/importir/introductionletter",
+    name: "Inquiry Letter",
+    path: "/importir/inquiry",
     role: ["user-import", "admin"],
-
-    // role: ["user"],
+  },
+  {
+    name: "Lembar Kerja Negosiasi",
+    path: "/importir/lkn",
+    role: ["user-import", "admin"],
+  },
+  {
+    name: "ORDERING LETTER",
+    path: "/importir/ordering",
+    role: ["user-import", "admin"],
+  },
+  {
+    name: "Sales Contract",
+    path: "/importir/salescontract",
+    role: ["user-import", "admin"],
+  },
+  {
+    name: "permintaan pembukaan LC",
+    path: "/importir/lc",
+    role: ["user-import", "admin", "fasilitator-bank"],
   },
 
-  {
-    name: "Offering Letter",
-    path: "/importir/offeringletter",
-    role: ["user-import", "admin"],
-  },
+  // {
+  //   name: "Create SKA-COO ",
+  //   path: "/importir/ska",
 
+  //   role: ["user-import", "admin"],
+  // },
   {
-    name: "Invoice",
-    path: "/importir/invoice",
-    role: ["user-import", "admin"],
-  },
-  {
-    name: "Packing List",
-    path: "/importir/packinglist",
-    role: ["user-import", "admin"],
-  },
-
-  {
-    name: "Delivery Order",
-    path: "/importir/deliveryorder",
-    role: ["user-import", "admin"],
-  },
-
-  {
-    name: "Bill of LADING ",
-    path: "/importir/billoflanding",
-    role: ["user-import", "admin"],
-  },
-  {
-    name: "Create SKA-COO ",
-    path: "/importir/ska",
-
-    role: ["user-import", "admin"],
-  },
-  {
-    name: "Create DRAFT Wesel ",
+    name: "Wesel Import",
     path: "/importir/wessel",
-    role: ["user-import", "admin"],
+    role: ["user-import", "admin", "fasilitator-bank"],
   },
 ];
 
@@ -64,38 +54,48 @@ const exportir = [
     role: ["user-export", "admin"],
   },
   {
-    name: "Inquiry Letter",
-    path: "/exportir/inquiry",
+    name: "Introduction Letter",
+    path: "/exportir/introductionletter",
+    role: ["user-export", "admin"],
+
+    // role: ["user"],
+  },
+  {
+    name: "Offering Letter",
+    path: "/exportir/offeringletter",
     role: ["user-export", "admin"],
   },
 
   {
-    name: "Lembar Kerja Negosiasi",
-    path: "/exportir/lkn",
+    name: "Invoice",
+    path: "/exportir/invoice",
+    role: ["user-export", "admin"],
+  },
+  {
+    name: "Packing List",
+    path: "/exportir/packinglist",
+    role: ["user-export", "admin"],
+  },
+  {
+    name: "Shipping Instruction",
+    path: "/exportir/shippinginstruction",
+    role: ["user-export", "admin"],
+  },
+  {
+    name: "Delivery Order",
+    path: "/exportir/deliveryorder",
     role: ["user-export", "admin"],
   },
 
   {
-    name: "ORDERING LETTER",
-    path: "/exportir/ordering",
+    name: "Bill of LADING ",
+    path: "/exportir/billoflanding",
     role: ["user-export", "admin"],
   },
-
   {
     name: "PEB",
     path: "/exportir/peb",
-    role: ["user-export", "admin"],
-  },
-  {
-    name: "Salaes Contract",
-    path: "/exportir/salescontract",
-    role: ["user-export", "admin"],
-  },
-
-  {
-    name: "permintaan pembukaan LC",
-    path: "/exportir/lc",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-kepabeanan"],
   },
 
   {
@@ -104,9 +104,9 @@ const exportir = [
     role: ["user-export", "admin"],
   },
   {
-    name: "DRAFT Wesel ",
+    name: "Wesel Export",
     path: "/exportir/wessel",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-bank"],
   },
 ];
 
@@ -121,6 +121,11 @@ const admin = [
   {
     name: "Users",
     path: "/admin/users",
+    role: ["admin"],
+  },
+  {
+    name: "Configuration",
+    path: "/admin/config",
     role: ["admin"],
   },
 ];

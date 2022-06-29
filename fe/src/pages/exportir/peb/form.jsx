@@ -61,6 +61,7 @@ function NewSkaForm(params) {
   const formik = useFormik({
     initialValues: {
       name: auth.user.name || "",
+      to: "fasilitator-kepabeanan",
       type: "foobar@example.com",
     },
     validationSchema: validationSchema,
@@ -85,7 +86,7 @@ function NewSkaForm(params) {
         Pengajuan PEB Baru
       </Typography>
       <TextField
-        label="name"
+        label="from"
         value={formik.values.name}
         onChange={formik.handleChange}
         disabled
@@ -102,6 +103,13 @@ function NewSkaForm(params) {
         <MenuItem value="type-a">Type A</MenuItem>
         <MenuItem value="type-b">Type B</MenuItem>
       </TextField> */}
+      <TextField
+        label="to"
+        name="to"
+        value={formik.values.to}
+        onChange={formik.handleChange}
+        disabled
+      />
       <InputFile
         value={(v) => {
           formik.setFieldValue("file", v ? v : "");

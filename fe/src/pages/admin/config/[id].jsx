@@ -16,7 +16,7 @@ export default function App(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: `${meta.model}/id`,
+        url: `${meta.model}/${id}`,
       })
     );
   }

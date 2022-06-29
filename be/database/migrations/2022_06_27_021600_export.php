@@ -14,21 +14,52 @@ class Export extends Migration
     public function up()
     {
         //
-        Schema::create('export_inquiry', function (Blueprint $table) {
+
+        Schema::create('import_offeringletter', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
+            $table->timestamps();
+        });
 
-            $table->string('docto');
-            $table->string('tel');
-            $table->string('fax');
+        Schema::create('import_invoice', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
+            $table->timestamps();
+        });
 
-            $table->string('article');
-            $table->string('shipment');
+        Schema::create('import_packinglist', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
+            $table->timestamps();
+        });
 
-            $table->string('who');
-            $table->string('sentto');
+        Schema::create('import_deliveryorder', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
+            $table->timestamps();
+        });
+        Schema::create('import_billoflading', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
+            $table->timestamps();
+        });
 
+        Schema::create('import_ska', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
+            $table->timestamps();
+        });
+
+        Schema::create('import_wessel', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('to');
             $table->timestamps();
         });
 
@@ -91,14 +122,14 @@ class Export extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('export_inquiry');
-        Schema::dropIfExists('export_lkn');
-        Schema::dropIfExists('export_ordering');
-        Schema::dropIfExists('export_peb');
-        Schema::dropIfExists('export_salescontract');
-        Schema::dropIfExists('export_lc');
-        Schema::dropIfExists('export_ska');
-        Schema::dropIfExists('export_wessel');
+        // Schema::dropIfExists('export_inquiry');
+        // Schema::dropIfExists('export_lkn');
+        // Schema::dropIfExists('export_ordering');
+        // Schema::dropIfExists('export_peb');
+        // Schema::dropIfExists('export_salescontract');
+        // Schema::dropIfExists('export_lc');
+        // Schema::dropIfExists('export_ska');
+        // Schema::dropIfExists('export_wessel');
 
     }
 }

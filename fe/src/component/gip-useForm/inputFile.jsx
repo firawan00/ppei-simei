@@ -7,7 +7,7 @@ const styles = {
   display: "flex",
 };
 
-export default function App({ value }) {
+export default function App({ value, btnText }) {
   const inputRef = React.useRef(null);
   const [file, setFile] = React.useState(null);
 
@@ -29,7 +29,9 @@ export default function App({ value }) {
         }}
       />
       <Stack direction={"row"} alignItems="center" spacing={2}>
-        <Button onClick={() => inputRef.current.click()}>Attach Form </Button>
+        <Button onClick={() => inputRef.current.click()}>
+          {btnText || "Attach Form"}
+        </Button>
         <Typography variant="caption" color="initial">
           {file ? file.name : " "}
         </Typography>

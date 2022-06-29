@@ -1,3 +1,6 @@
+import React, { useState, useContext } from "react";
+import Context from "@context";
+
 import {
   Stack,
   Typography,
@@ -11,11 +14,34 @@ import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
-import SenttoExportir from "@/component/apps/sentto";
+import Sentto from "@/component/apps/sentto";
 
-export default function App(props) {
+import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
+import context from "@/component/context";
+export default function App({ refdata }) {
+  const { auth } = useContext(Context);
+  const [formdisabled, setformdisabled] = useState(refdata ? true : false);
+  const [payload, setpayload] = useState(
+    refdata ? { ...refdata, to: refdata.to.id } : {}
+  );
+  const nav = useNavigate();
+
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  async function formSubmit(e) {
+    e.preventDefault();
+    delete payload.from;
+    let res = await fetcher({
+      url: `md_introductionletter`,
+      method: "post",
+      data: payload,
+    });
+    nav("/exportir/introductionletter", true);
+  }
   return (
-    <Stack>
+    <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
         <Stack spacing={3}>
           <Header />
@@ -27,8 +53,20 @@ export default function App(props) {
 
           <Stack direction={"row"} justifyContent="space-between">
             <Stack spacing={1}>
-              <InputInline lb={"Our Ref"} />
-              <InputInline lb={"To"} />
+              <InputInline
+                lb={"Our Ref"}
+                name="docref"
+                onChange={handlePayload}
+                value={payload.docto || ""}
+                disabled={formdisabled}
+              />
+              <InputInline
+                lb={"To"}
+                name="docto"
+                onChange={handlePayload}
+                value={payload.docto || ""}
+                disabled={formdisabled}
+              />
             </Stack>
             <Stack>
               <Typography color="initial">
@@ -44,9 +82,30 @@ export default function App(props) {
           </Stack>
 
           <Stack spacing={1}>
-            <InputInline lb={"Desc. of goods "} lbw={180} />
-            <InputInline lb={"Type"} lbw={180} />
-            <InputInline lb={"Price FOB Tg Priok"} lbw={180} />
+            <InputInline
+              lb={"Desc. of goods "}
+              name="desc_of_goods"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.docto || ""}
+              disabled={formdisabled}
+            />
+            <InputInline
+              lb={"Type"}
+              name="type"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.docto || ""}
+              disabled={formdisabled}
+            />
+            <InputInline
+              lb={"Price FOB Tg Priok"}
+              name="price_fob"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.docto || ""}
+              disabled={formdisabled}
+            />
           </Stack>
 
           <Stack>
@@ -72,7 +131,16 @@ export default function App(props) {
           </Stack>
         </Stack>
       </PaperA4>
-      <SenttoExportir />
+      {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
+        <Sentto
+          value={payload.to || ""}
+          name={"to"}
+          onChange={handlePayload}
+          disabled={formdisabled}
+          setEdit={() => setformdisabled(false)}
+          filter="user-import"
+        />
+      )}
     </Stack>
   );
 }
