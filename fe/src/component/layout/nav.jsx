@@ -88,16 +88,15 @@ const exportir = [
   },
 
   {
-    name: "Bill of LADING ",
-    path: "/exportir/billoflanding",
-    role: ["user-export", "admin"],
-  },
-  {
     name: "PEB",
     path: "/exportir/peb",
     role: ["user-export", "admin", "fasilitator-kepabeanan"],
   },
-
+  {
+    name: "Bill of LADING ",
+    path: "/exportir/billoflanding",
+    role: ["user-export", "admin"],
+  },
   {
     name: "SKA-COO ",
     path: "/exportir/ska",
