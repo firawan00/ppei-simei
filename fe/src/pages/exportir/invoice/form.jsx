@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Context from "@context";
+import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
 
 import { Stack, Typography, Divider, TextField } from "@mui/material";
 import PaperA4 from "@component/paperA4";
@@ -6,28 +8,36 @@ import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
-import SenttoExportir from "@/component/apps/sentto";
-import ProductList from "@/component/ui/productList";
+import ProductList from "@/component/ui/productListInvoice";
+import Sentto from "@/component/apps/sentto";
 
-export default function App(props) {
-  const [data, setdata] = useState([
-    {
-      Mark: "Frozen yoghurt",
-      desc: "asdf",
-      qty: 10,
-      up: 1000,
-    },
-  ]);
-  const header = [
-    "Mark",
-    "Description",
-    "Quantity",
-    "Unit price",
-    "Total Amount",
-  ];
+import Header from "../_partial/exportirHeader";
+import Sign from "@component/apps/sign";
+
+export default function App({ refdata }) {
+  const { auth } = useContext(Context);
+  const [formdisabled, setformdisabled] = useState(refdata ? true : false);
+  const [payload, setpayload] = useState(
+    refdata ? { ...refdata, to: refdata.to.id } : {}
+  );
+  const nav = useNavigate();
+
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  async function formSubmit(e) {
+    e.preventDefault();
+    let res = await fetcher({
+      url: `md_invoice`,
+      method: "post",
+      data: payload,
+    });
+    nav("/exportir/invoice", true);
+  }
 
   return (
-    <Stack>
+    <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
         <Stack spacing={3}>
           <Header />
@@ -35,70 +45,114 @@ export default function App(props) {
           <Typography variant="h6" align="center" color="initial">
             INVOICE
           </Typography>
-          <Stack direction={"row"} justifyContent="space-between">
-            <Stack spacing={1}>
-              <InputInline lb={"No"} />
-            </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+          <Stack direction={"row"} alignItems="flex-start" spacing={2}>
+            <InputInline
+              lb={"Consignee"}
+              name="consignee"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.consignee || ""}
+            />
+            <Stack width={"50%"}>
+              <InputInline
+                lb={"Invoice No."}
+                name="no"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.no || ""}
+              />
+              <InputInline
+                lb={"Date"}
+                name="date"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.date || ""}
+              />
+              <InputInline
+                lb={"SC No."}
+                name="scno"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.scno || ""}
+              />
+              <InputInline
+                lb={" L/C No."}
+                name="lcno"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.lcno || ""}
+              />
+              <InputInline
+                lb={"Issuing Bank"}
+                name="issuing_bank"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.issuing_bank || ""}
+              />
+              <InputInline
+                lb={"Terms of Delivery"}
+                name="tod"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.tod || ""}
+              />
             </Stack>
           </Stack>
-          <Stack>
-            <Stack direction={"row"} justifyContent="space-between">
-              <InputInline lb={"From"} />
-              <InputInline lb={"To"} />
-            </Stack>
-            <Stack direction={"row"} justifyContent="space-between">
-              <InputInline lb={"L/C No."} />
-              <InputInline lb={"Issuing Bank"} />
-            </Stack>
-            <InputInline lb={"Date"} />
-          </Stack>
-          <Stack>
-            Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
-            would like to submit our offers are as follows:
-          </Stack>
-          <ProductList />
 
           <Stack>
-            <InputInline lb={"Shipping Marks"} lbw={180} />
+            <InputInline
+              lb={"Ship By"}
+              name="ship_by"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.ship_by || ""}
+            />
+            <InputInline
+              lb={"Ship On"}
+              name="ship_on"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.ship_on || ""}
+            />
+            <InputInline
+              lb={"Destination"}
+              name="destination"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.destination || ""}
+            />
+            <InputInline
+              lb={"Shipping Marks"}
+              lbw={180}
+              name="shipping_mark"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.shipping_mark || ""}
+            />
           </Stack>
+          <ProductList
+            disabled={formdisabled}
+            initvalue={payload.product_list}
+            onChange={(v) => setpayload({ ...payload, product_list: v })}
+          />
+
           <Stack>
             Faithfully Yours.
-            <br />
-            <br />
-            <br />
-            <br />
+            <Sign text="Export" />
             Export Manager
           </Stack>
         </Stack>
       </PaperA4>
-      <SenttoExportir />
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} p={1}>
-        <img src={logo.e1} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          PT. BAYU SEGARA
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          JL. TAMAN ANGGREK NO. 14
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          Phone 62-21-5664425, Fax. 62-21-5664430
-        </Typography>
-      </Stack>
+      {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
+        <Sentto
+          value={payload.to || ""}
+          name={"to"}
+          onChange={handlePayload}
+          disabled={formdisabled}
+          setEdit={() => setformdisabled(false)}
+          filter="user-import"
+        />
+      )}
     </Stack>
   );
 }

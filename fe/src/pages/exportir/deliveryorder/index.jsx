@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Context from "@context";
+
 import Datatable from "@/component/datatables";
 import { fetcher } from "@/component/gip-useForm/fetcher";
 import { meta } from "./_meta";
 
 export default function AdminPage(params) {
   const [data, setfirst] = useState();
+  const { auth } = useContext(Context);
 
   React.useEffect(() => {
     fetching();
@@ -18,5 +21,12 @@ export default function AdminPage(params) {
       })
     );
   }
-  return <Datatable data={data} meta={meta} isRefetch={fetching} />;
+  return (
+    <Datatable
+      data={data}
+      meta={meta}
+      isRefetch={fetching}
+      disableNew={auth.user.role.includes("user")}
+    />
+  );
 }

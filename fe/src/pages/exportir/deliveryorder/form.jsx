@@ -1,3 +1,7 @@
+import React, { useState, useContext } from "react";
+import Context from "@context";
+import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
+
 import { Stack, Typography, Divider, TextField } from "@mui/material";
 import PaperA4 from "@component/paperA4";
 import { logo } from "@ui/logo";
@@ -5,10 +9,34 @@ import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
 import SenttoExportir from "@/component/apps/sentto";
+import InputDate from "@component/gip-useForm/inputDate";
+import Sign from "@component/apps/sign";
+import Sentto from "@/component/apps/sentto";
+import Header from "../_partial/cargoHeader";
 
-export default function App(props) {
+export default function App({ refdata }) {
+  const { auth } = useContext(Context);
+  const [formdisabled, setformdisabled] = useState(refdata ? true : false);
+  const [payload, setpayload] = useState(
+    refdata ? { ...refdata, to: refdata.to.id } : {}
+  );
+  const nav = useNavigate();
+
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  async function formSubmit(e) {
+    e.preventDefault();
+    let res = await fetcher({
+      url: `md_deliveryorder`,
+      method: "post",
+      data: payload,
+    });
+    nav("/exportir/deliveryorder", true);
+  }
   return (
-    <Stack>
+    <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
         <Stack spacing={3}>
           <Header />
@@ -20,13 +48,30 @@ export default function App(props) {
 
           <Stack direction={"row"} justifyContent="space-between">
             <Stack spacing={1}>
-              <InputInline lb={"No"} />
-              <InputInline lb={"Hal"} />
+              <InputInline
+                lb={"No"}
+                disabled={formdisabled}
+                name="no"
+                onChange={handlePayload}
+                value={payload.no || ""}
+              />
+              <InputInline
+                lb={"Hal"}
+                disabled={formdisabled}
+                name="hal"
+                onChange={handlePayload}
+                value={payload.hal || ""}
+              />
             </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+            <Stack direction={"row"}>
+              <Typography color="initial">Jakata,</Typography>
+              <InputDate
+                inputFormat="dd MMM yyyy"
+                label={""}
+                disabled={formdisabled}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
             </Stack>
           </Stack>
 
@@ -36,12 +81,54 @@ export default function App(props) {
           </Stack>
 
           <Stack spacing={1}>
-            <InputInline lb={"SHIPPER"} lbw={180} />
-            <InputInline lb={"S/I NO.	"} lbw={180} />
-            <InputInline lb={"TUJUAN "} lbw={180} />
-            <InputInline lb={"JUMLAH CONTAINER	"} lbw={180} />
-            <InputInline lb={"RENCANA KAPAL	"} lbw={180} />
-            <InputInline lb={"EST"} lbw={180} />
+            <InputInline
+              lb={"SHIPPER"}
+              lbw={180}
+              disabled={formdisabled}
+              name="shipper"
+              onChange={handlePayload}
+              value={payload.shipper || ""}
+            />
+            <InputInline
+              lb={"S/I NO.	"}
+              lbw={180}
+              disabled={formdisabled}
+              name="sino"
+              onChange={handlePayload}
+              value={payload.sino || ""}
+            />
+            <InputInline
+              lb={"TUJUAN "}
+              lbw={180}
+              disabled={formdisabled}
+              name="tujuan"
+              onChange={handlePayload}
+              value={payload.tujuan || ""}
+            />
+            <InputInline
+              lb={"JUMLAH CONTAINER	"}
+              lbw={180}
+              disabled={formdisabled}
+              name="juml_container"
+              onChange={handlePayload}
+              value={payload.juml_container || ""}
+            />
+            <InputInline
+              lb={"RENCANA KAPAL	"}
+              lbw={180}
+              disabled={formdisabled}
+              name="rencana_kapal"
+              onChange={handlePayload}
+              value={payload.rencana_kapal || ""}
+            />
+            <InputInline
+              lb={"EST"}
+              lbw={180}
+              disabled={formdisabled}
+              name="est"
+              onChange={handlePayload}
+              value={payload.est || ""}
+            />
           </Stack>
 
           <Stack>
@@ -53,44 +140,39 @@ export default function App(props) {
           <Stack>Terima kasih atas kerjasamanya</Stack>
 
           <Stack spacing={1}>
-            <InputInline lb={"Container no"} lbw={180} />
-            <InputInline lb={"Seal no"} lbw={180} />
+            <InputInline
+              lb={"Container no"}
+              lbw={180}
+              disabled={formdisabled}
+              name="container_no"
+              onChange={handlePayload}
+              value={payload.container_no || ""}
+            />
+            <InputInline
+              lb={"Seal no"}
+              lbw={180}
+              disabled={formdisabled}
+              name="seal_no"
+              onChange={handlePayload}
+              value={payload.seal_no || ""}
+            />
           </Stack>
 
           <Stack>
-            Faithfully Yours.
-            <br />
-            <br />
-            <br />
-            <br />
-            Logistik Dept
+            Faithfully Yours. <Sign text="Exportir" /> Logistik Dept
           </Stack>
         </Stack>
       </PaperA4>
-      <SenttoExportir />
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} p={1}>
-        <img src={logo.e2} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          PT. TRIKORA LLOYD
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          GENERAL AGENT FOR
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          [NED LLOYD]
-        </Typography>
-      </Stack>
+      {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
+        <Sentto
+          value={payload.to || ""}
+          name={"to"}
+          onChange={handlePayload}
+          disabled={formdisabled}
+          setEdit={() => setformdisabled(false)}
+          filter="user-export"
+        />
+      )}
     </Stack>
   );
 }

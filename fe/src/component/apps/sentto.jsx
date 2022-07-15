@@ -25,9 +25,9 @@ export default function App(props) {
   }, []);
 
   return (
-    <Stack alignItems={"center"} mt={3}>
-      <Stack width={"210mm"} spacing={2}>
-        {!props.formdisabled && (
+    <Stack alignItems={"center"} mt={3} className="hide_on_print">
+      <Stack width={!props.nogrow ? "210mm" : "100%"} spacing={2}>
+        {!props.disabled && (
           <>
             {data.length && (
               <TextField
@@ -47,12 +47,16 @@ export default function App(props) {
                   ))}
               </TextField>
             )}
-            <Button fullWidth type="submit">
+            <Button
+              fullWidth
+              type="submit"
+              disabled={props.disabled || props.value == ""}
+            >
               Submit
             </Button>
           </>
         )}
-        {props.formdisabled && (
+        {props.disabled && (
           <>
             <Button fullWidth onClick={props.setEdit}>
               Edit this Document

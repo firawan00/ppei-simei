@@ -73,7 +73,7 @@ export function LoginForm(params) {
 
       <Stack spacing={2}>
         <Input.Submit t="signin" />
-        <Typography
+        {/* <Typography
           variant="overline"
           align="center"
           minHeight={24}
@@ -81,7 +81,7 @@ export function LoginForm(params) {
           to="/signup"
         >
           user Register
-        </Typography>
+        </Typography> */}
 
         <Typography
           variant="caption"

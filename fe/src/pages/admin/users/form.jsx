@@ -41,7 +41,7 @@ export default function App({ refdata }) {
           name="username"
           value={payload.username || ""}
           onChange={handlePayload}
-          disabled
+          disabled={refdata}
         />
 
         <TextField
@@ -55,6 +55,13 @@ export default function App({ refdata }) {
           label="password"
           name="password"
           value={payload.password || ""}
+          onChange={handlePayload}
+        />
+
+        <TextField
+          label="address"
+          name="address"
+          value={payload.address || ""}
           onChange={handlePayload}
         />
         <TextField

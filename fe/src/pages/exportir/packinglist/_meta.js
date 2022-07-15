@@ -1,8 +1,8 @@
 export const meta = {
-  model: "import_packinglist",
+  model: "md_packinglist",
   modelTitle: "Packing List",
   col: [
-    { name: "name", label: "Submited By", w: "100%" },
-    { name: "status", label: "Status", w: "20%" },
+    { name: "from.name", label: "From ", w: "100%" },
+    { name: "to.name", label: "To", w: "100%" },
   ],
 };

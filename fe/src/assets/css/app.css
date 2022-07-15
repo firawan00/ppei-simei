@@ -1,5 +1,14 @@
+@font-face {
+  font-family: DancingScript;
+  src: url("fonts/TheNautigal.ttf");
+}
+
 * {
   box-sizing: content-box;
+}
+
+.f-sign {
+  font-family: DancingScript;
 }
 
 a {
@@ -78,6 +87,12 @@ form {
   }
 
   .print-margin {
-    margin-top: -16px;
+    margin-top: -18px;
   }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

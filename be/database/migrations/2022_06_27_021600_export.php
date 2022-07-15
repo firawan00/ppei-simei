@@ -15,102 +15,60 @@ class Export extends Migration
     {
         //
 
-        Schema::create('import_offeringletter', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('import_packinglist', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('import_invoice', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('import_deliveryorder', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
+        // Schema::create('import_billoflading', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('import_packinglist', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('import_ska', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('import_deliveryorder', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-        Schema::create('import_billoflading', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('export_peb', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('import_ska', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('export_lc', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('import_wessel', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('export_ska', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('export_lkn', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-
-        Schema::create('export_ordering', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-
-        Schema::create('export_peb', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-
-        Schema::create('export_salescontract', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-
-        Schema::create('export_lc', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-
-        Schema::create('export_ska', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
-
-        Schema::create('export_wessel', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('to');
-            $table->timestamps();
-        });
+        // Schema::create('export_wessel', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignUuid('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('to');
+        //     $table->timestamps();
+        // });
 
     }
 

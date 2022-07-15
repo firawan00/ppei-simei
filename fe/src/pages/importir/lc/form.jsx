@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import Context from "@context";
 
 import {
   Button,
@@ -15,24 +16,16 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import InputFile from "@component/gip-useForm/inputFile";
-import { fetcherMultipart } from "@component/gip-useForm/fetcher";
+import { fetcherMultipart, useNavigate } from "@component/gip-useForm/fetcher";
 import BackIcon from "@/component/ui/backIcon";
 import { meta } from "./_meta";
 import PaperA4 from "@component/paperA4";
+import Sentto from "@component/apps/sentto";
+import ArticleIcon from "@mui/icons-material/Article";
+import Approval from "@/component/apps/approval";
 
 export default function App({ refdata }) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  return (
-    <PaperA4 prefix={<Prefix />}>
-      <NewSkaForm />
-    </PaperA4>
-  );
+  return <NewSkaForm refdata={refdata} />;
 }
 
 function Prefix(params) {
@@ -47,78 +40,75 @@ function Prefix(params) {
   );
 }
 
-const validationSchema = yup.object({
-  name: yup.string("Enter your email").required("This Field Required "),
-  type: yup.string("Enter your password").required("Password is required"),
-});
+function NewSkaForm({ refdata }) {
+  const { auth } = useContext(Context);
 
-function NewSkaForm(params) {
-  const { auth } = React.useContext(context);
-
-  const formik = useFormik({
-    initialValues: {
-      name: auth.user.name || "",
-      to: "fasilitator-bank",
-
-      type: "foobar@example.com",
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (payload) => {
-      console.log({
-        fileName: payload.file.name,
-        type: payload.file.type,
-        size: `${payload.file.size} bytes`,
-      });
-
-      let res = await fetcherMultipart({
-        url: "ska",
-        method: "post",
-        data: payload,
-      });
-    },
-  });
+  const [err, seterr] = useState();
+  const [formdisabled, setformdisabled] = useState(refdata ? true : false);
+  const [payload, setpayload] = useState(
+    refdata ? { ...refdata, to: refdata.to.id } : {}
+  );
+  const nav = useNavigate();
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+  async function formSubmit(e) {
+    e.preventDefault();
+    delete payload.from;
+    let res = await fetcherMultipart({
+      url: `md_lc`,
+      method: "post",
+      data: payload,
+    });
+    if (!res.id) seterr("Incorect uploaded file");
+    else nav("/importir/lc", true);
+  }
 
   return (
-    <Stack spacing={2} component="form" onSubmit={formik.handleSubmit}>
-      <Typography variant="h4" color="primary" align="center">
-        Pengajuan LC Baru
-      </Typography>
+    <Stack component="form" onSubmit={formSubmit}>
+      <PaperA4 prefix={refdata ? <></> : <Prefix />}>
+        <Stack spacing={2}>
+          <Typography variant="h4" color="primary" align="center">
+            Pengajuan LC Baru
+          </Typography>
+          <Typography variant="body">
+            Dengan ini saya lampirangan dokument pengajuan Letter of Credit.
+          </Typography>
+          {!formdisabled && (
+            <InputFile
+              value={(v) => {
+                setpayload({ ...payload, file: v });
+              }}
+            />
+          )}
+          {formdisabled && (
+            <Stack>
+              <File path={refdata.file_path} text="Form LC Template" />
+            </Stack>
+          )}
 
-      {/* <TextField
-        name="type"
-        label="Form Type"
-        select
-        value={formik.values.type}
-        onChange={formik.handleChange}
-        error={formik.touched.type && Boolean(formik.errors.type)}
-        helperText={formik.touched.type && formik.errors.type}
-      >
-        <MenuItem value="type-a">Type A</MenuItem>
-        <MenuItem value="type-b">Type B</MenuItem>
-      </TextField> */}
+          <Stack mx={2}>
+            {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
+              <Sentto
+                nogrow
+                value={payload.to || ""}
+                name="to"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                setEdit={() => setformdisabled(false)}
+                filter="fasilitator-bank"
+              />
+            )}
 
-      <TextField
-        label="from"
-        value={formik.values.name}
-        onChange={formik.handleChange}
-        disabled
-      />
-      <TextField
-        label="to"
-        name="to"
-        value={formik.values.to}
-        onChange={formik.handleChange}
-        disabled
-      />
-
-      <InputFile
-        value={(v) => {
-          formik.setFieldValue("file", v ? v : "");
-        }}
-      />
-      <Button fullWidth type="submit">
-        Submit
-      </Button>
+            <Typography variant="caption" color="error" align="center">
+              {err}
+            </Typography>
+          </Stack>
+        </Stack>
+      </PaperA4>
+      {auth.user.role.includes("fasilitator") && (
+        <Approval model="md_lc" id={refdata.id} callback_url="/importir/lc" />
+      )}
     </Stack>
   );
 }

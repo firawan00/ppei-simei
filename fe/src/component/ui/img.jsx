@@ -9,10 +9,10 @@ export default function App({ path, className }) {
     <img
       src={`${import.meta.env.VITE_BEURL}/public/${path}`}
       alt="noimg"
-      onError={(e) => {
-        e.target.onError = null;
-        e.target.src = noimg;
-      }}
+      // onError={(e) => {
+      //   e.target.onError = null;
+      //   e.target.src = noimg;
+      // }}
       className={className}
     />
   );

@@ -9,6 +9,10 @@ import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
 import Sentto from "@/component/apps/sentto";
 
+import Header from "../_partial/exportirHeader";
+import InputDate from "@component/gip-useForm/inputDate";
+import Sign from "@component/apps/sign";
+
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
@@ -23,17 +27,19 @@ export default function App({ refdata }) {
 
   async function formSubmit(e) {
     e.preventDefault();
-    delete payload.from;
+    // console.log(payload);
+    // delete payload.from;
     let res = await fetcher({
-      url: `md_introductionletter`,
+      url: `md_offeringletter`,
       method: "post",
       data: payload,
     });
-    nav("/exportir/introductionletter", true);
+    console.log(res);
+    nav("/exportir/offeringletter", true);
   }
 
   return (
-    <Stack>
+    <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
         <Stack spacing={3}>
           <Header />
@@ -45,14 +51,37 @@ export default function App({ refdata }) {
 
           <Stack direction={"row"} justifyContent="space-between">
             <Stack spacing={1}>
-              <InputInline lb={"Our Ref"} />
-              <InputInline lb={"To"} />
-              <InputInline lb={"Cc"} />
+              <InputInline
+                lb={"Our Ref"}
+                name="doc_no"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.doc_no || ""}
+              />
+              <InputInline
+                lb={"To"}
+                name="doc_to"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.doc_to || ""}
+              />
+              <InputInline
+                lb={"Cc"}
+                name="doc_cc"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.doc_cc || ""}
+              />
             </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+            <Stack direction={"row"}>
+              <Typography color="initial">Jakata,</Typography>
+              <InputDate
+                inputFormat="dd MMM yyyy"
+                label={""}
+                value={payload.date || null}
+                disabled={formdisabled}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
             </Stack>
           </Stack>
 
@@ -62,13 +91,62 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack spacing={1}>
-            <InputInline lb={"Commodity"} lbw={180} />
-            <InputInline lb={"Quantity"} lbw={180} />
-            <InputInline lb={"Unit FOB Price"} lbw={180} />
-            <InputInline lb={"Packing"} lbw={180} />
-            <InputInline lb={"Shipment"} lbw={180} />
-            <InputInline lb={"Term of Payment "} lbw={180} />
-            <InputInline lb={"Validity"} lbw={180} />
+            <InputInline
+              lb={"Commodity"}
+              lbw={180}
+              name="commodity"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.commodity || ""}
+            />
+            <InputInline
+              lb={"Quantity"}
+              lbw={180}
+              name="qty"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.qty || ""}
+            />
+            <InputInline
+              lb={"Unit FOB Price"}
+              lbw={180}
+              name="fob"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.fob || ""}
+            />
+            <InputInline
+              lb={"Packing"}
+              lbw={180}
+              name="packing"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.packing || ""}
+            />
+            <InputInline
+              lb={"Shipment"}
+              lbw={180}
+              name="shipment"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.shipment || ""}
+            />
+            <InputInline
+              lb={"Term of Payment "}
+              lbw={180}
+              name="top"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.top || ""}
+            />
+            <InputInline
+              lb={"Validity"}
+              lbw={180}
+              name="validity"
+              onChange={handlePayload}
+              disabled={formdisabled}
+              value={payload.validity || ""}
+            />
           </Stack>
 
           <Stack>
@@ -79,10 +157,7 @@ export default function App({ refdata }) {
 
           <Stack>
             Faithfully Yours.
-            <br />
-            <br />
-            <br />
-            <br />
+            <Sign text="Exportir" />
             Export Manager
           </Stack>
         </Stack>
@@ -93,33 +168,11 @@ export default function App({ refdata }) {
           name={"to"}
           onChange={handlePayload}
           disabled={formdisabled}
+          formdisabled={formdisabled}
           setEdit={() => setformdisabled(false)}
           filter="user-import"
         />
       )}
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} p={1}>
-        <img src={logo.e1} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          PT. BAYU SEGARA
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          JL. TAMAN ANGGREK NO. 14
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          Phone 62-21-5664425, Fax. 62-21-5664430
-        </Typography>
-      </Stack>
     </Stack>
   );
 }

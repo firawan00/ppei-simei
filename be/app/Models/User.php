@@ -31,6 +31,12 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function setStatusIdAttribute($value)
+    {
+        return 8;
+        // $this->attributes['password'] = bcrypt($value);
+    }
+
     public function getTokenAttribute()
     {
         return ($this->createToken($this->email . '-' . now()))->accessToken;

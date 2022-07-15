@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class AdminConfig extends Model
 {
     use HasFactory;
+
+    public function scopeFilter($query, $request)
+    {
+        if (isset($request['from'])) {
+
+            $query->Where('from', $request['from']);
+        }
+
+    }
 }

@@ -15,16 +15,22 @@ class AdminConfigsSeeder extends Seeder
     public function run()
     {
         //
-        AdminConfig::create([
-            'name' => 'Template PEB',
-            'value' => 'uploads/template/peb-template.xls',
-            'type' => 'file',
+        // AdminConfig::create([
+        //     'name' => 'Template PEB',
+        //     'value' => 'uploads/template/peb-template.xls',
+        //     'type' => 'file',
 
-        ], );
+        // ], );
         AdminConfig::create([
             'name' => 'Template LC',
             'value' => 'uploads/template/lc-template.xls',
             'type' => 'file',
+        ], );
+
+        AdminConfig::create([
+            'name' => 'Exchange IDRUSD',
+            'value' => '16000',
+            'type' => 'text',
         ], );
 
     }

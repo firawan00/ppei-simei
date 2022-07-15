@@ -40,11 +40,11 @@ const importir = [
 
   //   role: ["user-import", "admin"],
   // },
-  {
-    name: "Wesel Import",
-    path: "/importir/wessel",
-    role: ["user-import", "admin", "fasilitator-bank"],
-  },
+  // {
+  //   name: "Wesel Import",
+  //   path: "/importir/wessel",
+  //   role: ["user-import", "admin", "fasilitator-bank"],
+  // },
 ];
 
 const exportir = [
@@ -65,7 +65,11 @@ const exportir = [
     path: "/exportir/offeringletter",
     role: ["user-export", "admin"],
   },
-
+  {
+    name: "Release LC",
+    path: "/exportir/lc",
+    role: ["user-export", "fasilitator-bank", "admin"],
+  },
   {
     name: "Invoice",
     path: "/exportir/invoice",
@@ -79,12 +83,12 @@ const exportir = [
   {
     name: "Shipping Instruction",
     path: "/exportir/shippinginstruction",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-cargo"],
   },
   {
     name: "Delivery Order",
     path: "/exportir/deliveryorder",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-cargo"],
   },
 
   {
@@ -93,13 +97,23 @@ const exportir = [
     role: ["user-export", "admin", "fasilitator-kepabeanan"],
   },
   {
+    name: "NPE",
+    path: "/exportir/npe",
+    role: ["user-export", "admin", "fasilitator-kepabeanan"],
+  },
+  {
     name: "Bill of LADING ",
     path: "/exportir/billoflanding",
     role: ["user-export", "admin"],
   },
   {
-    name: "SKA-COO ",
-    path: "/exportir/ska",
+    name: "SKA-COO-FORM A",
+    path: "/exportir/ska-a",
+    role: ["user-export", "admin"],
+  },
+  {
+    name: "SKA-COO-FORM D",
+    path: "/exportir/ska-d",
     role: ["user-export", "admin"],
   },
   {

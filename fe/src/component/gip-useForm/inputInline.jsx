@@ -3,7 +3,7 @@ import { TextField, Stack, Typography } from "@mui/material";
 export default function App(props) {
   function getWidth(params) {
     if (props.dcol) return "auto";
-    return props.lbw || 120;
+    return props.lbw || 180;
   }
   return (
     <Stack
@@ -17,18 +17,30 @@ export default function App(props) {
         color="initial"
         variant={props.var || "body1"}
       >
-        {props.lb}
+        {props.lb}:
       </Typography>
-      <TextField
-        {...props}
-        name={props.name ? props.name.toLowerCase() : props.lb.toLowerCase()}
-        sx={{
-          input: {
-            py: "1px",
-          },
-        }}
-        color="primary"
-      />
+      {!props.disabled && (
+        <TextField
+          {...props}
+          name={props.name ? props.name.toLowerCase() : props.lb.toLowerCase()}
+          sx={{
+            input: {
+              py: "1px",
+            },
+          }}
+          color="primary"
+        />
+      )}
+      {props.disabled && (
+        <Typography
+          variant={props.var}
+          sx={{
+            whiteSpace: props.multiLine ? "pre-wrap" : "",
+          }}
+        >
+          {props.value}
+        </Typography>
+      )}
     </Stack>
   );
 }

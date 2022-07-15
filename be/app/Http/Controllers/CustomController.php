@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
 class CustomController extends BaseController
 {
     protected $model;
 
-    public function index()
+    public function index(Request $r)
     {
-        return response()->json($this->model::all());
+        $data = $this->model::Filter($r->all())->get();
+        return response()->json($data);
     }
 
     public function show($id)

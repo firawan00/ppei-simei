@@ -41,10 +41,6 @@ export default function App(props) {
 
 class Render extends React.PureComponent {
   render() {
-    return (
-      <>
-        <Form refdata={this.props.refdata} />
-      </>
-    );
+    return <Form refdata={this.props.refdata} />;
   }
 }

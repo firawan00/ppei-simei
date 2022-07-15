@@ -10,13 +10,13 @@ export default function App(params) {
           <img src={logo.S256} alt="" className="img-contain h100" />
         </Stack>
         <Typography
-          variant="h3"
+          variant="h2"
           fontWeight="900"
           textAlign={"center"}
           width={"100%"}
           color="primary"
         >
-          SIMEI
+          SimEI
         </Typography>
         <Typography
           variant="overline"

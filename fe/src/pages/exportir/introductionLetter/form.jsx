@@ -12,12 +12,16 @@ import {
 import PaperA4 from "@component/paperA4";
 import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
-import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
 import Sentto from "@/component/apps/sentto";
 
 import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
 import context from "@/component/context";
+
+import Header from "../_partial/exportirHeader";
+import InputDate from "@component/gip-useForm/inputDate";
+import Sign from "@component/apps/sign";
+
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
@@ -57,7 +61,7 @@ export default function App({ refdata }) {
                 lb={"Our Ref"}
                 name="docref"
                 onChange={handlePayload}
-                value={payload.docto || ""}
+                value={payload.docref || ""}
                 disabled={formdisabled}
               />
               <InputInline
@@ -68,17 +72,22 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
               />
             </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+            <Stack direction={"row"}>
+              <Typography color="initial">Jakata,</Typography>
+              <InputDate
+                disabled={formdisabled}
+                inputFormat="dd MMM yyyy"
+                label={""}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
             </Stack>
           </Stack>
 
           <Stack>
             Dear Sir, Allow us herewith to introduce our company as an export
-            company that produce and export frozen seafood. With this letter, we
-            would like to offer our best selling items as following details.
+            company. With this letter, we would like to offer our best selling
+            items as following details.
           </Stack>
 
           <Stack spacing={1}>
@@ -87,7 +96,7 @@ export default function App({ refdata }) {
               name="desc_of_goods"
               lbw={180}
               onChange={handlePayload}
-              value={payload.docto || ""}
+              value={payload.desc_of_goods || ""}
               disabled={formdisabled}
             />
             <InputInline
@@ -95,7 +104,7 @@ export default function App({ refdata }) {
               name="type"
               lbw={180}
               onChange={handlePayload}
-              value={payload.docto || ""}
+              value={payload.type || ""}
               disabled={formdisabled}
             />
             <InputInline
@@ -103,7 +112,7 @@ export default function App({ refdata }) {
               name="price_fob"
               lbw={180}
               onChange={handlePayload}
-              value={payload.docto || ""}
+              value={payload.price_fob || ""}
               disabled={formdisabled}
             />
           </Stack>
@@ -123,10 +132,7 @@ export default function App({ refdata }) {
 
           <Stack>
             Faithfully Yours.
-            <br />
-            <br />
-            <br />
-            <br />
+            <Sign text="Exportir" />
             Export Manager
           </Stack>
         </Stack>
@@ -141,29 +147,6 @@ export default function App({ refdata }) {
           filter="user-import"
         />
       )}
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} p={1}>
-        <img src={logo.e1} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          PT. BAYU SEGARA
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          JL. TAMAN ANGGREK NO. 14
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          Phone 62-21-5664425, Fax. 62-21-5664430
-        </Typography>
-      </Stack>
     </Stack>
   );
 }

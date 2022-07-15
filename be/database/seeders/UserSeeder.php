@@ -32,6 +32,8 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'password' => 'password',
             'role' => 'admin',
+            'address' => "Jl. Letjen S. Parman No.112",
+
         ], );
 
         foreach ($data as $d) {
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
                 'username' => $d,
                 'name' => "PT." . $d,
                 'password' => 'password',
+                'address' => "Jl. Letjen S. Parman No.112",
                 'role' => str_contains($d, 'import') ? 'user-import' : 'user-export',
             ], );
 
@@ -50,6 +53,7 @@ class UserSeeder extends Seeder
             User::create([
                 'username' => $d,
                 'name' => $d,
+                'address' => "Jl. Letjen S. Parman No.112",
                 'password' => 'password',
                 'role' => $d,
             ], );

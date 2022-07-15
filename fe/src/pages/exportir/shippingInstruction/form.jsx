@@ -17,10 +17,11 @@ import InputInline from "@component/gip-useForm/inputInline";
 import Sentto from "@/component/apps/sentto";
 
 import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
-import context from "@/component/context";
+import InputDate from "@component/gip-useForm/inputDate";
+import Sign from "@component/apps/sign";
 
 export default function App({ refdata }) {
-  const { auth } = useContext(context);
+  const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
   const [payload, setpayload] = useState(
     refdata ? { ...refdata, to: refdata.to.id } : {}
@@ -35,11 +36,11 @@ export default function App({ refdata }) {
     e.preventDefault();
     delete payload.from;
     let res = await fetcher({
-      url: `md_introductionletter`,
+      url: `md_shippinginstruction`,
       method: "post",
       data: payload,
     });
-    nav("/exportir/introductionletter", true);
+    nav("/exportir/shippinginstruction", true);
   }
   return (
     <Stack component={"form"} onSubmit={formSubmit}>
@@ -69,10 +70,15 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
               />
             </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+            <Stack direction={"row"}>
+              <Typography color="initial">Jakata,</Typography>
+              <InputDate
+                inputFormat="dd MMM yyyy"
+                label={""}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+                disabled={formdisabled}
+              />
             </Stack>
           </Stack>
 
@@ -224,12 +230,7 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack pt={5}>
-            Faithfully Yours.
-            <br />
-            <br />
-            <br />
-            <br />
-            Export Manager
+            Faithfully Yours. <Sign text="Exportir" /> Export Manager
           </Stack>
         </Stack>
       </PaperA4>
@@ -241,6 +242,7 @@ export default function App({ refdata }) {
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
           filter="fasilitator-cargo"
+          btn_disabled={!payload.to}
         />
       )}
     </Stack>

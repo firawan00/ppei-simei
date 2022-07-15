@@ -9,35 +9,25 @@ use App\Http\Controllers\AdminConfigController;
 
 use App\Http\Controllers\md_inquiry_controller;
 use App\Http\Controllers\md_introductionletter_controller;
-
-use App\Http\Controllers\import_offeringletter_controller;
-use App\Http\Controllers\import_invoice_controller;
-use App\Http\Controllers\import_packinglist_controller;
-use App\Http\Controllers\import_deliveryorder_controller;
-use App\Http\Controllers\import_billoflading_controller;
-use App\Http\Controllers\import_ska_controller;
-use App\Http\Controllers\import_wessel_controller;
-
-use App\Http\Controllers\export_lkn_controller;
-use App\Http\Controllers\export_ordering_controller;
-use App\Http\Controllers\export_peb_controller;
-use App\Http\Controllers\export_salescontract_controller;
-use App\Http\Controllers\export_lc_controller;
-use App\Http\Controllers\export_ska_controller;
-use App\Http\Controllers\export_wessel_controller;
+use App\Http\Controllers\md_offeringletter_controller;
+use App\Http\Controllers\md_lkn_controller;
+use App\Http\Controllers\md_ordering_controller;
+use App\Http\Controllers\md_salescontract_controller;
+use App\Http\Controllers\md_invoice_controller;
+use App\Http\Controllers\md_packinglist_controller;
+use App\Http\Controllers\md_shippinginstruction_controller;
+use App\Http\Controllers\md_deliveryorder_controller;
+use App\Http\Controllers\md_billoflading_controller;
+use App\Http\Controllers\md_ska_a_controller;
+use App\Http\Controllers\md_ska_d_controller;
+use App\Http\Controllers\md_wessel_controller;
+use App\Http\Controllers\md_peb_controller;
+use App\Http\Controllers\md_npe_controller;
+use App\Http\Controllers\md_lc_controller;
+use App\Http\Controllers\md_lc_release_controller;
 
 use App\Http\Controllers\inbox_controller;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
- */
+use App\Http\Controllers\StatusController;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signin', [AuthController::class, 'signin']);
@@ -60,6 +50,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('from', [inbox_controller::class, 'from']);
         Route::get('to', [inbox_controller::class, 'to']);
     });
+    Route::post('status_handler', [StatusController::class, 'status_handler']);
 
     Route::resources([
         'users' => UserController::class,
@@ -67,25 +58,24 @@ Route::group(['middleware' => 'auth:api'], function () {
 
         'md_introductionletter' => md_introductionletter_controller::class,
         'md_inquiry' => md_inquiry_controller::class,
+        'md_offeringletter' => md_offeringletter_controller::class,
+        'md_lkn' => md_lkn_controller::class,
+        'md_ordering' => md_ordering_controller::class,
+        'md_salescontract' => md_salescontract_controller::class,
+        'md_invoice' => md_invoice_controller::class,
+        'md_packinglist' => md_packinglist_controller::class,
+        'md_shippinginstruction' => md_shippinginstruction_controller::class,
+        'md_deliveryorder' => md_deliveryorder_controller::class,
+        'md_billoflading' => md_billoflading_controller::class,
+        'md_ska_a' => md_ska_a_controller::class,
+        'md_ska_d' => md_ska_d_controller::class,
 
-        'import_offeringletter' => import_offeringletter_controller::class,
-        'import_invoice' => import_invoice_controller::class,
-        'import_packinglist' => import_packinglist_controller::class,
-        'import_deliveryorder' => import_deliveryorder_controller::class,
-        'import_billoflading' => import_billoflading_controller::class,
-        'import_ska' => import_ska_controller::class,
-        'import_wessel' => import_wessel_controller::class,
-        'export_lkn' => export_lkn_controller::class,
-        'export_ordering' => export_ordering_controller::class,
-        'export_peb' => export_peb_controller::class,
-        'export_salescontract' => export_salescontract_controller::class,
-        'export_lc' => export_lc_controller::class,
-        'export_ska' => export_ska_controller::class,
-        'export_wessel' => export_wessel_controller::class,
+        'md_wessel' => md_wessel_controller::class,
+        'md_peb' => md_peb_controller::class,
+        'md_npe' => md_npe_controller::class,
+
+        'md_lc' => md_lc_controller::class,
+        'md_lc_release' => md_lc_release_controller::class,
 
     ]);
 });
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });

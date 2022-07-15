@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Stack, Button } from "@mui/material";
 import { CircularProgress, Typography } from "@mui/material";
 import Search from "./search";
@@ -150,7 +150,6 @@ function RenderCol({ col, order, onOrderChange }) {
               variant="body1"
               fontWeight={"bold"}
               className="f-capitalize"
-              // color="initial"
             >
               {d.label ? d.label : d.name}
             </Typography>

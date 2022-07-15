@@ -11,6 +11,10 @@ import InputInline from "@component/gip-useForm/inputInline";
 import Sentto from "@component/apps/sentto";
 import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
 
+import Header from "../_partial/headerImportir";
+import InputDate from "@component/gip-useForm/inputDate";
+import Sign from "@component/apps/sign";
+
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
@@ -69,10 +73,14 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
               />
             </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+            <Stack direction={"row"}>
+              <Typography color="initial">Jakata,</Typography>
+              <InputDate
+                inputFormat="dd MMM yyyy"
+                label={""}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
             </Stack>
           </Stack>
 
@@ -131,10 +139,7 @@ export default function App({ refdata }) {
             <br />
             <br />
             Faithfully Yours.
-            <br />
-            <br />
-            <br />
-            <br />
+            <Sign text="Importir" />
             Import Manager
           </Stack>
         </Stack>
@@ -149,25 +154,6 @@ export default function App({ refdata }) {
           filter="user-export"
         />
       )}
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} className="center">
-        <img src={logo.e3} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          MD Berreclough Limited
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          United Kingdom
-        </Typography>
-      </Stack>
     </Stack>
   );
 }

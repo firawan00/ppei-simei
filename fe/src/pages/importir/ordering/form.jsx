@@ -1,15 +1,47 @@
+import React, { useState, useContext } from "react";
+import Context from "@context";
+import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
+
 import { Stack, Typography, Divider, TextField } from "@mui/material";
 import PaperA4 from "@component/paperA4";
 import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
 import { fdate } from "@component/helper/formating";
 import InputInline from "@component/gip-useForm/inputInline";
-import ProductList from "@/component/ui/productList";
+import ProductList from "@/component/ui/productListInvoice";
 import SenttoImportir from "@component/apps/senttoImportir";
 
-export default function App(props) {
+import Header from "../_partial/headerImportir";
+import InputDate from "@component/gip-useForm/inputDate";
+import Sign from "@component/apps/sign";
+import Sentto from "@component/apps/sentto";
+
+export default function App({ refdata }) {
+  const { auth } = useContext(Context);
+  const [formdisabled, setformdisabled] = useState(refdata ? true : false);
+  const [payload, setpayload] = useState(
+    refdata ? { ...refdata, to: refdata.to.id } : {}
+  );
+  const nav = useNavigate();
+
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  async function formSubmit(e) {
+    e.preventDefault();
+    console.log(payload);
+    let res = await fetcher({
+      url: `md_ordering`,
+      method: "post",
+      data: payload,
+    });
+    console.log(res);
+    // nav("/importir/ordering", true);
+  }
+
   return (
-    <Stack>
+    <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
         <Stack spacing={2}>
           <Header />
@@ -21,10 +53,14 @@ export default function App(props) {
             <Stack spacing={1}>
               <InputInline lb={"Our reff"} lbw={180} />
             </Stack>
-            <Stack>
-              <Typography color="initial">
-                Jakata, {fdate.format(fdate.today)}
-              </Typography>
+            <Stack direction={"row"}>
+              <Typography color="initial">Jakata,</Typography>
+              <InputDate
+                inputFormat="dd MMM yyyy"
+                label={""}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
             </Stack>
           </Stack>
           <Typography variant="body1" color="initial">
@@ -33,53 +69,83 @@ export default function App(props) {
             following :
           </Typography>
           <Stack spacing={0}>
-            <InputInline lb={"Time of delivery"} lbw={180} />
-            <InputInline lb={"Payment"} lbw={180} />
-            <InputInline lb={"Partial shipment"} lbw={180} />
-            <InputInline lb={"Time of Transshipment"} lbw={180} />
+            <InputInline
+              lb={"Time of delivery"}
+              lbw={180}
+              name="tod"
+              onChange={handlePayload}
+              value={payload.tod || ""}
+            />
+            <InputInline
+              lb={"Payment"}
+              lbw={180}
+              name="payment"
+              onChange={handlePayload}
+              value={payload.payment || ""}
+            />
+            <InputInline
+              lb={"Partial shipment"}
+              lbw={180}
+              name="partial_shipment"
+              onChange={handlePayload}
+              value={payload.partial_shipment || ""}
+            />
+            <InputInline
+              lb={"Time of Transshipment"}
+              lbw={180}
+              name="transshipment"
+              onChange={handlePayload}
+              value={payload.transshipment || ""}
+            />
 
-            <InputInline lb={"Destination "} lbw={180} />
-            <InputInline lb={"Notify "} lbw={180} />
-            <InputInline lb={"Packing "} lbw={180} />
+            <InputInline
+              lb={"Destination "}
+              lbw={180}
+              name="destination"
+              onChange={handlePayload}
+              value={payload.destination || ""}
+            />
+            <InputInline
+              lb={"Notify "}
+              lbw={180}
+              name="notify"
+              onChange={handlePayload}
+              value={payload.notify || ""}
+            />
+            <InputInline
+              lb={"Packing "}
+              lbw={180}
+              name="packing"
+              onChange={handlePayload}
+              value={payload.packing || ""}
+            />
           </Stack>
-          <ProductList />
+          <ProductList
+            initvalue={payload.product_list}
+            onChange={(v) => setpayload({ ...payload, product_list: v })}
+          />
           <Typography variant="body1" color="initial">
             Further more please return to us a duly signed copy of this ordering
             letter as your final confirmation, or duly signed sales contract.
           </Typography>
           <Stack>
             Faithfully Yours.
-            <br />
-            <br />
-            <br />
+            <Sign text="Import" />
             Import Manager
           </Stack>
         </Stack>
       </PaperA4>
-      <SenttoImportir />
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} p={1}>
-        <img src={logo.e3} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          MD Berreclough Limited
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          United Kingdom
-        </Typography>
-
-        {/* <Typography variant="subtitle1" color="initial">
-          Phone 62-21-5664425, Fax. 62-21-5664430
-        </Typography> */}
-      </Stack>
+      {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
+        <Sentto
+          value={payload.to || ""}
+          name="to"
+          onChange={handlePayload}
+          disabled={formdisabled}
+          btn_disabled={!payload.to}
+          setEdit={() => setformdisabled(false)}
+          filter="user-export"
+        />
+      )}
     </Stack>
   );
 }

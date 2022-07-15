@@ -8,7 +8,6 @@ import AppBar from "./appBar";
 import { styled } from "@mui/material/styles";
 import Footer from "@ly/component/footer";
 import { config } from "./config";
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({

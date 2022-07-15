@@ -1,8 +1,8 @@
 export const meta = {
-  model: "export_wessel",
+  model: "md_wessel",
   modelTitle: "wessel",
   col: [
-    { name: "name", label: "Submited By", w: "100%" },
+    { name: "from.name", label: "Submited By", w: "100%" },
     { name: "status", label: "Status", w: "20%" },
   ],
 };
