@@ -7,7 +7,7 @@ const styles = {
   display: "flex",
 };
 
-export default function App({ value, btnText }) {
+export default function App({ value, btnText, accept }) {
   const inputRef = React.useRef(null);
   const [file, setFile] = React.useState(null);
 
@@ -19,7 +19,7 @@ export default function App({ value, btnText }) {
     <Stack>
       <input
         ref={inputRef}
-        accept=".doc , .docx"
+        accept={accept || ".doc , .docx"}
         style={{ display: "none" }}
         id="raised-button-file"
         multiple

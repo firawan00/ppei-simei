@@ -2,31 +2,27 @@ import React, { useState } from "react";
 import { Stack, Button, TextField, MenuItem } from "@mui/material";
 import BackIcon from "@/component/ui/backIcon";
 import { meta } from "./_meta";
-import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
+import { fetcherMultipart, useNavigate } from "@component/gip-useForm/fetcher";
 import InputFile from "@component/gip-useForm/inputFile";
 
 export default function App({ refdata }) {
-  const [payload, setpayload] = useState(refdata || {});
+  const [payload, setpayload] = useState(refdata ? refdata : {});
   const nav = useNavigate();
 
   function handlePayload(e) {
     setpayload({ ...payload, [e.target.name]: e.target.value });
   }
 
-  function handlePayloadValue(e) {
-    setpayload({ ...payload, e });
-  }
-
   async function formSubmit(e) {
     e.preventDefault();
     delete payload.token;
 
-    let res = await fetcher({
-      url: `users`,
+    let res = await fetcherMultipart({
+      url: `config`,
       method: "post",
       data: payload,
     });
-    nav(-1, true);
+    nav("/admin/config", true);
   }
 
   return (
@@ -50,16 +46,17 @@ export default function App({ refdata }) {
         />
         {payload.type == "file" && (
           <InputFile
+            accept=".xls , .xlsx"
             btnText="Upload Document"
             value={(v) => {
-              handlePayloadValue({ file: v });
+              setpayload({ ...payload, file: v });
             }}
           />
         )}
         {payload.type == "text" && (
           <TextField
-            label="password"
-            name="password"
+            label="value"
+            name={"value"}
             value={payload.value || ""}
             onChange={handlePayload}
           />
@@ -83,11 +80,7 @@ export default function App({ refdata }) {
           <MenuItem value="fasilitator-ska">fasilitator ska</MenuItem>
         </TextField> */}
 
-        <Button
-        // type="submit"
-        >
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </Stack>
     </Stack>
   );
