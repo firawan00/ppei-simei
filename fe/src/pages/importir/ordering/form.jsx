@@ -37,7 +37,7 @@ export default function App({ refdata }) {
       data: payload,
     });
     console.log(res);
-    // nav("/importir/ordering", true);
+    nav("/importir/ordering", true);
   }
 
   return (

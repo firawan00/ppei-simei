@@ -17,8 +17,10 @@ import Sentto from "@/component/apps/sentto";
 export default function App({ refdata }) {
   console.log(refdata);
   const { auth } = useContext(Context);
-  const [formdisabled, setformdisabled] = useState(refdata.data ? true : false);
-  const [payload, setpayload] = useState(refdata.data);
+  const [formdisabled, setformdisabled] = useState(
+    refdata && refdata.data ? true : false
+  );
+  const [payload, setpayload] = useState(refdata ? refdata.data : {});
   const nav = useNavigate();
 
   function handlePayload(e) {
@@ -33,7 +35,7 @@ export default function App({ refdata }) {
       data: payload,
     });
     console.log(res);
-    // nav("/exportir/invoice", true);
+    nav("/exportir/billoflanding", true);
   }
   return (
     <Stack component={"form"} onSubmit={formSubmit}>

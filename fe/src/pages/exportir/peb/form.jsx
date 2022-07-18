@@ -75,7 +75,7 @@ export default function App({ refdata }) {
         </Stack>
       )}
       {auth.user.role.includes("fasilitator") && (
-        <Approval model="md_peb" id={refdata.id} callback_url="/exportir/peb" />
+        <Approval model="MD_peb" id={refdata.id} callback_url="/exportir/peb" />
       )}
     </Stack>
   );
@@ -294,7 +294,7 @@ function NewPEBForm2({ formdata, refdata }) {
       method: "post",
       data: payload,
     });
-    // nav("/exportir/peb", true);
+    nav("/exportir/peb", true);
   }
   return (
     <Stack spacing={0} component="form" onSubmit={formSubmit}>

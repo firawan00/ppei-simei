@@ -31,7 +31,9 @@ import Sentto from "@/component/apps/sentto";
 
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
-  const [formdisabled, setformdisabled] = useState(refdata.data ? true : false);
+  const [formdisabled, setformdisabled] = useState(
+    refdata && refdata.data ? true : false
+  );
   const [payload, setpayload] = useState(
     refdata ? { ...refdata.data, to: refdata.to.id } : {}
   );

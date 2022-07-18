@@ -107,7 +107,7 @@ function NewSkaForm({ refdata }) {
         </Stack>
       </PaperA4>
       {auth.user.role.includes("fasilitator") && (
-        <Approval model="md_lc" id={refdata.id} callback_url="/importir/lc" />
+        <Approval model="MD_lc" id={refdata.id} callback_url="/importir/lc" />
       )}
     </Stack>
   );

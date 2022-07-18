@@ -41,7 +41,7 @@ export function RInvoice(props) {
         {data &&
           data.map((d, ix) => (
             <MenuItem key={d.id} value={d} selected={ix == 0}>
-              {`#${d.uid} - to ${d.to.name}`}
+              {`#${d.no} - to ${d.to.name}`}
             </MenuItem>
           ))}
       </TextField>
@@ -86,7 +86,7 @@ export function RShippingInstruction(props) {
       >
         {data.map((d) => (
           <MenuItem key={d.id} value={d}>
-            {`#${d.docref} - to ${d.to.name}`}
+            {`#${d.no} - to ${d.to.name}`}
           </MenuItem>
         ))}
       </TextField>
@@ -126,7 +126,7 @@ export function RPackingList(props) {
         label="Select"
         value={props.value || ""}
         onChange={(e) => props.selected(e.target.value)}
-        helperText="Please select your Shipping Instruction reference"
+        helperText="Please select your Packing List reference"
         disabled={props.refvalue ? true : false}
       >
         {data.map((d) => (

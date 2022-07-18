@@ -57,7 +57,7 @@ export default function NewSkaForm({ refdata }) {
       method: "post",
       data: payload,
     });
-    // nav("/exportir/lc", true);
+    nav("/exportir/lc", true);
   }
 
   return (
