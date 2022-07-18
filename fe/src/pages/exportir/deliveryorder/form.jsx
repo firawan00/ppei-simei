@@ -133,7 +133,7 @@ export default function App({ refdata }) {
 
           <Stack>
             Biaya-biaya yang timbul atas penyerahan container kosong agar
-            dibebankan kepada{" "}
+            dibebankan kepada
             <span className="f-bold f-err">[EKSPORTIR/ EMKL]</span>.
           </Stack>
 
@@ -159,7 +159,7 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack>
-            Faithfully Yours. <Sign text="Exportir" /> Logistik Dept
+            Faithfully Yours. <Sign text="Cargo" /> Logistik Dept
           </Stack>
         </Stack>
       </PaperA4>
