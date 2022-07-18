@@ -25,7 +25,7 @@ export default function AdminPage(params) {
       data={data}
       meta={meta}
       isRefetch={fetching}
-      disableNew={auth.user.role.includes("fasilitator")}
+      disableNew={!auth.user.role.includes("fasilitator")}
     />
   );
 }
