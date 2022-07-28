@@ -229,6 +229,12 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedInteger('invoice_id')->nullable();
+            $table->unsignedInteger('pl_id')->nullable();
+            $table->unsignedInteger('bl_id')->nullable();
+            $table->unsignedInteger('peb_id')->nullable();
+
             $table->string('status')->nullable();
             $table->string('status_notes')->nullable();
 
@@ -241,6 +247,12 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedInteger('invoice_id')->nullable();
+            $table->unsignedInteger('pl_id')->nullable();
+            $table->unsignedInteger('bl_id')->nullable();
+            $table->unsignedInteger('npe_id')->nullable();
+
             $table->string('status')->nullable();
             $table->string('status_notes')->nullable();
 
@@ -253,6 +265,13 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedInteger('invoice_id')->nullable();
+            $table->unsignedInteger('pl_id')->nullable();
+            $table->unsignedInteger('bl_id')->nullable();
+            $table->unsignedInteger('npe_id')->nullable();
+            $table->unsignedInteger('skaa_id')->nullable();
+            $table->unsignedInteger('skad_id')->nullable();
 
             $table->string('status')->nullable();
             $table->string('status_notes')->nullable();

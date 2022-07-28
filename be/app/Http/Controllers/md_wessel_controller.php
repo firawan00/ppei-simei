@@ -16,10 +16,18 @@ class md_wessel_controller extends CustomController
 
     public function store(Request $r)
     {
+
         $payload = [
             'from' => Auth::user()->id,
             'to' => $r->to,
             'status' => 'pending',
+
+            'invoice_id' => $r->invoice_id,
+            'pl_id' => $r->pl_id,
+            'bl_id' => $r->bl_id,
+            'npe_id' => $r->npe_id,
+            'skaa_id' => $r->skaa_id,
+            'skad_id' => $r->skad_id,
 
             'data' => json_encode($r->except(['from'])),
         ];

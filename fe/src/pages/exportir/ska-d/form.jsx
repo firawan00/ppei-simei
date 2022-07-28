@@ -29,6 +29,7 @@ import SenttoImportir from "@component/apps/senttoImportir";
 import Sign from "@component/apps/sign";
 import Sentto from "@/component/apps/sentto";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import Approval from "@/component/apps/approval";
 
 const checkboxstyle = {
   height: "24px",
@@ -384,6 +385,13 @@ export default function App({ refdata }) {
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
           filter="fasilitator-ska"
+        />
+      )}
+      {auth.user.role.includes("fasilitator") && (
+        <Approval
+          model="MD_ska_d"
+          id={refdata.id}
+          callback_url="/exportir/ska-d"
         />
       )}
     </Stack>

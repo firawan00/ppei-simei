@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomController extends BaseController
 {
@@ -11,7 +12,12 @@ class CustomController extends BaseController
 
     public function index(Request $r)
     {
-        $data = $this->model::Filter($r->all())->get();
+        if ((Auth::user()->role == 'user-export' || Auth::user()->role == 'user-import') && class_basename($this->model) != 'AdminConfig') {
+            $data = $this->model::Filter($r->all())->where('from', Auth::id())->orWhere('to', Auth::id())->get();
+        } else {
+            $data = $this->model::Filter($r->all())->get();
+        }
+
         return response()->json($data);
     }
 

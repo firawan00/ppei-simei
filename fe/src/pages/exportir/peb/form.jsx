@@ -43,6 +43,12 @@ export default function App({ refdata }) {
   const [formdata, setformdata] = useState({});
   const { auth } = useContext(Context);
 
+  async function handleRef(v, target) {
+    let temp = formdata;
+    temp[target] = v;
+    setformdata({ ...temp });
+  }
+
   return (
     <Stack>
       <Stack
@@ -52,17 +58,17 @@ export default function App({ refdata }) {
         <Stack width={"210mm"} className="hide_on_print">
           <BackIcon />
           <RInvoice
-            selected={(v) => setformdata({ ...formdata, invoice: v })}
+            selected={(v) => handleRef(v, "invoice")}
             value={formdata.invoice}
             refvalue={refdata ? refdata.invoice_id : ""}
           />
           <RShippingInstruction
-            selected={(v) => setformdata({ ...formdata, si: v })}
+            selected={(v) => handleRef(v, "si")}
             value={formdata.si}
             refvalue={refdata ? refdata.si_id : ""}
           />
           <RPackingList
-            selected={(v) => setformdata({ ...formdata, pl: v })}
+            selected={(v) => handleRef(v, "pl")}
             value={formdata.pl}
             refvalue={refdata ? refdata.pl_id : ""}
           />
@@ -273,6 +279,7 @@ function NewPEBForm2({ formdata, refdata }) {
   const [payload, setpayload] = useState(
     refdata
       ? {
+          id: refdata.id,
           product_list: refdata.product_list,
         }
       : {

@@ -28,6 +28,7 @@ import { fdate } from "@/component/helper/formating";
 import SenttoImportir from "@component/apps/senttoImportir";
 import Sign from "@component/apps/sign";
 import Sentto from "@/component/apps/sentto";
+import Approval from "@/component/apps/approval";
 
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
@@ -250,6 +251,13 @@ export default function App({ refdata }) {
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
           filter="fasilitator-ska"
+        />
+      )}
+      {auth.user.role.includes("fasilitator") && (
+        <Approval
+          model="MD_ska_a"
+          id={refdata.id}
+          callback_url="/exportir/ska-a"
         />
       )}
     </Stack>

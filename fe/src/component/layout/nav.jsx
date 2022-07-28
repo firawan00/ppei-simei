@@ -104,17 +104,17 @@ const exportir = [
   {
     name: "Bill of LADING ",
     path: "/exportir/billoflanding",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-cargo"],
   },
   {
     name: "SKA-COO-FORM A",
     path: "/exportir/ska-a",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-ska"],
   },
   {
     name: "SKA-COO-FORM D",
     path: "/exportir/ska-d",
-    role: ["user-export", "admin"],
+    role: ["user-export", "admin", "fasilitator-ska"],
   },
   {
     name: "Wesel Export",

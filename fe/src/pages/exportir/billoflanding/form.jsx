@@ -365,7 +365,7 @@ export default function App({ refdata }) {
           onChange={handlePayload}
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
-          filter="fasilitator-cargo"
+          filter="user-export"
         />
       )}
     </Stack>

@@ -8,10 +8,10 @@ export default function App(props) {
   const [data, setdata] = useState([]);
 
   const field = [
-    { data: "from", label: "From", w: "10%" },
+    { data: "from", label: "From", w: "20%" },
     { data: "to", label: "To", w: "20%" },
-    { data: "from", label: "Message", w: "50%" },
-    { data: "from", label: "Action", w: "10%" },
+    { data: "from", label: "Message", w: "40%" },
+    { data: "from", label: "Action", w: "5%" },
   ];
 
   useEffect(() => {

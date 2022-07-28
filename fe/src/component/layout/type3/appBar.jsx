@@ -64,7 +64,7 @@ export default function App({ open, setOpen }) {
         >
           <Stack textAlign={"right"}>
             <Typography variant="h6" color="primary" fontWeight={"bold"}>
-              KEMENTRIAN PERDAGANGAN
+              KEMENTERIAN PERDAGANGAN
             </Typography>
             <Typography variant="body" color="primary" fontWeight={"bold"}>
               {import.meta.env.VITE_APPNAME}

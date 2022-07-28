@@ -13,6 +13,16 @@ import InputDate from "@component/gip-useForm/inputDate";
 import Sentto from "@/component/apps/sentto";
 import Approval from "@/component/apps/approval";
 
+import {
+  RInvoice,
+  RShippingInstruction,
+  RPackingList,
+  RBillOfLading,
+  RNPE,
+  RSKAA,
+  RSKAD,
+} from "@component/apps/selectRef";
+
 const blank_ws = `At . . . . . Sight . . . . . . pay this first of Exchange (of same tenor and date not paid ) to the . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . or order. . . . . . . . . . . . . . . . . . . . . . . . === US Dollar . . . . . . . . . . . . . . . . . .=== 
   Value received drawn against 
   LC No. . . . . .  Date . . . . . . 
@@ -25,12 +35,88 @@ const blank_ws_footer = `. . . . . . . . . . . . . . . . . .
  . . . . . . . . . . . . . . . . . .  `;
 
 export default function App({ refdata }) {
+  const [formdata, setformdata] = useState({});
   const { auth } = useContext(Context);
+
+  async function handleRef(v, target) {
+    let temp = formdata;
+    temp[target] = v;
+    setformdata({ ...temp });
+  }
+
+  return (
+    <Stack>
+      <Stack alignItems={"center"}>
+        <Stack width={"210mm"} className="hide_on_print">
+          <RInvoice
+            selected={(v) => handleRef(v, "invoice")}
+            value={formdata.invoice}
+            refvalue={refdata ? refdata.invoice_id : ""}
+            withview
+          />
+          <RPackingList
+            selected={(v) => handleRef(v, "pl")}
+            value={formdata.pl}
+            refvalue={refdata ? refdata.pl_id : ""}
+            withview
+          />
+          <RBillOfLading
+            selected={(v) => handleRef(v, "bl")}
+            value={formdata.bl}
+            refvalue={refdata ? refdata.bl_id : ""}
+            withview
+          />
+          <RNPE
+            selected={(v) => handleRef(v, "npe")}
+            value={formdata.npe}
+            refvalue={refdata ? refdata.npe_id : ""}
+            withview
+          />
+          <RSKAA
+            selected={(v) => handleRef(v, "skaa")}
+            value={formdata.skaa}
+            refvalue={refdata ? refdata.skaa_id : ""}
+            withview
+          />
+
+          <RSKAD
+            selected={(v) => handleRef(v, "skad")}
+            value={formdata.skad}
+            refvalue={refdata ? refdata.skad_id : ""}
+            withview
+          />
+        </Stack>
+      </Stack>
+
+      {formdata.invoice &&
+        formdata.bl &&
+        formdata.pl &&
+        formdata.npe &&
+        (formdata.skaa || formdata.skad) && (
+          <MainForm refdata={refdata} formdata={formdata} />
+        )}
+    </Stack>
+  );
+}
+
+function MainForm({ refdata, formdata }) {
+  const { auth } = useContext(Context);
+
   const [formdisabled, setformdisabled] = useState(
     refdata && refdata.data ? true : false
   );
   const [payload, setpayload] = useState(
-    refdata ? { ...refdata.data, to: refdata.to.id } : {}
+    refdata
+      ? { ...refdata.data, to: refdata.to.id }
+      : {
+          bl_id: formdata.bl.id,
+          invoice_id: formdata.invoice.id,
+          npe_id: formdata.npe.id,
+
+          pl_id: formdata.pl.id,
+          skaa_id: formdata.skaa && formdata.skaa.id,
+          skad_id: formdata.skad && formdata.skad.id,
+        }
   );
   const nav = useNavigate();
 
@@ -48,7 +134,6 @@ export default function App({ refdata }) {
     });
     nav("/exportir/wessel", true);
   }
-
   return (
     <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
@@ -182,7 +267,7 @@ export default function App({ refdata }) {
       )}
       {auth.user.role.includes("fasilitator") && (
         <Approval
-          model="md_wessel"
+          model="MD_wessel"
           id={refdata.id}
           callback_url="/exportir/wessel"
         />

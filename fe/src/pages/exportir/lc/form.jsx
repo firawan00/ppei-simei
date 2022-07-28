@@ -104,7 +104,8 @@ export default function NewSkaForm({ refdata }) {
           />
           <InputInline
             dcol
-            multiLine
+            multiline
+            rows={22}
             lb={"Body"}
             name="body"
             onChange={handlePayload}

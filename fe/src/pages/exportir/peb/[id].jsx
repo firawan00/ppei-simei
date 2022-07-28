@@ -23,7 +23,9 @@ export default function App(props) {
       })
     );
   }
+
   if (!data) return "";
+
   return (
     <Stack>
       <Render refdata={data} ref={componentRef} />
