@@ -24,11 +24,24 @@ export default function App(props) {
           {...props}
           name={props.name ? props.name.toLowerCase() : props.lb.toLowerCase()}
           sx={{
+            "&:hover": {
+              fieldset: {
+                borderColor: "rgba(0, 0, 0, 0.23)",
+                "&.MuiOutlinedInput-notchedOutline": {
+                  borderColor: "rgba(0, 0, 0, 0.23)",
+                },
+              },
+            },
+
+            fieldset: {
+              borderColor: "rgba(0, 0, 0, 0.23)",
+            },
             input: {
               py: "1px",
+              color: "black",
             },
           }}
-          color="primary"
+          color="secondary"
         />
       )}
       {props.disabled && (

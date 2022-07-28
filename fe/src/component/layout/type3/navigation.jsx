@@ -7,6 +7,7 @@ import { nav } from "@/component/layout/nav";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Profile from "@ly/component/profile";
 import Helpermodal from "@component/apps/helpermodal";
+import ThemeSelect from "@/component/gip-themeSwitcher";
 
 export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
   const [open, setopen] = React.useState();
@@ -104,6 +105,7 @@ export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
       </Stack>
       <Stack>
         <Helpermodal />
+        <ThemeSelect />
         <Logout />
       </Stack>
     </Stack>

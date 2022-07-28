@@ -10,11 +10,13 @@ import Context from ".";
 
 const ButtonPallet = {
   primary: {
-    main: "#1a57a0",
-    dark: "#131e24",
+    main: "#2f4858",
+    dark: "#0a2030",
   },
   secondary: {
-    main: "#FE9150",
+    main: "#2f4858",
+
+    // main: "#FE9150",
   },
   white: {
     main: "#FFFFFF",
@@ -44,13 +46,25 @@ const ButtonPallet = {
 };
 
 const darkPallet = {
+  initial: {
+    main: "#FFFFFF",
+  },
   mode: "dark",
   background: {
-    default: "#2F4858",
-    bgdrawer: "#282d37",
+    default: "#164364",
+    bgdrawer: "#272727",
+    // bgdrawer: "#272727",
+
     paper: "#272727",
+    header: "#0e2a3e",
   },
   ...ButtonPallet,
+  primary: {
+    main: "#FFFFFF",
+  },
+  dark: {
+    main: "#babec2",
+  },
 };
 
 const lightPallet = {
@@ -59,13 +73,17 @@ const lightPallet = {
     default: "#ecf0f5",
   },
   ...ButtonPallet,
+  // primary: {
+  //   main: "#2f4858",
+  //   dark: "#131e24",
+  // },
 };
 
 export default function App(props) {
-  const { theme } = React.useContext(Context);
+  const { app } = React.useContext(Context);
 
   let themeLoader = createTheme({
-    palette: theme === "dark" ? darkPallet : lightPallet,
+    palette: app.data.theme === "dark" ? darkPallet : lightPallet,
     typography: {
       // fontFamily: "Lato",
       h1: {

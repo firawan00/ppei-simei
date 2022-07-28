@@ -15,6 +15,7 @@ export default function App({ children, prefix, noback = false, nolimit }) {
         bgcolor="white.main"
         className="print-margin"
         overflow={"hidden"}
+        color="black"
       >
         {children}
       </Stack>

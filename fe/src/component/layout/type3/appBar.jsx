@@ -63,7 +63,7 @@ export default function App({ open, setOpen }) {
           spacing={1}
         >
           <Stack textAlign={"right"}>
-            <Typography variant="h6" color="black" fontWeight={"bold"}>
+            <Typography variant="h6" color="primary" fontWeight={"bold"}>
               KEMENTRIAN PERDAGANGAN
             </Typography>
             <Typography variant="body" color="primary" fontWeight={"bold"}>
