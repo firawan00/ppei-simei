@@ -35,8 +35,8 @@ class md_shippinginstruction_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Packing List from ' . Auth::user()->name,
-            'link' => '/importir/lkn/' . $data->id,
+            'title' => 'Shipping Instruction from ' . Auth::user()->name,
+            'link' => '/exportir/shippinginstruction/' . $data->id,
         ]
         );
 

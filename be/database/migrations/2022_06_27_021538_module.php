@@ -233,7 +233,7 @@ class Module extends Migration
             $table->unsignedInteger('invoice_id')->nullable();
             $table->unsignedInteger('pl_id')->nullable();
             $table->unsignedInteger('bl_id')->nullable();
-            $table->unsignedInteger('peb_id')->nullable();
+            $table->unsignedInteger('npe_id')->nullable();
 
             $table->string('status')->nullable();
             $table->string('status_notes')->nullable();

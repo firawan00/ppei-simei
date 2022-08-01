@@ -52,7 +52,7 @@ class md_lc_controller extends CustomController
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
             'title' => 'Pengajuan LC from ' . Auth::user()->name,
-            'link' => '/exportir/offeringletter/' . $data->id,
+            'link' => '/importir/lc/' . $data->id,
         ]
         );
         return response()->json($data);

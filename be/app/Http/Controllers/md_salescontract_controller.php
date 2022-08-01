@@ -38,7 +38,7 @@ class md_salescontract_controller extends CustomController
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
             'title' => 'Sales Contract from ' . Auth::user()->name,
-            'link' => '/importir/ordering/' . $data->id,
+            'link' => '/importir/salescontract/' . $data->id,
         ]
         );
         return response()->json($data);

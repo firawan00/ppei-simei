@@ -35,8 +35,8 @@ class md_deliveryorder_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Lembar Kerja Negoisasi  from ' . Auth::user()->name,
-            'link' => '/importir/lkn/' . $data->id,
+            'title' => 'Delviery Order from ' . Auth::user()->name,
+            'link' => '/exportir/deliveryorder/' . $data->id,
         ]
         );
         return response()->json($data);

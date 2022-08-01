@@ -21,6 +21,11 @@ class md_ska_a_controller extends CustomController
             'to' => $r->to,
             'status' => 'pending',
 
+            'invoice_id' => $r->invoice_id,
+            'pl_id' => $r->pl_id,
+            'bl_id' => $r->bl_id,
+            'npe_id' => $r->npe_id,
+
             'data' => json_encode($r->except(['from'])),
         ];
 
@@ -39,7 +44,7 @@ class md_ska_a_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Pengajuan SKA from ' . Auth::user()->name,
+            'title' => 'Pengajuan SKA-A from ' . Auth::user()->name,
             'link' => '/exportir/ska-a/' . $data->id,
         ]
         );

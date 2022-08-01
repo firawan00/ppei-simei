@@ -37,7 +37,7 @@ class md_invoice_controller extends CustomController
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
             'title' => 'Invoice from ' . Auth::user()->name,
-            'link' => '/importir/lkn/' . $data->id,
+            'link' => '/exportir/invoice/' . $data->id,
         ]
         );
 
