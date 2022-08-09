@@ -13,6 +13,7 @@ import Sentto from "@/component/apps/sentto";
 
 import Header from "../_partial/exportirHeader";
 import Sign from "@component/apps/sign";
+import InputDate from "@component/gip-useForm/inputDate";
 
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
@@ -61,13 +62,26 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
                 value={payload.no || ""}
               />
-              <InputInline
+              {/* <InputInline
                 lb={"Date"}
                 name="date"
                 onChange={handlePayload}
                 disabled={formdisabled}
                 value={payload.date || ""}
-              />
+              /> */}
+              <Stack direction={"row"} justifyContent="space-between">
+                <Typography color="initial" width={180}>
+                  Date
+                </Typography>
+                <InputDate
+                  disabled={formdisabled}
+                  inputFormat="dd MMM yyyy"
+                  label={""}
+                  value={payload.date || null}
+                  onChange={(v) => setpayload({ ...payload, date: v })}
+                />
+              </Stack>
+
               <InputInline
                 lb={"SC No."}
                 name="scno"

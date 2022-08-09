@@ -96,13 +96,18 @@ function Form({ refdata, formdata }) {
                 disabled={formdisabled}
                 value={payload.no || ""}
               />
-              <InputInline
-                lb={"Date"}
-                name="date"
-                onChange={handlePayload}
-                disabled={formdisabled}
-                value={payload.date || ""}
-              />
+              <Stack direction={"row"} justifyContent="space-between">
+                <Typography color="initial" width={180}>
+                  Date
+                </Typography>
+                <InputDate
+                  disabled={formdisabled}
+                  inputFormat="dd MMM yyyy"
+                  label={""}
+                  value={payload.date || null}
+                  onChange={(v) => setpayload({ ...payload, date: v })}
+                />
+              </Stack>
               <InputInline
                 lb={"SC No."}
                 name="scno"

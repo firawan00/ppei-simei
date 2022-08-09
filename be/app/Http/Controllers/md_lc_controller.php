@@ -18,7 +18,7 @@ class md_lc_controller extends CustomController
     {
         //
         $r->validate([
-            'file' => 'required|mimes:doc,docx|max:512',
+            'file' => 'required|max:512',
         ]);
 
         $payload = $r->except(['file', 'name', 'type']);
