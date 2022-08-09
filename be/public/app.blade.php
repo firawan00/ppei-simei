@@ -11,7 +11,7 @@
     />
     <link rel="manifest" href="/public/site.webmanifest" />
     <title>PPEJP - SimEI</title>
-    <script type="module" crossorigin src="/public/assets/index.d5599c50.js"></script>
+    <script type="module" crossorigin src="/public/assets/index.8fa8c127.js"></script>
     <link rel="stylesheet" href="/public/assets/index.b399a524.css">
   </head>
   <body>

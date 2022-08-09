@@ -1,7 +1,7 @@
 import React from "react";
 import Context from "@context";
 
-import { Stack, Typography, Button, TextField } from "@mui/material";
+import { Stack, Typography, Button, TextField, MenuItem } from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
 import useForm, { Input } from "@/component/useForm";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,6 +9,27 @@ import { fetcher } from "@component/gip-useForm/fetcher";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
+
+const userList = [
+  "user-export1",
+  "user-export2",
+  "user-export3",
+  "user-export4",
+  "user-export5",
+
+  "user-import1",
+  "user-import2",
+  "user-import3",
+  "user-import4",
+  "user-import5",
+
+  "fasilitator-bank",
+  "fasilitator-cargo",
+  "fasilitator-kepabeanan",
+  "fasilitator-ska",
+
+  "admin",
+];
 
 export default function Login(params) {
   return <LoginForm />;
@@ -59,7 +80,15 @@ export function LoginForm(params) {
         onChange={formik.handleChange}
         error={formik.touched.username && Boolean(formik.errors.username)}
         helperText={(formik.touched.username && formik.errors.username) || " "}
-      />
+        select
+      >
+        {userList.map((d) => (
+          <MenuItem value={d} key={d}>
+            {d}
+          </MenuItem>
+        ))}
+      </TextField>
+
       <TextField
         fullWidth
         name="password"
