@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class CustomController extends BaseController
 {
@@ -13,7 +14,12 @@ class CustomController extends BaseController
     public function index(Request $r)
     {
         if ((Auth::user()->role == 'user-export' || Auth::user()->role == 'user-import') && class_basename($this->model) != 'AdminConfig') {
-            $data = $this->model::Filter($r->all())->where('from', Auth::id())->orWhere('to', Auth::id())->get();
+            $data = $this->model::Filter($r->all())
+                ->whereDate('created_at', Carbon::today())
+                ->where(function ($q) {
+                    $q->where('from', Auth::id())->orWhere('to', Auth::id());
+                })
+                ->get();
         } else {
             $data = $this->model::Filter($r->all())->get();
         }

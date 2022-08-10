@@ -304,7 +304,7 @@ class Module extends Migration
 
             $table->string('sender')->nullable();
             $table->string('receiver')->nullable();
-            $table->longText('data')->nullable();
+            $table->longText('body')->nullable();
 
             $table->timestamps();
 

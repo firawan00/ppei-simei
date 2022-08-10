@@ -43,6 +43,9 @@ const ButtonPallet = {
     main: "#BB1C2A",
     dark: "#BB1C2A",
   },
+  success: {
+    main: "#12c36d",
+  },
 };
 
 const darkPallet = {

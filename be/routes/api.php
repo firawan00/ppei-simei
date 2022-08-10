@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminConfigController;
+use App\Http\Controllers\AppController;
 
 use App\Http\Controllers\md_inquiry_controller;
 use App\Http\Controllers\md_introductionletter_controller;
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('to', [inbox_controller::class, 'to']);
     });
     Route::post('status_handler', [StatusController::class, 'status_handler']);
+    Route::post('dashboard', [AppController::class, 'dashboard']);
 
     Route::resources([
         'users' => UserController::class,

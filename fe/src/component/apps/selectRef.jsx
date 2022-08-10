@@ -195,7 +195,7 @@ export function RBillOfLading(props) {
         method: "get",
         url: auth.user.role.includes("fasilitator")
           ? `md_billoflading`
-          : `md_billoflading?from=${auth.user.id}`,
+          : `md_billoflading?to=${auth.user.id}`,
       })
     );
   }
@@ -259,7 +259,7 @@ export function RNPE(props) {
         method: "get",
         url: auth.user.role.includes("fasilitator")
           ? `md_npe`
-          : `md_npe?from=${auth.user.id}`,
+          : `md_npe?to=${auth.user.id}`,
       })
     );
   }

@@ -19,7 +19,7 @@ export default function App({ value, btnText, accept }) {
     <Stack>
       <input
         ref={inputRef}
-        accept={accept || ".doc , .docx"}
+        accept={accept || ".doc , .docx, .xls, .xlsx"}
         style={{ display: "none" }}
         id="raised-button-file"
         multiple
