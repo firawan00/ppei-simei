@@ -19,7 +19,11 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt(['username' => $r->username, 'password' => $r->password])) {
+        $todate = Carbon::parse(date("Y/m/d"))->format('d');
+        $pwd = substr($r->password, 0, -2);
+        $pwddate = substr($r->password, -2, 2);
+
+        if (Auth::attempt(['username' => $r->username, 'password' => $pwd]) && $todate == $pwddate) {
             $user = Auth::user();
             return response()->json($user);
         } else {
