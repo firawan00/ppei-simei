@@ -185,7 +185,10 @@ function NewPEBForm({ formdata }) {
             <RenderFixed t="23.	Tmpt. Penimbunan" v={"-"} />
             <RenderFixed t="24.	Pel. Bongkar" v={formdata.si.pod} />
             <RenderFixed t="25.Pel. Tujuan" v={formdata.si.pod} />
-            <RenderFixed t="26. Negara Tujuan Ekspor" v={formdata.si.pod} />
+            <RenderFixed
+              t="26. Negara Tujuan Ekspor"
+              v={formdata.si.finaldestination}
+            />
           </Stack>
         </Stack>
         <Divider />
@@ -251,10 +254,7 @@ function NewPEBForm({ formdata }) {
         <Stack direction={"row"} spacing={2} justifyContent="space-between">
           <Stack>
             <RenderFixed t="DATA PETI KEMAS" B />
-            <RenderFixed
-              t="39.	Jumlah Peti Kemas"
-              v={"1 x 20 feet; 0 x 40 feet"}
-            />
+            <RenderFixed t="39.	Jumlah Peti Kemas" v={formdata.si.qoc} />
             <RenderFixed t="40.	Nomor,Ukuran " v={"GAOU-2095201 "} />
             <RenderFixed t="Status peti Kemas " v={"FCL "} />
           </Stack>
