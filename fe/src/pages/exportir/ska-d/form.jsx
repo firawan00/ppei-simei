@@ -30,6 +30,7 @@ import Sign from "@component/apps/sign";
 import Sentto from "@/component/apps/sentto";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Approval from "@/component/apps/approval";
+import InputDate from "@component/gip-useForm/inputDate";
 
 const checkboxstyle = {
   height: "24px",
@@ -62,6 +63,8 @@ export default function App({ refdata }) {
     <Stack>
       <Stack alignItems={"center"}>
         <Stack width={"210mm"} className="hide_on_print">
+          <BackIcon />
+
           <RInvoice
             selected={(v) => handleRef(v, "invoice")}
             value={formdata.invoice}
@@ -103,8 +106,15 @@ function MainForm({ refdata, formdata }) {
   );
   const [payload, setpayload] = useState(
     refdata
-      ? { ...refdata.data, to: refdata.to.id }
+      ? { ...refdata.data, id: refdata.id, to: refdata.to.id }
       : {
+          gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
+          gct: `${formdata.invoice.to.name},${formdata.invoice.to.address}`,
+          f7: formdata.invoice.product_list.reduce(
+            (a, b) => a.concat(`${b.hs}, `),
+            ""
+          ),
+
           invoice_id: formdata.invoice.id,
           pl_id: formdata.pl.id,
           bl_id: formdata.bl.id,
@@ -126,6 +136,22 @@ function MainForm({ refdata, formdata }) {
     });
     nav("/exportir/ska-d", true);
   }
+
+  React.useEffect(() => {
+    setpayload({
+      ...payload,
+      gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
+      gct: `${formdata.invoice.to.name},${formdata.invoice.to.address}`,
+      f7: formdata.invoice.product_list.reduce(
+        (a, b) => a.concat(`${b.hs}, `),
+        ""
+      ),
+      invoice_id: formdata.invoice.id,
+      pl_id: formdata.pl.id,
+      bl_id: formdata.bl.id,
+      npe_id: formdata.npe.id,
+    });
+  }, [formdata]);
 
   return (
     <Stack spacing={3} component="form" onSubmit={formSubmit}>
@@ -317,14 +343,13 @@ function MainForm({ refdata, formdata }) {
                 those goods in the generalized system of preferences for goods
                 exported to
               </Typography>
-              <Typography
-                variant="caption"
-                color="initial"
-                my={0.5}
-                align="center"
-              >
-                Jakarta,{fdate.format(fdate.today)}
-              </Typography>
+              <InputDate
+                disabled={formdisabled}
+                inputFormat="dd MMM yyyy"
+                label={""}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
               <Divider />
 
               <Typography variant="caption" color="initial">

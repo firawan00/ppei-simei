@@ -73,7 +73,7 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
+              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
                 disabled={formdisabled}
                 inputFormat="dd MMM yyyy"
@@ -116,12 +116,12 @@ export default function App({ refdata }) {
               disabled={formdisabled}
             />
           </Stack>
-
+          {/* 
           <Stack>
             Enclosed we are sending some brochure about our product, according
             to our survey that this product have a good prospect inside your
             market.
-          </Stack>
+          </Stack> */}
 
           <Stack>
             We do hope you will be interested and we shall be pleased to have

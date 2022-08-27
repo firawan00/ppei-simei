@@ -33,7 +33,7 @@ class md_inquiry_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Inquery Letter from ' . Auth::user()->name,
+            'title' => 'Inquiry Letter from ' . Auth::user()->name,
             'link' => '/importir/inquiry/' . $data->id,
         ]
         );

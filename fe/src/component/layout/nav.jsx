@@ -155,6 +155,12 @@ const nav = [
     path: "/inbox",
     icon: MailIcon,
   },
+
+  {
+    name: "Outbox",
+    path: "/outbox",
+    icon: MailIcon,
+  },
   ...admin,
 
   // {

@@ -74,20 +74,32 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
+              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
-                inputFormat="dd MMM yyyy"
                 label={""}
                 value={payload.date || null}
                 disabled={formdisabled}
-                onChange={(v) => setpayload({ ...payload, date: v })}
+                onChange={(v) => setpayload({ ...payload, nodate: v })}
               />
             </Stack>
           </Stack>
 
           <Stack>
-            Dear Sir/Madam, Regarding to your inquiry no…. dated…., herewith we
-            would like to submit our offers are as follows:
+            <Stack direction={"row"} spacing={1}>
+              <Typography variant="body1" color="initial">
+                Dear Sir/Madam, Regarding to your inquiry
+              </Typography>
+              <InputDate
+                disabled={formdisabled}
+                placeholder="No . . . Date . . . "
+                label={""}
+                value={payload.date || null}
+                onChange={(v) => setpayload({ ...payload, date: v })}
+              />
+            </Stack>
+            <Stack>
+              herewith we would like to submit our offers are as follows:
+            </Stack>
           </Stack>
 
           <Stack spacing={1}>

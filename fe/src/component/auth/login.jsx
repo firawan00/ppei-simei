@@ -1,7 +1,15 @@
 import React from "react";
 import Context from "@context";
 
-import { Stack, Typography, Button, TextField, MenuItem } from "@mui/material";
+import {
+  Stack,
+  Typography,
+  Button,
+  TextField,
+  MenuItem,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
 import useForm, { Input } from "@/component/useForm";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,34 +18,37 @@ import { fetcher } from "@component/gip-useForm/fetcher";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
 const userList = [
   "user-export1",
   "user-export2",
   "user-export3",
-  "user-export4",
-  "user-export5",
+  // "user-export4",
+  // "user-export5",
 
   "user-import1",
   "user-import2",
   "user-import3",
-  "user-import4",
-  "user-import5",
+  // "user-import4",
+  // "user-import5",
 
   "fasilitator-bank",
   "fasilitator-cargo",
   "fasilitator-kepabeanan",
   "fasilitator-ska",
-
-  "admin",
 ];
 
-export default function Login(params) {
-  return <LoginForm />;
+export default function Login({ isAdminLogin }) {
+  return <LoginForm isAdminLogin={isAdminLogin} />;
 }
 
-export function LoginForm(params) {
+export function LoginForm({ isAdminLogin }) {
   let navigate = useNavigate();
   const [err, seterr] = React.useState("");
+  const [pwdshow, setpwdshow] = React.useState(false);
+
   const { auth } = React.useContext(Context);
 
   const formik = useFormik({
@@ -49,14 +60,11 @@ export function LoginForm(params) {
     },
     validationSchema: validationSchema,
     onSubmit: async (payload) => {
-      // console.log(payload);
-
       const res = await fetcher({
         method: "post",
         url: "auth/signin",
         data: payload,
       });
-      console.log(res);
       if (res.error) seterr(res.error);
       else {
         await auth.update(res);
@@ -72,36 +80,65 @@ export function LoginForm(params) {
       noValidate
       autoComplete="off"
     >
-      <TextField
-        fullWidth
-        name="username"
-        label="Username"
-        value={formik.values.username}
-        onChange={formik.handleChange}
-        error={formik.touched.username && Boolean(formik.errors.username)}
-        helperText={(formik.touched.username && formik.errors.username) || " "}
-        select
-      >
-        {userList.map((d) => (
-          <MenuItem value={d} key={d}>
-            {d}
-          </MenuItem>
-        ))}
-      </TextField>
-
+      {!isAdminLogin && (
+        <TextField
+          fullWidth
+          name="username"
+          label="Username"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          error={formik.touched.username && Boolean(formik.errors.username)}
+          helperText={
+            (formik.touched.username && formik.errors.username) || " "
+          }
+          select
+        >
+          {userList.map((d) => (
+            <MenuItem value={d} key={d}>
+              {d}
+            </MenuItem>
+          ))}
+        </TextField>
+      )}
+      {isAdminLogin && (
+        <TextField
+          fullWidth
+          name="username"
+          label="Username"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          error={formik.touched.username && Boolean(formik.errors.username)}
+          helperText={
+            (formik.touched.username && formik.errors.username) || " "
+          }
+        />
+      )}
       <TextField
         fullWidth
         name="password"
         label="Password"
-        type="password"
+        type={!pwdshow ? "password" : "text"}
         value={formik.values.password}
         onChange={formik.handleChange}
         error={formik.touched.password && Boolean(formik.errors.password)}
         helperText={(formik.touched.password && formik.errors.password) || " "}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setpwdshow(!pwdshow)}
+                // onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {!pwdshow ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
-
       <Stack spacing={2}>
-        <Input.Submit t="signin" />
+        <Input.Submit t="sign in" />
         {/* <Typography
           variant="overline"
           align="center"

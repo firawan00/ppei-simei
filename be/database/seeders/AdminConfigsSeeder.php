@@ -22,6 +22,12 @@ class AdminConfigsSeeder extends Seeder
         ], );
 
         AdminConfig::create([
+            'name' => 'Template Wessel',
+            'value' => 'uploads/template/wessel-template.doc',
+            'type' => 'file',
+        ], );
+
+        AdminConfig::create([
             'name' => 'Exchange IDRUSD',
             'value' => '16000',
             'type' => 'text',

@@ -54,12 +54,13 @@ export default function App({ refdata }) {
               <InputInline lb={"Our reff"} lbw={180} />
             </Stack>
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
+              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
                 value={payload.date || null}
                 onChange={(v) => setpayload({ ...payload, date: v })}
+                disabled={formdisabled}
               />
             </Stack>
           </Stack>
@@ -75,6 +76,7 @@ export default function App({ refdata }) {
               name="tod"
               onChange={handlePayload}
               value={payload.tod || ""}
+              disabled={formdisabled}
             />
             <InputInline
               lb={"Payment"}
@@ -82,6 +84,7 @@ export default function App({ refdata }) {
               name="payment"
               onChange={handlePayload}
               value={payload.payment || ""}
+              disabled={formdisabled}
             />
             <InputInline
               lb={"Partial shipment"}
@@ -89,6 +92,7 @@ export default function App({ refdata }) {
               name="partial_shipment"
               onChange={handlePayload}
               value={payload.partial_shipment || ""}
+              disabled={formdisabled}
             />
             <InputInline
               lb={"Time of Transshipment"}
@@ -96,6 +100,7 @@ export default function App({ refdata }) {
               name="transshipment"
               onChange={handlePayload}
               value={payload.transshipment || ""}
+              disabled={formdisabled}
             />
 
             <InputInline
@@ -104,6 +109,7 @@ export default function App({ refdata }) {
               name="destination"
               onChange={handlePayload}
               value={payload.destination || ""}
+              disabled={formdisabled}
             />
             <InputInline
               lb={"Notify "}
@@ -111,6 +117,7 @@ export default function App({ refdata }) {
               name="notify"
               onChange={handlePayload}
               value={payload.notify || ""}
+              disabled={formdisabled}
             />
             <InputInline
               lb={"Packing "}
@@ -118,11 +125,13 @@ export default function App({ refdata }) {
               name="packing"
               onChange={handlePayload}
               value={payload.packing || ""}
+              disabled={formdisabled}
             />
           </Stack>
           <ProductList
             initvalue={payload.product_list}
             onChange={(v) => setpayload({ ...payload, product_list: v })}
+            disabled={formdisabled}
           />
           <Typography variant="body1" color="initial">
             Further more please return to us a duly signed copy of this ordering

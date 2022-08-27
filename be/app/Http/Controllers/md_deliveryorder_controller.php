@@ -35,7 +35,7 @@ class md_deliveryorder_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Delviery Order from ' . Auth::user()->name,
+            'title' => 'Delivery Order from ' . Auth::user()->name,
             'link' => '/exportir/deliveryorder/' . $data->id,
         ]
         );

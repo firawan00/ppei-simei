@@ -77,6 +77,7 @@ export default function NewSkaForm({ refdata }) {
           <InputInline
             dcol
             multiline
+            prewrap
             rows={2}
             lb={"Sender"}
             name="sender"
@@ -87,6 +88,7 @@ export default function NewSkaForm({ refdata }) {
           <InputInline
             dcol
             multiline
+            prewrap
             rows={2}
             lb={"Receiver"}
             name="receiver"
@@ -104,6 +106,7 @@ export default function NewSkaForm({ refdata }) {
           />
           <InputInline
             dcol
+            prewrap
             multiline
             rows={22}
             lb={"Body"}

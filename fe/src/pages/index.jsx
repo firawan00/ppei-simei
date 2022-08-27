@@ -27,7 +27,7 @@ const exportItem = [
 
 const importItem = [
   { model: "MD_inquiry", label: "Inquiry letter" },
-  { model: "MD_lkn", label: "Lembar Kerja Negoisasi" },
+  { model: "MD_lkn", label: "Lembar Kerja Negosiasi" },
   { model: "md_ordering", label: "Ordering letter" },
   { model: "MD_salescontract", label: "Sales Contract" },
   { model: "MD_lc", label: "Permintaan Pembukaan LC" },

@@ -37,7 +37,7 @@ export default function Action({ model, id, isRefetch }) {
         }}
       >
         <Link to={`${id}`}>
-          <MenuItem>Edit</MenuItem>
+          <MenuItem>View / Edit</MenuItem>
         </Link>
         <MenuItem>
           <ActionConfirm

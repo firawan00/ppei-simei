@@ -12,13 +12,16 @@ export default function App(props) {
       my={props.dcol ? 0 : 0.5}
       justifyContent="space-between"
     >
-      <Typography
-        width={getWidth()}
-        color="initial"
-        variant={props.var || "body1"}
-      >
-        {props.lb}:
-      </Typography>
+      {props.lb && (
+        <Typography
+          width={getWidth()}
+          color="initial"
+          variant={props.var || "body1"}
+        >
+          {`${props.lb} :`}
+        </Typography>
+      )}
+
       {!props.disabled && (
         <TextField
           {...props}
@@ -48,7 +51,7 @@ export default function App(props) {
         <Typography
           variant={props.var}
           sx={{
-            whiteSpace: props.multiLine ? "pre-wrap" : "",
+            whiteSpace: props.multiLine || props.prewrap ? "pre-wrap" : "",
           }}
         >
           {props.value}

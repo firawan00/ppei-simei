@@ -86,7 +86,9 @@ export default function App({ refdata }) {
     </Stack>
   );
 }
+
 function NewPEBForm({ formdata }) {
+  // console.log(formdata);
   return (
     <PaperA4 noback>
       <Stack spacing={0} component="form">
@@ -178,15 +180,12 @@ function NewPEBForm({ formdata }) {
           </Stack>
           <Stack>
             <RenderFixed t="DATA PELABUHAN/TEMPAT MUAT EKSPOR" B />
-            <RenderFixed t="21.	Pel. Muat Asal" v={"IDTPP	Tanjung Priok"} />
-            <RenderFixed
-              t="22.	Pel./Tempat Muat Ekspor"
-              v={"IDTPP	Tanjung Priok"}
-            />
+            <RenderFixed t="21.	Pel. Muat Asal" v={formdata.si.pol} />
+            <RenderFixed t="22.	Pel./Tempat Muat Ekspor" v={formdata.si.pol} />
             <RenderFixed t="23.	Tmpt. Penimbunan" v={"-"} />
-            <RenderFixed t="24.	Pel. Bongkar" v={formdata.si.pol} />
-            <RenderFixed t="25.Pel. Tujuan" v={formdata.si.pol} />
-            <RenderFixed t="26. Negara Tujuan Ekspor" v={formdata.si.pol} />
+            <RenderFixed t="24.	Pel. Bongkar" v={formdata.si.pod} />
+            <RenderFixed t="25.Pel. Tujuan" v={formdata.si.pod} />
+            <RenderFixed t="26. Negara Tujuan Ekspor" v={formdata.si.pod} />
           </Stack>
         </Stack>
         <Divider />

@@ -53,6 +53,7 @@ export default function App({ refdata }) {
             <ProductList
               initvalue={payload.product_list}
               onChange={(v) => setpayload({ ...payload, product_list: v })}
+              disabled={formdisabled}
             />
           </Stack>
 
@@ -63,6 +64,7 @@ export default function App({ refdata }) {
               name="jenis_incoterm"
               onChange={handlePayload}
               value={payload.jenis_incoterm || ""}
+              disabled={formdisabled}
             />
             <InputInline
               lb={"3.	Latest date shipment   "}
@@ -70,6 +72,7 @@ export default function App({ refdata }) {
               name="latest_date_shipment"
               onChange={handlePayload}
               value={payload.latest_date_shipment || ""}
+              disabled={formdisabled}
             />
           </Stack>
         </Stack>

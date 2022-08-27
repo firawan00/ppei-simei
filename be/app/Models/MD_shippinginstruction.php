@@ -9,5 +9,10 @@ class MD_shippinginstruction extends Model4NF
     use HasFactory;
 
     protected $table = "md_shippinginstruction";
+    public function getProductListAttribute($val)
+    {
+        return json_decode($val);
+
+    }
 
 }

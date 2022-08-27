@@ -16,10 +16,10 @@ class Model4NF extends Model
 
     public $with = ['from', 'to'];
 
-    public function setDateAttribute($value)
-    {
-        $this->attributes['date'] = Carbon::parse($value);
-    }
+    // public function setDateAttribute($value)
+    // {
+    //     $this->attributes['date'] = Carbon::parse($value);
+    // }
 
     public function scopeFilter($query, $request)
     {

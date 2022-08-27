@@ -62,13 +62,7 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
                 value={payload.no || ""}
               />
-              {/* <InputInline
-                lb={"Date"}
-                name="date"
-                onChange={handlePayload}
-                disabled={formdisabled}
-                value={payload.date || ""}
-              /> */}
+
               <Stack direction={"row"} justifyContent="space-between">
                 <Typography color="initial" width={180}>
                   Date
@@ -122,7 +116,7 @@ export default function App({ refdata }) {
               value={payload.ship_by || ""}
             />
             <InputInline
-              lb={"Ship On"}
+              lb={"Ship on date"}
               name="ship_on"
               onChange={handlePayload}
               disabled={formdisabled}
@@ -164,7 +158,7 @@ export default function App({ refdata }) {
           onChange={handlePayload}
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
-          filter="user-import"
+          filter="fasilitator-cargo"
         />
       )}
     </Stack>

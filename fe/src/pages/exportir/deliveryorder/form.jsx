@@ -14,11 +14,59 @@ import Sign from "@component/apps/sign";
 import Sentto from "@/component/apps/sentto";
 import Header from "../_partial/cargoHeader";
 
+import BackIcon from "@/component/ui/backIcon";
+import {
+  RInvoice,
+  RShippingInstruction,
+  RPackingList,
+} from "@component/apps/selectRef";
+
 export default function App({ refdata }) {
+  const [formdata, setformdata] = useState({});
+  const { auth } = useContext(Context);
+
+  async function handleRef(v, target) {
+    let temp = formdata;
+    temp[target] = v;
+    setformdata({ ...temp });
+  }
+  console.log(refdata);
+
+  return (
+    <Stack>
+      <Stack
+        alignItems={"center"}
+        display={!auth.user.role.includes("fasilitator") ? "none" : ""}
+      >
+        <Stack width={"210mm"} className="hide_on_print">
+          <BackIcon />
+          <RShippingInstruction
+            selected={(v) => handleRef(v, "si")}
+            value={formdata.si}
+            refvalue={refdata ? refdata.si_id : ""}
+          />
+        </Stack>
+      </Stack>
+      {formdata.si && (
+        <Stack spacing={2}>
+          <MainForm formdata={formdata} refdata={refdata} />
+        </Stack>
+      )}
+    </Stack>
+  );
+}
+
+function MainForm({ refdata, formdata }) {
+  console.log(formdata);
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
   const [payload, setpayload] = useState(
-    refdata ? { ...refdata, to: refdata.to.id } : {}
+    refdata
+      ? { ...refdata, to: refdata.to.id }
+      : {
+          si_id: formdata.si.id,
+          sino: formdata.si.lc_ref,
+        }
   );
   const nav = useNavigate();
 
@@ -64,7 +112,6 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
@@ -128,6 +175,33 @@ export default function App({ refdata }) {
               name="est"
               onChange={handlePayload}
               value={payload.est || ""}
+            />
+
+            <InputInline
+              lb={"EST OPEN STACK"}
+              lbw={180}
+              disabled={formdisabled}
+              name="est_openstack"
+              onChange={handlePayload}
+              value={payload.est_openstack || ""}
+            />
+
+            <InputInline
+              lb={"EST CLOSING TIME"}
+              lbw={180}
+              disabled={formdisabled}
+              name="est_closingtime"
+              onChange={handlePayload}
+              value={payload.est_closingtime || ""}
+            />
+
+            <InputInline
+              lb={"UTC"}
+              lbw={180}
+              disabled={formdisabled}
+              name="utc"
+              onChange={handlePayload}
+              value={payload.utc || ""}
             />
           </Stack>
 

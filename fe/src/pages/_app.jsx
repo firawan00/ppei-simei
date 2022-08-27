@@ -7,6 +7,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 const PrivatePath = ["/diklat", "/"];
+const PublicPath = ["/super"];
 
 export default function Test(params) {
   const loc = useLocation();

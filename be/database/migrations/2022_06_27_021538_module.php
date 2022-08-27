@@ -18,7 +18,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('docto')->nullable();
             $table->string('tel')->nullable();
@@ -38,7 +38,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('docref')->nullable();
             $table->string('docto')->nullable();
@@ -54,7 +54,8 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
+            $table->string('nodate')->nullable();
 
             $table->string('doc_no')->nullable();
             $table->string('doc_cc')->nullable();
@@ -75,7 +76,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('jenis_incoterm')->nullable();
             $table->string('latest_date_shipment')->nullable();
@@ -88,7 +89,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('destination')->nullable();
             $table->string('notify')->nullable();
@@ -107,7 +108,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('destination')->nullable();
             $table->string('notify_address')->nullable();
@@ -125,7 +126,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('consignee')->nullable();
 
@@ -148,7 +149,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
 
             $table->string('consignee')->nullable();
 
@@ -171,7 +172,9 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
+
+            $table->unsignedInteger('pl_id')->nullable();
 
             $table->string('consignee')->nullable();
             $table->string('copy_bl')->nullable();
@@ -183,6 +186,7 @@ class Module extends Migration
             $table->string('lc_ref')->nullable();
             $table->string('nett_weight')->nullable();
             $table->string('notify_party')->nullable();
+            $table->string('toname')->nullable();
 
             $table->string('num_package')->nullable();
             $table->string('ocean_vessel')->nullable();
@@ -192,6 +196,16 @@ class Module extends Migration
             $table->string('shipper')->nullable();
             $table->string('shipping_marks')->nullable();
 
+            $table->string('podelivery')->nullable();
+            $table->string('finaldestination')->nullable();
+            $table->string('etd')->nullable();
+            $table->string('eta')->nullable();
+            $table->string('qoc')->nullable();
+            $table->longText('product_list')->nullable();
+
+            $table->string('stuffing_date')->nullable();
+            $table->string('freight_term')->nullable();
+
             $table->timestamps();
         });
 
@@ -199,7 +213,9 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
+
+            $table->unsignedInteger('si_id')->nullable();
 
             $table->string('container_no')->nullable();
             $table->string('est')->nullable();
@@ -212,6 +228,10 @@ class Module extends Migration
             $table->string('sino')->nullable();
             $table->string('tujuan')->nullable();
 
+            $table->string('est_openstack')->nullable();
+            $table->string('est_closingtime')->nullable();
+            $table->string('utc')->nullable();
+
             $table->timestamps();
         });
 
@@ -219,7 +239,7 @@ class Module extends Migration
             $table->id();
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
-            // $table->date('date')->nullable();
+            // $table->string('date')->nullable();
             $table->longText('data')->nullable();
 
             $table->timestamps();
@@ -277,6 +297,7 @@ class Module extends Migration
             $table->string('status_notes')->nullable();
 
             $table->longText('data')->nullable();
+            $table->string('file_path')->nullable();
 
             $table->timestamps();
 

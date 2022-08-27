@@ -14,7 +14,7 @@ import {
 
 const ROUTESLIST = import.meta.globEager("@/pages/**/[a-z[]*.jsx");
 const PRESERVED = import.meta.globEager(
-  "/src/pages/(_app|404|signin|signup).jsx"
+  "/src/pages/(_app|404|signin|signup|super).jsx"
 );
 
 const router = Object.keys(ROUTESLIST).map((route) => {
@@ -38,6 +38,7 @@ export default function App(params) {
   const App = preserved?.["_app"] || Fragment;
   const Signin = preserved?.["signin"] || Fragment;
   const Signup = preserved?.["signup"] || Fragment;
+  const Super = preserved?.["super"] || Fragment;
 
   const NotFound = preserved?.["404"] || Fragment;
 
@@ -47,6 +48,7 @@ export default function App(params) {
         <Routes>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/super" element={<Super />} />
 
           <Route element={<App />}>
             {router.map((d, ix) => (

@@ -36,7 +36,7 @@ class md_npe_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Dokument NPE from ' . Auth::user()->name,
+            'title' => 'Dokumen NPE from ' . Auth::user()->name,
             'link' => '/exportir/npe/' . $data->id,
         ]
         );

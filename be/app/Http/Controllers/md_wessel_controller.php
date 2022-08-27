@@ -38,6 +38,17 @@ class md_wessel_controller extends CustomController
             ],
             $payload);
 
+        if ($r->hasFile('file')) {
+            //
+            $file = $r->file('file');
+            $path = '/uploads/wessel/';
+            $filename = Auth::user()->id . "{$data->id}.{$file->getClientOriginalExtension()}";
+            $file->move(public_path($path), $filename);
+
+            $data->file_path = $path . $filename;
+            $data->save();
+        }
+
         inbox::updateOrCreate([
             'ref-model' => get_class($data),
             'ref-id' => $data->id,

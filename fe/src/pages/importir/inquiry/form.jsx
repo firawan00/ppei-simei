@@ -74,28 +74,35 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
+              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
-                value={payload.date || null}
+                value={payload.date || ""}
                 onChange={(v) => setpayload({ ...payload, date: v })}
+                disabled={formdisabled}
               />
             </Stack>
           </Stack>
 
           <Stack>
-            <Typography variant="body1" color="initial">
-              Dear Sir, We are very glad to note that you are exporter of :
-            </Typography>
-            <TextField
-              multiline
-              rows={5}
-              name="who"
-              onChange={handlePayload}
-              value={payload.who || ""}
-              disabled={formdisabled}
-            />
+            <Stack>
+              <Typography variant="body1" color="initial">
+                Dear Sir, We are very glad to note that you are exporter of :
+              </Typography>
+              {formdisabled && payload.who}
+              {!formdisabled && (
+                <TextField
+                  multiline
+                  rows={5}
+                  name="who"
+                  onChange={handlePayload}
+                  value={payload.who || ""}
+                  disabled={formdisabled}
+                />
+              )}
+            </Stack>
+
             <Typography variant="body1" color="initial">
               We note that your offer is too high, so please reconsider your
               best competitive price for the following :
@@ -120,18 +127,21 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack>
-            <Typography variant="body1" color="initial">
-              Please also quote CFR Felixstowe, United Kingdom, if you could,
-              with Freight and Insurance separately and send it to :
-            </Typography>
-            <TextField
-              multiline
-              rows={5}
-              name="sentto"
-              onChange={handlePayload}
-              value={payload.sentto || ""}
-              disabled={formdisabled}
-            />
+            <Typography variant="body1" color="initial"></Typography>
+            {formdisabled && payload.sentto}
+            {!formdisabled && (
+              <TextField
+                multiline
+                rows={5}
+                name="sentto"
+                onChange={handlePayload}
+                value={
+                  payload.sentto ||
+                  "Please also quote CFR Felixstowe, United Kingdom, if you could, with Freight and Insurance separately and send it to :"
+                }
+                disabled={formdisabled}
+              />
+            )}
           </Stack>
 
           <Stack>

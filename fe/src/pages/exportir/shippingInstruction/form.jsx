@@ -20,12 +20,95 @@ import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
 import InputDate from "@component/gip-useForm/inputDate";
 import Sign from "@component/apps/sign";
 
+import BackIcon from "@/component/ui/backIcon";
+import Header from "../_partial/exportirHeader";
+import ProductList from "@/component/ui/productListPackingList";
+
+import {
+  RInvoice,
+  RShippingInstruction,
+  RPackingList,
+} from "@component/apps/selectRef";
+
 export default function App({ refdata }) {
+  const [formdata, setformdata] = useState({});
+  const { auth } = useContext(Context);
+
+  async function handleRef(v, target) {
+    let temp = formdata;
+    temp[target] = v;
+    setformdata({ ...temp });
+  }
+
+  return (
+    <Stack>
+      <Stack
+        alignItems={"center"}
+        display={auth.user.role.includes("fasilitator") ? "none" : ""}
+      >
+        <Stack width={"210mm"} className="hide_on_print">
+          <BackIcon />
+
+          <RPackingList
+            selected={(v) => handleRef(v, "pl")}
+            value={formdata.pl}
+            refvalue={refdata ? refdata.pl_id : ""}
+          />
+        </Stack>
+      </Stack>
+      {formdata.pl && (
+        <Stack spacing={0}>
+          <MainForm formdata={formdata} refdata={refdata} />
+        </Stack>
+      )}
+    </Stack>
+  );
+}
+
+function MainForm({ refdata, formdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
   const [payload, setpayload] = useState(
-    refdata ? { ...refdata, to: refdata.to.id } : {}
+    refdata
+      ? { ...refdata, to: refdata.to.id }
+      : {
+          product_list: formdata.pl.product_list,
+          pl_id: formdata.pl.id,
+          gross_weight:
+            formdata.pl.product_list.reduce(
+              (a, b) => a + parseInt(b.gweight),
+              0
+            ) + " kg",
+          nett_weight:
+            formdata.pl.product_list.reduce(
+              (a, b) => a + parseInt(b.nweight),
+              0
+            ) + " kg",
+          lc_ref: formdata.pl.lcno,
+          desc_goods: formdata.pl.product_list.reduce(
+            (a, b) => a.concat(`${b.name}, `),
+            ""
+          ),
+        }
   );
+
+  React.useEffect(() => {
+    setpayload({
+      ...payload,
+      gross_weight:
+        formdata.pl.product_list.reduce((a, b) => a + parseInt(b.gweight), 0) +
+        " kg",
+      nett_weight:
+        formdata.pl.product_list.reduce((a, b) => a + parseInt(b.nweight), 0) +
+        " kg",
+      lc_ref: formdata.pl.lcno,
+      desc_goods: formdata.pl.product_list.reduce(
+        (a, b) => a.concat(`${b.name}, `),
+        ""
+      ),
+    });
+  }, [formdata]);
+
   const nav = useNavigate();
 
   function handlePayload(e) {
@@ -44,8 +127,8 @@ export default function App({ refdata }) {
   }
   return (
     <Stack component={"form"} onSubmit={formSubmit}>
-      <PaperA4>
-        <Stack spacing={1}>
+      <PaperA4 noback>
+        <Stack spacing={0}>
           <Header refdata={refdata} />
           <Divider />
 
@@ -54,7 +137,7 @@ export default function App({ refdata }) {
           </Typography>
 
           <Stack direction={"row"} justifyContent="space-between">
-            <Stack spacing={1}>
+            <Stack spacing={0}>
               <InputInline
                 lb={"Our Ref"}
                 name="docref"
@@ -71,7 +154,6 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
@@ -87,86 +169,149 @@ export default function App({ refdata }) {
             our cargo with following details:
           </Stack>
 
-          <Stack spacing={1}>
-            <InputInline
-              lb={"Shipper"}
-              name="shipper"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.shipper || ""}
+          <Stack spacing={0}>
+            <Stack direction={"row"} spacing={2}>
+              <Stack>
+                <InputInline
+                  lb={"Shipper"}
+                  name="shipper"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.shipper || ""}
+                  disabled={formdisabled}
+                />
+                <InputInline
+                  lb={"Consignee"}
+                  name="consignee"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.consignee || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"Notify Party"}
+                  name="notify_party"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.notify_party || ""}
+                  disabled={formdisabled}
+                />
+                <InputInline
+                  lb={"Feeder Vessel"}
+                  name="feeder_vessel"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.feeder_vessel || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"Place of Receipt "}
+                  name="por"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.por || ""}
+                  disabled={formdisabled}
+                />
+                <InputInline
+                  lb={"Ocean Vessel"}
+                  name="ocean_vessel"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.ocean_vessel || ""}
+                  disabled={formdisabled}
+                />
+              </Stack>
+              <Stack>
+                <InputInline
+                  lb={"Port of Loading"}
+                  name="pol"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.pol || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"Port of Discharge"}
+                  name="pod"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.pod || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"Place OF Delivery"}
+                  name="podelivery"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.podelivery || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"Final Destination"}
+                  name="finaldestination"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.finaldestination || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"ETD"}
+                  name="etd"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.etd || ""}
+                  disabled={formdisabled}
+                />
+                <InputInline
+                  lb={"ETA"}
+                  name="eta"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.eta || ""}
+                  disabled={formdisabled}
+                />
+
+                <InputInline
+                  lb={"Quantity Of Container"}
+                  name="qoc"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.qoc || ""}
+                  disabled={formdisabled}
+                />
+              </Stack>
+            </Stack>
+            <Typography variant="body1" color="initial">
+              Description Of Goods
+            </Typography>
+            <ProductList
               disabled={formdisabled}
-            />
-            <InputInline
-              lb={"Consignee"}
-              name="consignee"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.consignee || ""}
-              disabled={formdisabled}
-            />
-            <InputInline
-              lb={"Feeder Vessel"}
-              name="feeder_vessel"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.feeder_vessel || ""}
-              disabled={formdisabled}
+              initvalue={payload.product_list}
+              onChange={(v) => setpayload({ ...payload, product_list: v })}
+              refitem={
+                payload.product_list
+                  ? payload.product_list
+                  : formdata.invoice.product_list
+              }
             />
 
-            <InputInline
-              lb={"Place of Receipt "}
-              name="por"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.por || ""}
-              disabled={formdisabled}
-            />
-
-            <InputInline
-              lb={"Port of Loading"}
-              name="pol"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.pol || ""}
-              disabled={formdisabled}
-            />
-
-            <InputInline
-              lb={"Port of Discharge"}
-              name="pod"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.pod || ""}
-              disabled={formdisabled}
-            />
-
-            <InputInline
-              lb={"Ocean Vessel"}
-              name="ocean_vessel"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.ocean_vessel || ""}
-              disabled={formdisabled}
-            />
-
+            {/* 
             <InputInline
               lb={"To"}
-              name="to"
+              name="toname"
               lbw={180}
               onChange={handlePayload}
-              value={payload.to || ""}
+              value={payload.toname || ""}
               disabled={formdisabled}
-            />
+            /> */}
 
-            <InputInline
-              lb={"Notify Party"}
-              name="notify_party"
-              lbw={180}
-              onChange={handlePayload}
-              value={payload.notify_party || ""}
-              disabled={formdisabled}
-            />
-            <InputInline
+            {/* <InputInline
               lb={"No. Of Package "}
               name="num_package"
               lbw={180}
@@ -182,16 +327,16 @@ export default function App({ refdata }) {
               onChange={handlePayload}
               value={payload.desc_goods || ""}
               disabled={formdisabled}
-            />
+            /> */}
 
-            <InputInline
+            {/* <InputInline
               lb={"Shipping Marks "}
               name="shipping_marks"
               lbw={180}
               onChange={handlePayload}
               value={payload.shipping_marks || ""}
               disabled={formdisabled}
-            />
+            /> */}
 
             <InputInline
               lb={"Gross Weight "}
@@ -199,7 +344,8 @@ export default function App({ refdata }) {
               lbw={180}
               onChange={handlePayload}
               value={payload.gross_weight || ""}
-              disabled={formdisabled}
+              // disabled={formdisabled}
+              disabled
             />
 
             <InputInline
@@ -208,7 +354,8 @@ export default function App({ refdata }) {
               lbw={180}
               onChange={handlePayload}
               value={payload.nett_weight || ""}
-              disabled={formdisabled}
+              // disabled={formdisabled}
+              disabled
             />
 
             <InputInline
@@ -217,19 +364,39 @@ export default function App({ refdata }) {
               lbw={180}
               onChange={handlePayload}
               value={payload.lc_ref || ""}
+              // disabled={formdisabled}
+              disabled
+            />
+
+            <InputInline
+              lb={"Stuffing date"}
+              name="stuffing_date"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.stuffing_date || ""}
               disabled={formdisabled}
             />
+
+            <InputInline
+              lb={"Freight term"}
+              name="freight_term"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.freight_term || ""}
+              disabled={formdisabled}
+            />
+
             <InputInline
               lb={"Original/copy/bill of Lading"}
               name="copy_bl"
-              lbw={180}
+              lbw={280}
               onChange={handlePayload}
               value={payload.copy_bl || ""}
               disabled={formdisabled}
             />
           </Stack>
 
-          <Stack pt={5}>
+          <Stack pt={3}>
             Faithfully Yours. <Sign text="Exportir" /> Export Manager
           </Stack>
         </Stack>
@@ -245,29 +412,6 @@ export default function App({ refdata }) {
           btn_disabled={!payload.to}
         />
       )}
-    </Stack>
-  );
-}
-
-function Header(params) {
-  return (
-    <Stack direction={"row"} className="center" spacing={2}>
-      <Stack width={96} height={96} p={1}>
-        <img src={logo.e1} alt="" className="img-contain" />
-      </Stack>
-      <Stack>
-        <Typography variant="h6" color="initial">
-          PT. BAYU SEGARA
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          JL. TAMAN ANGGREK NO. 14
-        </Typography>
-
-        <Typography variant="subtitle1" color="initial">
-          Phone 62-21-5664425, Fax. 62-21-5664430
-        </Typography>
-      </Stack>
     </Stack>
   );
 }

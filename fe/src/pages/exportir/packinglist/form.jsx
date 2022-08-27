@@ -48,7 +48,15 @@ function Form({ refdata, formdata }) {
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
 
   const [payload, setpayload] = useState(
-    refdata ? { ...refdata, to: refdata.to.id } : {}
+    refdata
+      ? { ...refdata, to: refdata.to.id }
+      : {
+          lcno: formdata.invoice.lcno,
+          scno: formdata.invoice.scno,
+          issuing_bank: formdata.invoice.issuing_bank,
+          consignee: formdata.invoice.consignee,
+          tod: formdata.invoice.tod,
+        }
   );
   const nav = useNavigate();
 
@@ -195,7 +203,7 @@ function Form({ refdata, formdata }) {
           onChange={handlePayload}
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
-          filter="user-import"
+          filter="fasilitator-cargo"
         />
       )}
     </Stack>

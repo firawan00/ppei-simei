@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Context from "@context";
-import { fetcher, useNavigate } from "@component/gip-useForm/fetcher";
+import { fetcherMultipart, useNavigate } from "@component/gip-useForm/fetcher";
 
 import { Stack, Typography, Divider, TextField } from "@mui/material";
 import PaperA4 from "@component/paperA4";
@@ -12,6 +12,8 @@ import SenttoImportir from "@component/apps/senttoImportir";
 import InputDate from "@component/gip-useForm/inputDate";
 import Sentto from "@/component/apps/sentto";
 import Approval from "@/component/apps/approval";
+import File from "@ui/file";
+import InputFile from "@component/gip-useForm/inputFile";
 
 import {
   RInvoice,
@@ -93,13 +95,32 @@ export default function App({ refdata }) {
         formdata.pl &&
         formdata.npe &&
         (formdata.skaa || formdata.skad) && (
-          <MainForm refdata={refdata} formdata={formdata} />
+          <Stack alignItems={"center"} mt={2}>
+            <Stack
+              width={"210mm"}
+              className="print-margin"
+              overflow={"hidden"}
+              color="black"
+            >
+              <Typography variant="subtitle2" color="primary">
+                Silahkan Download dan isi template pengajuan di bawah ini.
+                Setelah itu, isi form dan upload kembali dokumen yang telah
+                disini
+              </Typography>
+              <File
+                path={"uploads/template/wessel-template.doc"}
+                text="Form Wessel Template"
+              />
+            </Stack>
+            <MainForm refdata={refdata} formdata={formdata} />
+          </Stack>
         )}
     </Stack>
   );
 }
 
 function MainForm({ refdata, formdata }) {
+  console.log(refdata);
   const { auth } = useContext(Context);
 
   const [formdisabled, setformdisabled] = useState(
@@ -107,7 +128,7 @@ function MainForm({ refdata, formdata }) {
   );
   const [payload, setpayload] = useState(
     refdata
-      ? { ...refdata.data, to: refdata.to.id }
+      ? { ...refdata.data, id: refdata.id, to: refdata.to.id }
       : {
           bl_id: formdata.bl.id,
           invoice_id: formdata.invoice.id,
@@ -127,7 +148,7 @@ function MainForm({ refdata, formdata }) {
   async function formSubmit(e) {
     e.preventDefault();
     delete payload.from;
-    let res = await fetcher({
+    let res = await fetcherMultipart({
       url: `md_wessel`,
       method: "post",
       data: payload,
@@ -146,7 +167,7 @@ function MainForm({ refdata, formdata }) {
             height={475}
           >
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
+              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
@@ -204,7 +225,7 @@ function MainForm({ refdata, formdata }) {
             height={475}
           >
             <Stack direction={"row"}>
-              <Typography color="initial">Jakata,</Typography>
+              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
@@ -254,7 +275,24 @@ function MainForm({ refdata, formdata }) {
             </Stack>
           </Stack>
         </Stack>
+        <Stack mt={3}>
+          {!formdisabled && (
+            <InputFile
+              btnText="Lampirkan Doc lainnya"
+              value={(v) => {
+                setpayload({ ...payload, file: v });
+              }}
+            />
+          )}
+          {formdisabled && refdata.file_path && (
+            <File
+              path={refdata.file_path}
+              text="Lampuiran Form Pengajuan LC "
+            />
+          )}
+        </Stack>
       </PaperA4>
+
       {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
         <Sentto
           value={payload.to || ""}

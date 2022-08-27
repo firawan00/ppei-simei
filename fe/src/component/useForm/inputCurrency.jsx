@@ -25,7 +25,7 @@ const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
       }}
       thousandSeparator
       isNumericString
-      prefix="IDR "
+      prefix="USD "
     />
   );
 });

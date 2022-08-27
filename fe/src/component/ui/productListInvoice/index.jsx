@@ -25,13 +25,17 @@ const meta = [
   },
 
   {
+    name: "HS#",
+    w: "8%",
+  },
+  {
     name: "qty",
     w: "7%",
   },
-  {
-    name: "CARTON",
-    w: "10%",
-  },
+  // {
+  //   name: "CARTON",
+  //   w: "10%",
+  // },
   {
     name: "unit",
     w: "10%",
@@ -39,12 +43,12 @@ const meta = [
 
   {
     name: "unit price",
-    w: "25%",
+    w: "20%",
   },
 
   {
     name: "total amount",
-    w: "23%",
+    w: "20%",
   },
 ];
 const blank = {
@@ -60,12 +64,12 @@ export default function BasicTable({ initvalue, onChange, disabled }) {
   const [data, setdata] = useState(
     initvalue || [
       {
-        name: "Frozen yoghurt",
-        qty: 10,
-        carton: 1,
+        name: "",
+        qty: 0,
+        carton: 0,
 
         unit: "pcs",
-        unitprice: 10000,
+        unitprice: 0,
       },
     ]
   );
@@ -137,6 +141,14 @@ export default function BasicTable({ initvalue, onChange, disabled }) {
           </Stack>
           <Stack width={meta[1].w}>
             <TextField
+              value={d.hs}
+              sx={inputStyle}
+              onChange={(e) => handleChange(e.target.value, "hs", ix)}
+              disabled={disabled}
+            />
+          </Stack>
+          <Stack width={meta[2].w}>
+            <TextField
               value={d.qty}
               type="number"
               sx={inputStyle}
@@ -144,16 +156,8 @@ export default function BasicTable({ initvalue, onChange, disabled }) {
               disabled={disabled}
             />
           </Stack>
+
           <Stack width={meta[3].w}>
-            <TextField
-              type="number"
-              value={d.carton}
-              sx={inputStyle}
-              onChange={(e) => handleChange(e.target.value, "carton", ix)}
-              disabled={disabled}
-            />
-          </Stack>
-          <Stack width={meta[2].w}>
             <TextField
               value={d.unit}
               sx={inputStyle}

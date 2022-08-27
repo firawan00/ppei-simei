@@ -36,7 +36,7 @@ class md_lkn_controller extends CustomController
             "to" => $r->to,
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
-            'title' => 'Lembar Kerja Negoisasi  from ' . Auth::user()->name,
+            'title' => 'Lembar Kerja Negosiasi  from ' . Auth::user()->name,
             'link' => '/importir/lkn/' . $data->id,
         ]
         );
@@ -44,3 +44,6 @@ class md_lkn_controller extends CustomController
 
     }
 }
+
+// Negoisasi
+// Negosiasi

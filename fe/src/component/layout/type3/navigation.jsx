@@ -8,6 +8,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Profile from "@ly/component/profile";
 import Helpermodal from "@component/apps/helpermodal";
 import ThemeSelect from "@/component/gip-themeSwitcher";
+import FiberNewIcon from "@mui/icons-material/FiberNew";
+import { fetcher } from "@component/gip-useForm/fetcher";
 
 export default function MainNav({ isOpen, parentOpen, isWhiteColor = true }) {
   const [open, setopen] = React.useState();
@@ -132,10 +134,28 @@ function RenderSingle({ data, isWhiteColor }) {
           <Typography variant="overline" pt={0.5}>
             {data.name}
           </Typography>
+          {data.name == "Inbox" && <HasInbox />}
         </Stack>
       </ListItem>
     </Link>
   );
+}
+
+function HasInbox() {
+  const [hasinbox, sethasinbox] = React.useState(false);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      let res = await fetcher({
+        url: `inbox/check`,
+        method: "get",
+      });
+      sethasinbox(res > 0);
+    }
+    fetchData();
+  });
+
+  return hasinbox ? <FiberNewIcon color="error" /> : <></>;
 }
 
 function Logout({ data, isWhiteColor }) {

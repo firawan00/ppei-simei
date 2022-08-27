@@ -21,20 +21,20 @@ const inputStyle = {
 const meta = [
   {
     name: "name",
-    w: "35%",
+    w: "30%",
   },
 
   {
     name: "qty",
-    w: "5%",
+    w: "10%",
   },
   {
-    name: "CARTON",
+    name: "UNIT",
     w: "10%",
   },
 
   {
-    name: "G. WEIGHT (KG)",
+    name: "GROSS WEIGHT (KG)",
     w: "15%",
   },
 
@@ -43,7 +43,7 @@ const meta = [
     w: "15%",
   },
   {
-    name: "MEASUREMENT",
+    name: "MEASUREMENT (M³)",
     w: "10%",
   },
 ];
@@ -131,16 +131,16 @@ export default function BasicTable({ initvalue, onChange, refitem, disabled }) {
               type="tel"
               sx={inputStyle}
               onChange={(e) => handleChange(e.target.value, "qty", ix)}
-              disabled
+              disabled={disabled}
             />
           </Stack>
           <Stack width={meta[2].w}>
             <TextField
-              type="tel"
-              value={d.carton}
+              type="text"
+              value={d.unit}
               sx={inputStyle}
-              onChange={(e) => handleChange(e.target.value, "carton", ix)}
-              disabled
+              onChange={(e) => handleChange(e.target.value, "unit", ix)}
+              disabled={disabled}
             />
           </Stack>
           <Stack width={meta[3].w}>
@@ -185,7 +185,7 @@ export default function BasicTable({ initvalue, onChange, refitem, disabled }) {
           Total
         </Typography>
         <Typography variant="body2" fontWeight={"bold"} color="initial">
-          {fcurr.format(data.reduce((a, b) => a + Number(b.measurement), 0))}
+          {`${data.reduce((a, b) => a + Number(b.measurement), 0)} (M³)`}
         </Typography>
       </Stack>
 

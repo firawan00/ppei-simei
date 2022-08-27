@@ -23,7 +23,7 @@ export default function Header({ refdata }) {
       </Stack>
       <Stack>
         <Typography variant="h6" color="initial">
-          MD {refdata ? refdata.from.name : auth.user.name}
+          {refdata ? refdata.from.name : auth.user.name}
         </Typography>
 
         <Typography variant="overline" color="initial">

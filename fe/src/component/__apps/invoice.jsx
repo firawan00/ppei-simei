@@ -11,10 +11,10 @@ import Table from "./partial/table";
 export default function App(props) {
   const [data, setdata] = useState([
     {
-      Mark: "Frozen yoghurt",
-      desc: "asdf",
-      qty: 10,
-      up: 1000,
+      Mark: "",
+      desc: "",
+      qty: 0,
+      up: 0,
     },
   ]);
   const header = [

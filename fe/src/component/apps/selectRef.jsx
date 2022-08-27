@@ -104,6 +104,7 @@ export function RShippingInstruction(props) {
         onChange={(e) => props.selected(e.target.value)}
         helperText="Please select your Shipping Instruction reference"
         disabled={props.refvalue ? true : false}
+        fullWidth
       >
         {data.map((d) => (
           <MenuItem key={d.id} value={d}>
@@ -280,7 +281,7 @@ export function RNPE(props) {
       >
         {data.map((d) => (
           <MenuItem key={d.id} value={d}>
-            {`NPE - to ${d.to.name}`}
+            {`NPE#${d.id} - to ${d.to.name}`}
           </MenuItem>
         ))}
       </TextField>

@@ -26,7 +26,7 @@ const fdate = {
 
 // ==================================================================================================================
 const fcurr = {
-  format: (data) => "IDR " + formatter.format(data),
+  format: (data) => "USD " + formatter.format(data),
   format2: (data) => formatter2.format(data),
   formatDec0: (data) => data.toFixed(0),
   formatDec2: (data) => data.toFixed(2),

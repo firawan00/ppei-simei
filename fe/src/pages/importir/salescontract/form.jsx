@@ -52,6 +52,7 @@ export default function App({ refdata }) {
           <ProductList
             initvalue={payload.product_list}
             onChange={(v) => setpayload({ ...payload, product_list: v })}
+            disabled={formdisabled}
           />
         </Stack>
       </PaperA4>
@@ -66,6 +67,7 @@ export default function App({ refdata }) {
             name="shipment_date"
             onChange={handlePayload}
             value={payload.shipment_date || ""}
+            disabled={formdisabled}
           />
           <InputInline
             lb={"1.2	Partial – Shipment  "}
@@ -73,6 +75,7 @@ export default function App({ refdata }) {
             name="partial_shipment"
             onChange={handlePayload}
             value={payload.partial_shipment || ""}
+            disabled={formdisabled}
           />
           <InputInline
             lb={"1.3	Transshipment "}
@@ -80,6 +83,7 @@ export default function App({ refdata }) {
             name="transshipment"
             onChange={handlePayload}
             value={payload.transshipment || ""}
+            disabled={formdisabled}
           />
           <InputInline
             lb={"1.4	Destination "}
@@ -87,6 +91,7 @@ export default function App({ refdata }) {
             name="destination"
             onChange={handlePayload}
             value={payload.destination || ""}
+            disabled={formdisabled}
           />
           <InputInline
             lb={"1.5	Notify address "}
@@ -94,6 +99,7 @@ export default function App({ refdata }) {
             name="notify_address"
             onChange={handlePayload}
             value={payload.notify_address || ""}
+            disabled={formdisabled}
           />
           <InputInline
             lb={"1.6	Shipping Marks "}
@@ -101,6 +107,7 @@ export default function App({ refdata }) {
             name="shipping_marks"
             onChange={handlePayload}
             value={payload.shipping_marks || ""}
+            disabled={formdisabled}
           />
 
           <InputInline
@@ -109,6 +116,7 @@ export default function App({ refdata }) {
             name="payment"
             onChange={handlePayload}
             value={payload.payment || ""}
+            disabled={formdisabled}
           />
         </Stack>
 

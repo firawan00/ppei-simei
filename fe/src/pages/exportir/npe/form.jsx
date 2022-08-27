@@ -46,29 +46,12 @@ export default function App({ refdata }) {
 
   return (
     <Stack>
-      {/* <Stack
-        alignItems={"center"}
-        display={auth.user.role.includes("fasilitator") ? "none" : ""}
-      >
+      <Stack alignItems={"center"}>
         <Stack width={"210mm"} className="hide_on_print">
           <BackIcon />
-          <RInvoice
-            selected={(v) => setformdata({ ...formdata, invoice: v })}
-            value={formdata.invoice}
-            refvalue={refdata ? refdata.invoice_id : ""}
-          />
-          <RShippingInstruction
-            selected={(v) => setformdata({ ...formdata, si: v })}
-            value={formdata.si}
-            refvalue={refdata ? refdata.si_id : ""}
-          />
-          <RPackingList
-            selected={(v) => setformdata({ ...formdata, pl: v })}
-            value={formdata.pl}
-            refvalue={refdata ? refdata.pl_id : ""}
-          />
         </Stack>
-      </Stack> */}
+      </Stack>
+
       <Stack spacing={2}>
         <NewPEBForm formdata={formdata} refdata={refdata} />
       </Stack>

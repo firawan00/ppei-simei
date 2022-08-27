@@ -72,7 +72,7 @@ function NewSkaForm({ refdata }) {
             Pengajuan LC Baru
           </Typography>
           <Typography variant="body">
-            Dengan ini saya lampirangan dokument pengajuan Letter of Credit.
+            Dengan ini saya lampirangan dokumen pengajuan Letter of Credit.
           </Typography>
           {!formdisabled && (
             <InputFile
@@ -83,7 +83,10 @@ function NewSkaForm({ refdata }) {
           )}
           {formdisabled && (
             <Stack>
-              <File path={refdata.file_path} text="Form LC Template" />
+              <File
+                path={refdata.file_path}
+                text="Lampuiran Form Pengajuan LC "
+              />
             </Stack>
           )}
 

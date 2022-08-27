@@ -35,7 +35,7 @@ class md_lc_controller extends CustomController
             //
             $file = $r->file('file');
             $path = '/uploads/lc/';
-            $filename = Auth::user()->id . "{$data->id}.doc";
+            $filename = Auth::user()->id . "{$data->id}.{$file->getClientOriginalExtension()}";
             $file->move(public_path($path), $filename);
 
             $data->file_path = $path . $filename;
