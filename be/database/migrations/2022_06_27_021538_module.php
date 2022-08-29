@@ -339,9 +339,12 @@ class Module extends Migration
             $table->unsignedInteger('invoice_id')->nullable();
             $table->unsignedInteger('si_id')->nullable();
             $table->unsignedInteger('pl_id')->nullable();
+            $table->unsignedInteger('do_id')->nullable();
+
             $table->string('status')->nullable();
             $table->string('status_notes')->nullable();
 
+            $table->longText('data')->nullable();
             $table->longText('product_list')->nullable();
 
             $table->timestamps();

@@ -26,6 +26,7 @@ import {
   RInvoice,
   RShippingInstruction,
   RPackingList,
+  RDO,
 } from "@component/apps/selectRef";
 import RenderFixed from "./_renderFixed";
 import { ref } from "yup";
@@ -38,9 +39,14 @@ import { fdate } from "@/component/helper/formating";
 import ProductList from "@/component/ui/productListPEB";
 import Sentto from "@/component/apps/sentto";
 import Approval from "@/component/apps/approval";
+import InputInline from "@component/gip-useForm/inputInline";
+import InputSelect from "@component/gip-useForm/inputSelect";
 
 export default function App({ refdata }) {
   const [formdata, setformdata] = useState({});
+  const [formdata2, setformdata2] = useState({});
+  const [formdisabled, setformdisabled] = useState(false);
+
   const { auth } = useContext(Context);
 
   async function handleRef(v, target) {
@@ -72,12 +78,27 @@ export default function App({ refdata }) {
             value={formdata.pl}
             refvalue={refdata ? refdata.pl_id : ""}
           />
+          <RDO
+            selected={(v) => handleRef(v, "do")}
+            value={formdata.do}
+            refvalue={refdata ? refdata.do_id : ""}
+          />
         </Stack>
       </Stack>
-      {formdata.invoice && formdata.si && formdata.pl && (
+      {formdata.invoice && formdata.si && formdata.pl && formdata.do && (
         <Stack spacing={2}>
-          <NewPEBForm formdata={formdata} />
-          <NewPEBForm2 formdata={formdata} refdata={refdata} />
+          <NewPEBForm
+            formdata={formdata}
+            refdata={refdata}
+            handleRef={(v) => setformdata2(v)}
+            onEdit={formdisabled}
+          />
+          <NewPEBForm2
+            formdata={formdata}
+            formdata2={formdata2}
+            refdata={refdata}
+            onEdit={(v) => setformdisabled(v)}
+          />
         </Stack>
       )}
       {auth.user.role.includes("fasilitator") && (
@@ -87,8 +108,26 @@ export default function App({ refdata }) {
   );
 }
 
-function NewPEBForm({ formdata }) {
-  // console.log(formdata);
+function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
+  const [payload, setpayload] = useState(refdata ? { ...refdata.data } : {});
+  const [formdisabled, setformdisabled] = useState(onEdit);
+
+  React.useEffect(() => {
+    handleRef(payload);
+  }, [payload]);
+
+  React.useEffect(() => {
+    setformdisabled(onEdit);
+  }, [onEdit]);
+
+  // React.useEffect(() => {
+  //   isFormDisabled(formdisabled);
+  // }, [formdisabled]);
+
+  function handlePayload(e) {
+    setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
   return (
     <PaperA4 noback>
       <Stack spacing={0} component="form">
@@ -168,15 +207,41 @@ function NewPEBForm({ formdata }) {
           <Stack>
             <RenderFixed t="DATA PENGANGKUTAN" B />
             <RenderFixed t="17.	Cara Pengangkutan" v={"laut"} />
-            <RenderFixed
+            {/* <RenderFixed
               t="18.	Nama & Bendera Sarana Pengangkut"
               v={formdata.si.shipper}
-            />
-            <RenderFixed
+            /> */}
+
+            {/* <RenderFixed
               t="19.	No.Pengangkut (Voy/ Flight/Nopol)"
               v={formdata.si.docref}
+            /> */}
+            {/* <RenderFixed t="20.	Tanggal Perkiraan Ekspor" v={formdata.si.date} /> */}
+            <InputInline
+              lb={"18.	Nama & Bendera Sarana Pengangkut"}
+              name="i18"
+              onChange={handlePayload}
+              value={payload.i18 || ""}
+              disabled={formdisabled}
+              var="caption"
             />
-            <RenderFixed t="20.	Tanggal Perkiraan Ekspor" v={formdata.si.date} />
+            <InputInline
+              lb={"19.	No.Pengangkut (Voy/ Flight/Nopol)"}
+              name="i19"
+              onChange={handlePayload}
+              value={payload.i19 || ""}
+              disabled={formdisabled}
+              var="caption"
+            />
+
+            <InputInline
+              lb={"20.	Tanggal Perkiraan Ekspor"}
+              name="i20"
+              onChange={handlePayload}
+              value={payload.i20 || ""}
+              var="caption"
+              disabled={formdisabled}
+            />
           </Stack>
           <Stack>
             <RenderFixed t="DATA PELABUHAN/TEMPAT MUAT EKSPOR" B />
@@ -237,7 +302,15 @@ function NewPEBForm({ formdata }) {
         <Stack direction={"row"} spacing={2} justifyContent="space-between">
           <Stack>
             <RenderFixed t="DATA TRANSAKSI EKSPOR" B />
-            <RenderFixed t="33.	Bank Devisa Hasil Ekspor" v={"123 – BANKDEV"} />
+            {/* <RenderFixed t="33.	Bank Devisa Hasil Ekspor" v={"123 – BANKDEV"} /> */}
+            <InputInline
+              lb={"33.	Bank Devisa Hasil Ekspor"}
+              name="i33"
+              onChange={handlePayload}
+              value={payload.i33 || ""}
+              var="caption"
+              disabled={formdisabled}
+            />
             <RenderFixed t="34.	Jenis Valuta Asing" v={"USD"} />
             <RenderFixed
               t="Nilai Ekspor"
@@ -255,8 +328,22 @@ function NewPEBForm({ formdata }) {
           <Stack>
             <RenderFixed t="DATA PETI KEMAS" B />
             <RenderFixed t="39.	Jumlah Peti Kemas" v={formdata.si.qoc} />
-            <RenderFixed t="40.	Nomor,Ukuran " v={"GAOU-2095201 "} />
-            <RenderFixed t="Status peti Kemas " v={"FCL "} />
+            <RenderFixed
+              t="40.	Nomor,Ukuran "
+              v={`${formdata.do.container_no} |
+               ${formdata.do.seal_no}`}
+            />
+            {/* <RenderFixed t="Status peti Kemas " v={"FCL "} /> */}
+
+            <InputSelect
+              lb={"status peti kemas"}
+              name="ispk"
+              onChange={handlePayload}
+              value={payload.ispk || ""}
+              var="caption"
+              disabled={formdisabled}
+              options={["fcl", "lcl"]}
+            />
           </Stack>
           <Stack pt={"18px"} width="50%">
             <RenderFixed
@@ -271,9 +358,13 @@ function NewPEBForm({ formdata }) {
   );
 }
 
-function NewPEBForm2({ formdata, refdata }) {
+function NewPEBForm2({ formdata, formdata2, refdata, onEdit }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
+
+  React.useEffect(() => {
+    onEdit(formdisabled);
+  }, [formdisabled]);
 
   const [payload, setpayload] = useState(
     refdata
@@ -285,6 +376,8 @@ function NewPEBForm2({ formdata, refdata }) {
           invoice_id: formdata.invoice.id,
           pl_id: formdata.pl.id,
           si_id: formdata.si.id,
+          do_id: formdata.do.id,
+          rawhead: formdata2,
         }
   );
   const nav = useNavigate();
@@ -302,6 +395,11 @@ function NewPEBForm2({ formdata, refdata }) {
     });
     nav("/exportir/peb", true);
   }
+
+  React.useEffect(() => {
+    setpayload({ ...payload, rawhead: formdata2 });
+  }, [formdata2]);
+
   return (
     <Stack spacing={0} component="form" onSubmit={formSubmit}>
       <PaperA4 noback>

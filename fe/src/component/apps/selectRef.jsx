@@ -419,3 +419,67 @@ export function RSKAD(props) {
     </Stack>
   );
 }
+
+export function RDO(props) {
+  const { auth } = React.useContext(context);
+  const [data, setdata] = useState([]);
+
+  React.useEffect(() => {
+    fetching();
+  }, []);
+
+  React.useEffect(() => {
+    props.refvalue && props.selected(data.find((d) => d.id == props.refvalue));
+  }, [data]);
+
+  async function fetching() {
+    setdata(
+      await fetcher({
+        method: "get",
+        url: auth.user.role.includes("fasilitator")
+          ? `md_deliveryorder`
+          : `md_deliveryorder?to=${auth.user.id}`,
+      })
+    );
+  }
+  if (!data.length)
+    return (
+      <Typography color={"error"}>
+        Anda belum memiliki Delivery Order
+      </Typography>
+    );
+
+  return (
+    <Stack direction={"row"}>
+      <TextField
+        id="outlined-select-currency"
+        select
+        label="Select"
+        value={props.value || ""}
+        fullWidth
+        onChange={(e) => props.selected(e.target.value)}
+        helperText="Please select your Delivery Order List reference"
+        disabled={props.refvalue ? true : false}
+      >
+        {data.map((d) => (
+          <MenuItem key={d.id} value={d}>
+            {`DO ${d.no} - to ${d.to.name}`}
+          </MenuItem>
+        ))}
+      </TextField>
+      {props.refvalue && props.withview && (
+        <Stack width={"120px"}>
+          <Button
+            variant="text"
+            LinkComponent={"a"}
+            href={`/exportir/deliveryorder/${props.refvalue}`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View
+          </Button>
+        </Stack>
+      )}
+    </Stack>
+  );
+}

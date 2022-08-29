@@ -17,11 +17,12 @@ class md_peb_controller extends CustomController
     public function store(Request $r)
     {
 
-        $payload = $r->except(['product_list']);
+        $payload = $r->except(['product_list', 'rawhead']);
         $payload['from'] = Auth::user()->id;
         $payload['status'] = 'pending';
 
         $payload['product_list'] = json_encode($r->product_list);
+        $payload['data'] = json_encode($r->rawhead);
 
         $data = MD_peb::updateOrCreate(
             [

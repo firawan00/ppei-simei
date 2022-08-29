@@ -14,4 +14,10 @@ class MD_peb extends Model4NF
         return json_decode($val);
 
     }
+
+    public function getDataAttribute($val)
+    {
+        return json_decode($val);
+
+    }
 }
