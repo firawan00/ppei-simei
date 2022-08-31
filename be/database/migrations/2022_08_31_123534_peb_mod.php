@@ -15,7 +15,7 @@ class PebMod extends Migration
     {
         //
 
-        Schema::table('users', function ($table) {
+        Schema::table('md_peb', function ($table) {
             $table->unsignedInteger('do_id')->nullable();
             $table->longText('data')->nullable();
 
