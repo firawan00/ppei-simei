@@ -162,7 +162,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
           </Stack>
         </Stack>
         <Divider />
-        <Stack direction={"row"} spacing={2} justifyContent="space-between">
+        <Stack direction={"row"} justifyContent="space-between">
           <Stack>
             <RenderFixed t="EKSPORTIR" B />
             <RenderFixed
@@ -176,14 +176,14 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
           <Stack>
             <RenderFixed t="PEMILIK BARANG" B />
             <RenderFixed t="Identitas" v={"01.234.567.8-910.111"} w={60} />
-            <RenderFixed t="nama" v={formdata.invoice.to.name} w={60} />
-            <RenderFixed t="nama" v={formdata.invoice.to.address} w={60} />
+            <RenderFixed t="nama" v={formdata.invoice.from.name} w={60} />
+            <RenderFixed t="nama" v={formdata.invoice.from.address} w={60} />
           </Stack>
           <Stack>
             <RenderFixed t="PENERIMA" B />
             <RenderFixed t="Identitas" v={"01.234.567.8-910.111"} w={60} />
-            <RenderFixed t="nama" v={formdata.invoice.from.name} w={60} />
-            <RenderFixed t="alamat" v={formdata.invoice.from.address} w={60} />
+            <RenderFixed t="nama" v={formdata.invoice.consignee} w={60} />
+            <RenderFixed t="alamat" v={formdata.invoice.destination} w={60} />
           </Stack>
         </Stack>
         <Divider />
@@ -197,8 +197,8 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
           <Stack>
             <RenderFixed t="PEMBELI" B />
             <RenderFixed t="Identitas" v={"01.234.567.8-910.111"} w={60} />
-            <RenderFixed t="nama" v={formdata.invoice.to.name} w={60} />
-            <RenderFixed t="nama" v={formdata.invoice.to.address} w={60} />
+            <RenderFixed t="nama" v={formdata.invoice.consignee} w={60} />
+            <RenderFixed t="nama" v={formdata.invoice.destination} w={60} />
           </Stack>
         </Stack>
         <Divider />

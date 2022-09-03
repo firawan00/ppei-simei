@@ -141,11 +141,16 @@ function MainForm({ refdata, formdata }) {
     setpayload({
       ...payload,
       gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
-      gct: `${formdata.invoice.to.name},${formdata.invoice.to.address}`,
+      gct: `${formdata.invoice.consignee},${formdata.invoice.destination}`,
+      f3: `SHIPPED BY : 
+FROM : 
+TO : 
+DATE OF SHIPMENT :`,
       f7: formdata.invoice.product_list.reduce(
         (a, b) => a.concat(`${b.hs}, `),
         ""
       ),
+
       invoice_id: formdata.invoice.id,
       pl_id: formdata.pl.id,
       bl_id: formdata.bl.id,
@@ -206,11 +211,11 @@ function MainForm({ refdata, formdata }) {
             </Stack>
           </Stack>
           <Stack direction={"row"} spacing={3}>
-            <Stack width={"50%"}>
+            <Stack width={"52%"}>
               <InputInline
                 dcol
                 multiline
-                rows={3}
+                rows={5}
                 lb="3.   Means of Transport and route (as far known)"
                 disabled={formdisabled}
                 name="f3"
