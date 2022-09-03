@@ -10,7 +10,7 @@ export default function App(props) {
       direction={props.dcol ? "column" : "row"}
       alignItems={props.dcol ? "left" : "center"}
       my={props.dcol ? 0 : 0.5}
-      justifyContent="space-between"
+      justifyContent={props.jc ? props.jc : "space-between"}
     >
       {props.lb && (
         <Typography

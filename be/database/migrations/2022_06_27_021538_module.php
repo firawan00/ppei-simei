@@ -20,6 +20,7 @@ class Module extends Migration
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
             $table->string('date')->nullable();
 
+            $table->string('no')->nullable();
             $table->string('docto')->nullable();
             $table->string('tel')->nullable();
             $table->string('fax')->nullable();
@@ -46,6 +47,7 @@ class Module extends Migration
             $table->string('desc_of_goods')->nullable();
             $table->string('type')->nullable();
             $table->string('price_fob')->nullable();
+            $table->string('capacity')->nullable();
 
             $table->timestamps();
         });

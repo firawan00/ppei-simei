@@ -52,6 +52,13 @@ export default function App({ refdata }) {
           <Stack direction={"row"} justifyContent="space-between">
             <Stack spacing={1}>
               <InputInline
+                lb={"No"}
+                name="no"
+                onChange={handlePayload}
+                value={payload.no || ""}
+                disabled={formdisabled}
+              />
+              <InputInline
                 lb={"To"}
                 name="docto"
                 onChange={handlePayload}
@@ -74,7 +81,6 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              {/* <Typography color="initial">Jakata,</Typography> */}
               <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
@@ -86,21 +92,20 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack>
-            <Stack>
+            <Stack mb={2}>
               <Typography variant="body1" color="initial">
-                Dear Sir, We are very glad to note that you are exporter of :
+                Dear Sir, We are very glad to note that you are exporter of
               </Typography>
-              {formdisabled && payload.who}
-              {!formdisabled && (
-                <TextField
-                  multiline
-                  rows={5}
-                  name="who"
-                  onChange={handlePayload}
-                  value={payload.who || ""}
-                  disabled={formdisabled}
-                />
-              )}
+              <InputInline
+                dcol
+                multiline
+                prewrap
+                rows={6}
+                name="who"
+                onChange={handlePayload}
+                value={payload.who || ""}
+                disabled={formdisabled}
+              />
             </Stack>
 
             <Typography variant="body1" color="initial">
@@ -116,6 +121,7 @@ export default function App({ refdata }) {
               onChange={handlePayload}
               value={payload.article || ""}
               disabled={formdisabled}
+              jc="flex-start"
             />
             <InputInline
               lb={"Shipment"}
@@ -123,6 +129,7 @@ export default function App({ refdata }) {
               onChange={handlePayload}
               value={payload.shipment || ""}
               disabled={formdisabled}
+              jc="flex-start"
             />
           </Stack>
 

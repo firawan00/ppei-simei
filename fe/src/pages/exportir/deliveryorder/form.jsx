@@ -65,7 +65,7 @@ function MainForm({ refdata, formdata }) {
       ? { ...refdata, to: refdata.to.id }
       : {
           si_id: formdata.si.id,
-          sino: formdata.si.lc_ref,
+          sino: formdata.si.docref,
         }
   );
   const nav = useNavigate();
@@ -135,7 +135,9 @@ function MainForm({ refdata, formdata }) {
               name="shipper"
               onChange={handlePayload}
               value={payload.shipper || ""}
+              jc="flex-start"
             />
+
             <InputInline
               lb={"S/I NO.	"}
               lbw={180}
@@ -143,6 +145,7 @@ function MainForm({ refdata, formdata }) {
               name="sino"
               onChange={handlePayload}
               value={payload.sino || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"TUJUAN "}
@@ -151,6 +154,7 @@ function MainForm({ refdata, formdata }) {
               name="tujuan"
               onChange={handlePayload}
               value={payload.tujuan || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"JUMLAH CONTAINER	"}
@@ -159,6 +163,7 @@ function MainForm({ refdata, formdata }) {
               name="juml_container"
               onChange={handlePayload}
               value={payload.juml_container || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"RENCANA KAPAL	"}
@@ -167,15 +172,16 @@ function MainForm({ refdata, formdata }) {
               name="rencana_kapal"
               onChange={handlePayload}
               value={payload.rencana_kapal || ""}
+              jc="flex-start"
             />
-            <InputInline
+            {/* <InputInline
               lb={"EST"}
               lbw={180}
               disabled={formdisabled}
               name="est"
               onChange={handlePayload}
               value={payload.est || ""}
-            />
+            /> */}
 
             <InputInline
               lb={"EST OPEN STACK"}
@@ -184,6 +190,7 @@ function MainForm({ refdata, formdata }) {
               name="est_openstack"
               onChange={handlePayload}
               value={payload.est_openstack || ""}
+              jc="flex-start"
             />
 
             <InputInline
@@ -193,6 +200,7 @@ function MainForm({ refdata, formdata }) {
               name="est_closingtime"
               onChange={handlePayload}
               value={payload.est_closingtime || ""}
+              jc="flex-start"
             />
 
             <InputInline
@@ -202,6 +210,7 @@ function MainForm({ refdata, formdata }) {
               name="utc"
               onChange={handlePayload}
               value={payload.utc || ""}
+              jc="flex-start"
             />
           </Stack>
 
@@ -221,6 +230,7 @@ function MainForm({ refdata, formdata }) {
               name="container_no"
               onChange={handlePayload}
               value={payload.container_no || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"Seal no"}
@@ -229,6 +239,7 @@ function MainForm({ refdata, formdata }) {
               name="seal_no"
               onChange={handlePayload}
               value={payload.seal_no || ""}
+              jc="flex-start"
             />
           </Stack>
 

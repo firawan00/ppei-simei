@@ -1,6 +1,7 @@
 import AppsIcon from "@mui/icons-material/Apps";
 import MailIcon from "@mui/icons-material/Mail";
 import OutboxIcon from "@mui/icons-material/Outbox";
+import PersonIcon from "@mui/icons-material/Person";
 const importir = [
   {
     name: "Importir Menu",
@@ -148,6 +149,13 @@ const nav = [
     name: "Dashboard",
     path: "/",
     icon: AppsIcon,
+  },
+
+  {
+    name: "Profile",
+    path: "/profile",
+    icon: PersonIcon,
+    role: ["user-export", "user-import"],
   },
 
   {

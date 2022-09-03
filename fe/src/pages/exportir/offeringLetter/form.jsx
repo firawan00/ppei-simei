@@ -11,6 +11,8 @@ import Sentto from "@/component/apps/sentto";
 
 import Header from "../_partial/exportirHeader";
 import InputDate from "@component/gip-useForm/inputDate";
+import InputSelect from "@component/gip-useForm/inputSelect";
+
 import Sign from "@component/apps/sign";
 
 export default function App({ refdata }) {
@@ -119,14 +121,17 @@ export default function App({ refdata }) {
               disabled={formdisabled}
               value={payload.qty || ""}
             />
-            <InputInline
+
+            <InputSelect
               lb={"Unit FOB Price"}
-              lbw={180}
               name="fob"
               onChange={handlePayload}
-              disabled={formdisabled}
               value={payload.fob || ""}
+              disabled={formdisabled}
+              options={["CFR price ", "CIF price "]}
+              fullWid
             />
+
             <InputInline
               lb={"Packing"}
               lbw={180}

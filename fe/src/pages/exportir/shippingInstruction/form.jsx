@@ -139,7 +139,7 @@ function MainForm({ refdata, formdata }) {
           <Stack direction={"row"} justifyContent="space-between">
             <Stack spacing={0}>
               <InputInline
-                lb={"Our Ref"}
+                lb={"No"}
                 name="docref"
                 onChange={handlePayload}
                 value={payload.docref || ""}

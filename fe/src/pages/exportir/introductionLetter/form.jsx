@@ -98,6 +98,10 @@ export default function App({ refdata }) {
               onChange={handlePayload}
               value={payload.desc_of_goods || ""}
               disabled={formdisabled}
+              dcol
+              multiline
+              prewrap
+              rows={6}
             />
             <InputInline
               lb={"Type"}
@@ -106,6 +110,7 @@ export default function App({ refdata }) {
               onChange={handlePayload}
               value={payload.type || ""}
               disabled={formdisabled}
+              jc="flex-start"
             />
             <InputInline
               lb={"Price FOB Tg Priok"}
@@ -114,6 +119,17 @@ export default function App({ refdata }) {
               onChange={handlePayload}
               value={payload.price_fob || ""}
               disabled={formdisabled}
+              jc="flex-start"
+            />
+
+            <InputInline
+              lb={"Production Capacity"}
+              name="capacity"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.capacity || ""}
+              disabled={formdisabled}
+              jc="flex-start"
             />
           </Stack>
           {/* 
