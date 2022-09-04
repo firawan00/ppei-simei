@@ -112,12 +112,11 @@ function MainForm({ refdata, formdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <InputDate
-                inputFormat="dd MMM yyyy"
-                label={""}
+              <InputInline
                 disabled={formdisabled}
-                value={payload.date || null}
-                onChange={(v) => setpayload({ ...payload, date: v })}
+                name="date"
+                onChange={handlePayload}
+                value={payload.date || ""}
               />
             </Stack>
           </Stack>

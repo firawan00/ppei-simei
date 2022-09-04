@@ -51,16 +51,23 @@ export default function App({ refdata }) {
           </Typography>
           <Stack direction={"row"} justifyContent="space-between">
             <Stack spacing={1}>
-              <InputInline lb={"Our reff"} lbw={180} />
+              <InputInline
+                lb={"Our reff"}
+                lbw={180}
+                name="doc_no"
+                onChange={handlePayload}
+                value={payload.doc_no || ""}
+                disabled={formdisabled}
+              />
             </Stack>
             <Stack direction={"row"}>
-              {/* <Typography color="initial">Jakata,</Typography> */}
-              <InputDate
-                inputFormat="dd MMM yyyy"
-                label={""}
-                value={payload.date || null}
-                onChange={(v) => setpayload({ ...payload, date: v })}
+              <InputInline
+                placeholder={fdate.format(fdate.today)}
+                name="date"
+                onChange={handlePayload}
+                value={payload.date || ""}
                 disabled={formdisabled}
+                jc="flex-start"
               />
             </Stack>
           </Stack>
@@ -76,6 +83,7 @@ export default function App({ refdata }) {
               name="tod"
               onChange={handlePayload}
               value={payload.tod || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -84,6 +92,7 @@ export default function App({ refdata }) {
               name="payment"
               onChange={handlePayload}
               value={payload.payment || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -92,6 +101,7 @@ export default function App({ refdata }) {
               name="partial_shipment"
               onChange={handlePayload}
               value={payload.partial_shipment || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -100,6 +110,7 @@ export default function App({ refdata }) {
               name="transshipment"
               onChange={handlePayload}
               value={payload.transshipment || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
 
@@ -109,6 +120,7 @@ export default function App({ refdata }) {
               name="destination"
               onChange={handlePayload}
               value={payload.destination || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -117,6 +129,7 @@ export default function App({ refdata }) {
               name="notify"
               onChange={handlePayload}
               value={payload.notify || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -125,6 +138,7 @@ export default function App({ refdata }) {
               name="packing"
               onChange={handlePayload}
               value={payload.packing || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
           </Stack>

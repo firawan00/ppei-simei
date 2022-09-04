@@ -42,7 +42,7 @@ export default function App({ refdata }) {
       <PaperA4>
         <BackIcon />
         <Stack>
-          <Stack direction={"row"} spacing={3}>
+          <Stack direction={"row"} spacing={2}>
             <Stack width={"60%"}>
               <InputInline
                 lb={"SHIPPER"}
@@ -53,6 +53,8 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 value={payload.shipper || ""}
               />
+              <Divider />
+
               <InputInline
                 lb={"CONSIGNEE"}
                 lbw={180}
@@ -62,6 +64,8 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 value={payload.consignee || ""}
               />
+              <Divider />
+
               <InputInline
                 lb={"NOTIFY PARTY"}
                 lbw={180}
@@ -71,6 +75,8 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 value={payload.notify_party || ""}
               />
+              <Divider />
+
               <Stack
                 direction={"row"}
                 justifyContent="space-between"
@@ -85,6 +91,8 @@ export default function App({ refdata }) {
                   onChange={handlePayload}
                   value={payload.pre_carriage_by || ""}
                 />
+                <Divider orientation="vertical" />
+
                 <InputInline
                   lb={"Place of Receipt"}
                   lbw={180}
@@ -96,6 +104,8 @@ export default function App({ refdata }) {
                 />
               </Stack>
             </Stack>
+            <Divider orientation="vertical" />
+
             <Stack width={"40%"}>
               <InputInline
                 lb={"B/L No."}
@@ -108,9 +118,8 @@ export default function App({ refdata }) {
               <Header />
             </Stack>
           </Stack>
-
+          <Divider />
           <Stack>
-            <Divider flexItem />
             <Stack direction={"row"} justifyContent="flex-start" spacing={2}>
               <Stack width={"150px"} flexShrink={0}>
                 <InputInline
@@ -124,7 +133,7 @@ export default function App({ refdata }) {
                 />
               </Stack>
 
-              <Divider orientation="vertical" flexItem />
+              <Divider orientation="vertical" />
               <Stack width={"150px"} flexShrink={0}>
                 <InputInline
                   lb={"Voyage No"}
@@ -146,7 +155,7 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 value={payload.flag || ""}
               />
-              <Divider orientation="vertical" flexItem />
+              <Divider orientation="vertical" />
               <InputInline
                 lb={"Place of Delivery"}
                 lbw={180}
@@ -157,7 +166,7 @@ export default function App({ refdata }) {
                 value={payload.place_of_delivery || ""}
               />
             </Stack>
-            <Divider flexItem />
+            <Divider />
 
             <Stack direction={"row"} justifyContent="flex-start" spacing={2}>
               <Stack width={"150px"} flexShrink={0}>
@@ -200,69 +209,99 @@ export default function App({ refdata }) {
             </Stack>
           </Stack>
           <Divider flexItem />
-          <Stack direction={"row"} justifyContent="space-between">
-            <Stack>
+          <Stack direction={"row"}>
+            <InputInline
+              dcol
+              lb={"Container No"}
+              lbw={200}
+              disabled={formdisabled}
+              name="container_no"
+              onChange={handlePayload}
+              value={payload.container_no || ""}
+              multiline
+              prewrap
+              rows={3}
+              var="body2"
+            />
+            <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
+            <Stack minWidth={110}>
               <InputInline
-                lb={"Container No"}
-                lbw={200}
-                disabled={formdisabled}
-                name="container_no"
-                onChange={handlePayload}
-                value={payload.container_no || ""}
-              />
-              <Divider flexItem />
-              <InputInline
+                dcol
                 lb={"Seal No.Marks&Nos"}
                 lbw={200}
                 disabled={formdisabled}
                 name="seal_no"
                 onChange={handlePayload}
                 value={payload.seal_no || ""}
-              />
-              <Divider flexItem />
-              <InputInline
-                lb={"No.of Containers or P'kgs"}
-                lbw={200}
-                disabled={formdisabled}
-                name="container_no_or"
-                onChange={handlePayload}
-                value={payload.container_no_or || ""}
+                multiline
+                prewrap
+                rows={3}
+                var="body2"
+                jc="space-between"
               />
             </Stack>
             <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
 
-            <Stack>
-              <InputInline
-                lb={"Description of Goods"}
-                lbw={180}
-                disabled={formdisabled}
-                name="dog"
-                onChange={handlePayload}
-                value={payload.dog || ""}
-              />
-              <Divider flexItem />
+            <InputInline
+              dcol
+              lb={"No.of Containers or P'kgs"}
+              lbw={200}
+              disabled={formdisabled}
+              name="container_no_or"
+              onChange={handlePayload}
+              value={payload.container_no_or || ""}
+              multiline
+              prewrap
+              rows={3}
+              var="body2"
+            />
+            <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
 
-              <InputInline
-                lb={"Gross Weight"}
-                lbw={180}
-                disabled={formdisabled}
-                name="gw"
-                onChange={handlePayload}
-                value={payload.gw || ""}
-              />
-              <Divider flexItem />
+            <InputInline
+              dcol
+              lb={"Description of Goods"}
+              lbw={180}
+              disabled={formdisabled}
+              name="dog"
+              onChange={handlePayload}
+              value={payload.dog || ""}
+              multiline
+              prewrap
+              rows={3}
+              var="body2"
+            />
+            <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
 
-              <InputInline
-                lb={"Measurement"}
-                lbw={180}
-                disabled={formdisabled}
-                name="measurement"
-                onChange={handlePayload}
-                value={payload.measurement || ""}
-              />
-            </Stack>
-          </Stack>
+            <InputInline
+              dcol
+              lb={"Gross Weight"}
+              lbw={180}
+              disabled={formdisabled}
+              name="gw"
+              onChange={handlePayload}
+              value={payload.gw || ""}
+              multiline
+              prewrap
+              rows={3}
+              var="body2"
+            />
+            <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
 
+            <InputInline
+              dcol
+              lb={"Measurement"}
+              lbw={180}
+              disabled={formdisabled}
+              name="measurement"
+              onChange={handlePayload}
+              value={payload.measurement || ""}
+              multiline
+              prewrap
+              rows={3}
+              var="body2"
+            />
+          </Stack>{" "}
+          <Stack></Stack>
           <Stack>
             <Divider />
 
@@ -277,7 +316,7 @@ export default function App({ refdata }) {
             <Divider />
 
             <InputInline
-              lb={"Total Number of Containers"}
+              lb={"Total Number of Containers or other Packages (in words)"}
               lbw={240}
               disabled={formdisabled}
               name="total_containers"
@@ -286,17 +325,16 @@ export default function App({ refdata }) {
             />
             <Divider />
 
-            <InputInline
-              lb={"or other Packages (in words)"}
+            {/* <InputInline
+              lb={""}
               lbw={240}
               disabled={formdisabled}
               name="other_packages"
               onChange={handlePayload}
               value={payload.other_packages || ""}
-            />
+            /> */}
             <Divider />
           </Stack>
-
           <Stack>
             <Stack direction={"row"} justifyContent="flex-start">
               <Stack>
@@ -397,15 +435,17 @@ export default function App({ refdata }) {
               </Stack>
               <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
 
-              <InputInline
-                lb={"Place of Issue"}
-                lbw={180}
-                dcol
-                disabled={formdisabled}
-                name="poi"
-                onChange={handlePayload}
-                value={payload.poi || ""}
-              />
+              <Stack width={"40%"}>
+                <InputInline
+                  lb={"Place of Issue"}
+                  lbw={180}
+                  dcol
+                  disabled={formdisabled}
+                  name="poi"
+                  onChange={handlePayload}
+                  value={payload.poi || ""}
+                />
+              </Stack>
             </Stack>
             <Divider />
 
@@ -437,21 +477,22 @@ export default function App({ refdata }) {
 
               <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
 
-              <InputInline
-                lb={"Date of Issue"}
-                lbw={180}
-                dcol
-                disabled={formdisabled}
-                name="date_issue"
-                onChange={handlePayload}
-                value={payload.date_issue || ""}
-              />
+              <Stack width={"40%"}>
+                <InputInline
+                  lb={"Date of Issue"}
+                  lbw={180}
+                  dcol
+                  disabled={formdisabled}
+                  name="date_issue"
+                  onChange={handlePayload}
+                  value={payload.date_issue || ""}
+                />
+              </Stack>
             </Stack>
             <Divider />
           </Stack>
-
-          <Stack direction={"row"} justifyContent="space-between" spacing={2}>
-            <Stack>
+          <Stack direction={"row"} justifyContent="flex-start" spacing={2}>
+            <Stack minWidth={"30%"}>
               Laden on Board the Vessel
               <InputInline
                 lb={"date"}
@@ -470,7 +511,9 @@ export default function App({ refdata }) {
                 value={payload.laden_by || ""}
               />
             </Stack>
-            <Stack className="center">
+            <Divider orientation="vertical" />
+
+            <Stack className="center" minWidth={"auto"} flexGrow={1}>
               <Typography variant="h4" color="initial">
                 NED LLOYD LINE
               </Typography>
@@ -480,6 +523,7 @@ export default function App({ refdata }) {
             </Stack>
           </Stack>
         </Stack>
+        <Divider />
       </PaperA4>
       {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
         <Sentto
@@ -507,7 +551,7 @@ function Header(params) {
       <Typography variant="subtitle1" color="initial">
         BILL OF LANDING
       </Typography>
-      <Typography variant="h1" color="initial">
+      <Typography variant="h3" color="initial">
         COPY
       </Typography>
     </Stack>

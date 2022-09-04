@@ -137,7 +137,7 @@ DATE OF SHIPMENT :`,
     setpayload({
       ...payload,
       gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
-      gct: `${formdata.invoice.consignee},${formdata.invoice.destination}`,
+      gct: `${formdata.invoice.consignee},${formdata.invoice.consignee_address},${formdata.invoice.consignee_country}`,
       f7: formdata.invoice.product_list.reduce(
         (a, b) => a.concat(`${b.hs}, `),
         ""
@@ -180,7 +180,7 @@ DATE OF SHIPMENT :`,
             </Stack>
             <Stack width={"50%"} spacing={2} className="center" p={2}>
               <InputInline
-                lb="Reference No :"
+                lb="Reference No"
                 disabled={formdisabled}
                 name="refno"
                 onChange={handlePayload}
@@ -206,6 +206,7 @@ DATE OF SHIPMENT :`,
               <InputInline
                 dcol
                 multiline
+                prewrap
                 rows={5}
                 lb="3.   Means of Transport and route (as far known)"
                 disabled={formdisabled}

@@ -6,6 +6,7 @@ use App\Models\MD_invoice;
 use Illuminate\Http\Request;
 use App\Models\inbox;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class md_invoice_controller extends CustomController
 {
@@ -20,6 +21,7 @@ class md_invoice_controller extends CustomController
         $payload = $r->except(['product_list']);
         $payload['from'] = Auth::user()->id;
         $payload['product_list'] = json_encode($r->product_list);
+        $payload['status'] = 'pending';
 
         $data = MD_invoice::updateOrCreate(
             [

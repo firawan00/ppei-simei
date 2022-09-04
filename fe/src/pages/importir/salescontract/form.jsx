@@ -11,6 +11,8 @@ import ProductList from "@/component/ui/productListInvoice";
 import SenttoImportir from "@component/apps/senttoImportir";
 import Sign from "@component/apps/sign";
 import Sentto from "@component/apps/sentto";
+import Header from "../_partial/headerImportir";
+
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
@@ -36,10 +38,41 @@ export default function App({ refdata }) {
   return (
     <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
-        <Stack spacing={2}>
-          <Typography variant="h6" align="center" color="initial">
+        <Stack spacing={0}>
+          <Header />
+          <Divider sx={{ my: 2 }} />
+          <InputInline
+            lb="date"
+            placeholder={fdate.format(fdate.today)}
+            name="contract_date"
+            onChange={handlePayload}
+            value={payload.contract_date || ""}
+            disabled={formdisabled}
+            jc="flex-start"
+          />
+          <InputInline
+            lb="Our Ref"
+            placeholder={fdate.format(fdate.today)}
+            name="contract_ref"
+            onChange={handlePayload}
+            value={payload.contract_ref || ""}
+            disabled={formdisabled}
+            jc="flex-start"
+          />
+
+          <Typography variant="h6" align="center" color="initial" mt={1}>
             SALES CONTRACT
           </Typography>
+          <Stack className="center">
+            <InputInline
+              lb={""}
+              lbw={180}
+              name="contract_no"
+              onChange={handlePayload}
+              value={payload.contract_no || ""}
+              disabled={formdisabled}
+            />
+          </Stack>
 
           <Typography variant="body1" color="initial">
             The seller confirms having concluded this contract with the buyer
@@ -54,10 +87,6 @@ export default function App({ refdata }) {
             onChange={(v) => setpayload({ ...payload, product_list: v })}
             disabled={formdisabled}
           />
-        </Stack>
-      </PaperA4>
-      <PaperA4>
-        <Stack spacing={2}>
           <Typography variant="body1" color="initial">
             I. Shipment
           </Typography>
@@ -68,6 +97,7 @@ export default function App({ refdata }) {
             onChange={handlePayload}
             value={payload.shipment_date || ""}
             disabled={formdisabled}
+            jc="flex-start"
           />
           <InputInline
             lb={"1.2	Partial – Shipment  "}
@@ -75,6 +105,7 @@ export default function App({ refdata }) {
             name="partial_shipment"
             onChange={handlePayload}
             value={payload.partial_shipment || ""}
+            jc="flex-start"
             disabled={formdisabled}
           />
           <InputInline
@@ -83,6 +114,7 @@ export default function App({ refdata }) {
             name="transshipment"
             onChange={handlePayload}
             value={payload.transshipment || ""}
+            jc="flex-start"
             disabled={formdisabled}
           />
           <InputInline
@@ -91,6 +123,7 @@ export default function App({ refdata }) {
             name="destination"
             onChange={handlePayload}
             value={payload.destination || ""}
+            jc="flex-start"
             disabled={formdisabled}
           />
           <InputInline
@@ -99,6 +132,7 @@ export default function App({ refdata }) {
             name="notify_address"
             onChange={handlePayload}
             value={payload.notify_address || ""}
+            jc="flex-start"
             disabled={formdisabled}
           />
           <InputInline
@@ -107,6 +141,7 @@ export default function App({ refdata }) {
             name="shipping_marks"
             onChange={handlePayload}
             value={payload.shipping_marks || ""}
+            jc="flex-start"
             disabled={formdisabled}
           />
 
@@ -116,11 +151,12 @@ export default function App({ refdata }) {
             name="payment"
             onChange={handlePayload}
             value={payload.payment || ""}
+            jc="flex-start"
             disabled={formdisabled}
           />
         </Stack>
 
-        <Stack direction={"row"} justifyContent="space-between" mt={5}>
+        <Stack direction={"row"} justifyContent="space-between" mt={1}>
           <Stack>
             Confirmed by .
             <Sign text="Importir" />
@@ -134,6 +170,7 @@ export default function App({ refdata }) {
           </Stack>
         </Stack>
       </PaperA4>
+
       {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
         <Sentto
           value={payload.to || ""}

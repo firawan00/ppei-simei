@@ -141,7 +141,8 @@ function MainForm({ refdata, formdata }) {
     setpayload({
       ...payload,
       gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
-      gct: `${formdata.invoice.consignee},${formdata.invoice.destination}`,
+      gct: `${formdata.invoice.consignee},${formdata.invoice.consignee_address},${formdata.invoice.consignee_country}`,
+
       f3: `SHIPPED BY : 
 FROM : 
 TO : 
@@ -188,7 +189,7 @@ DATE OF SHIPMENT :`,
             </Stack>
             <Stack width={"50%"} spacing={2} className="center" p={2}>
               <InputInline
-                lb="Reference No :"
+                lb="Reference No"
                 disabled={formdisabled}
                 name="refno"
                 onChange={handlePayload}

@@ -21,6 +21,12 @@ export default function Test(params) {
 
   React.useEffect(() => {
     if (isPrivateRoute(loc.pathname) && !auth.user.token) navigate("/signin");
+    if (loc.pathname.includes("admin") && auth.user.role != "admin") {
+      localStorage.clear();
+      auth.update({});
+      navigate("/super");
+      navigate(0);
+    }
   }, [loc]);
 
   React.useEffect(() => {

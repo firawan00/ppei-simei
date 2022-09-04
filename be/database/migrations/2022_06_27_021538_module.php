@@ -93,6 +93,8 @@ class Module extends Migration
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
             $table->string('date')->nullable();
 
+            $table->string('doc_no')->nullable();
+
             $table->string('destination')->nullable();
             $table->string('notify')->nullable();
             $table->string('packing')->nullable();
@@ -111,6 +113,10 @@ class Module extends Migration
             $table->foreignUuid('from')->references('id')->on('users')->onDelete('cascade');
             $table->foreignUuid('to')->references('id')->on('users')->onDelete('cascade');
             $table->string('date')->nullable();
+
+            $table->string('contract_no')->nullable();
+            $table->string('contract_ref')->nullable();
+            $table->string('contract_date')->nullable();
 
             $table->string('destination')->nullable();
             $table->string('notify_address')->nullable();
@@ -131,6 +137,8 @@ class Module extends Migration
             $table->string('date')->nullable();
 
             $table->string('consignee')->nullable();
+            $table->string('consignee_address')->nullable();
+            $table->string('consignee_country')->nullable();
 
             $table->string('destination')->nullable();
             $table->string('issuing_bank')->nullable();
@@ -143,6 +151,9 @@ class Module extends Migration
             $table->string('tod')->nullable();
 
             $table->longText('product_list')->nullable();
+
+            $table->string('status')->nullable();
+            $table->string('status_notes')->nullable();
 
             $table->timestamps();
         });
@@ -166,6 +177,9 @@ class Module extends Migration
             $table->string('tod')->nullable();
 
             $table->longText('product_list')->nullable();
+
+            $table->string('status')->nullable();
+            $table->string('status_notes')->nullable();
 
             $table->timestamps();
         });
@@ -207,6 +221,9 @@ class Module extends Migration
 
             $table->string('stuffing_date')->nullable();
             $table->string('freight_term')->nullable();
+
+            $table->string('status')->nullable();
+            $table->string('status_notes')->nullable();
 
             $table->timestamps();
         });

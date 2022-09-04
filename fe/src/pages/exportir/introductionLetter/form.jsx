@@ -21,6 +21,7 @@ import context from "@/component/context";
 import Header from "../_partial/exportirHeader";
 import InputDate from "@component/gip-useForm/inputDate";
 import Sign from "@component/apps/sign";
+import { fdate } from "@component/helper/formating";
 
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
@@ -74,12 +75,20 @@ export default function App({ refdata }) {
             </Stack>
             <Stack direction={"row"}>
               {/* <Typography color="initial">Jakata,</Typography> */}
-              <InputDate
+              {/* <InputDate
                 disabled={formdisabled}
                 inputFormat="dd MMM yyyy"
                 label={""}
                 value={payload.date || null}
                 onChange={(v) => setpayload({ ...payload, date: v })}
+              /> */}
+
+              <InputInline
+                placeholder={fdate.format(fdate.today)}
+                name="date"
+                onChange={handlePayload}
+                value={payload.date || ""}
+                disabled={formdisabled}
               />
             </Stack>
           </Stack>

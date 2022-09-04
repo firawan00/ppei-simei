@@ -11,16 +11,19 @@ export default function App(props) {
       direction={props.dcol ? "column" : "row"}
       alignItems={props.dcol ? "left" : "center"}
       my={props.dcol ? 0 : 0.5}
-      justifyContent="space-between"
+      // justifyContent="flex-start"
     >
       {props.lb && (
-        <Typography
-          width={getWidth()}
-          color="initial"
-          variant={props.var || "body1"}
-        >
-          {`${props.lb} :`}
-        </Typography>
+        <Stack direction={"row"}>
+          <Typography
+            width={getWidth()}
+            color="initial"
+            variant={props.var || "body1"}
+          >
+            {`${props.lb}`}
+          </Typography>
+          <Typography pr={1}>{`: `}</Typography>
+        </Stack>
       )}
 
       {!props.disabled && (
@@ -34,7 +37,7 @@ export default function App(props) {
           }}
           name={props.name ? props.name.toLowerCase() : props.lb.toLowerCase()}
           sx={{
-            minWidth: "110px",
+            minWidth: "220px",
             "&:hover": {
               fieldset: {
                 borderColor: "rgba(0, 0, 0, 0.23)",

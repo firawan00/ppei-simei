@@ -167,13 +167,20 @@ function MainForm({ refdata, formdata }) {
             height={475}
           >
             <Stack direction={"row"}>
-              {/* <Typography color="initial">Jakata,</Typography> */}
-              <InputDate
+              <InputInline
+                placeholder={fdate.format(fdate.today)}
+                lbw={140}
+                name="datews1"
+                onChange={handlePayload}
+                value={payload.datews1 || ""}
+                disabled={formdisabled}
+              />
+              {/* <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
                 value={payload.datews1 || null}
                 onChange={(v) => setpayload({ ...payload, datews1: v })}
-              />
+              /> */}
             </Stack>
             <InputInline
               lb={"Exchange for USD"}
@@ -183,8 +190,10 @@ function MainForm({ refdata, formdata }) {
               value={payload.ws1_exc || ""}
               disabled={formdisabled}
             />
-            <TextField
+            <InputInline
               fullWidth
+              dcol
+              prewrap
               multiline
               rows={7}
               name="ws1"
@@ -193,8 +202,10 @@ function MainForm({ refdata, formdata }) {
               disabled={formdisabled}
             />
 
-            <TextField
+            <InputInline
               fullWidth
+              dcol
+              prewrap
               multiline
               rows={4}
               name="ws1_footer"
@@ -225,40 +236,42 @@ function MainForm({ refdata, formdata }) {
             height={475}
           >
             <Stack direction={"row"}>
-              {/* <Typography color="initial">Jakata,</Typography> */}
-              <InputDate
-                inputFormat="dd MMM yyyy"
-                label={""}
-                value={payload.datews2 || null}
+              <InputInline
+                value={payload.datews1 || null}
                 onChange={(v) => setpayload({ ...payload, datews2: v })}
+                disabled
               />
             </Stack>
             <InputInline
               lb={"Exchange for USD"}
               lbw={140}
-              name="ws2_exc"
+              name="ws1_exc"
               onChange={handlePayload}
-              value={payload.ws2_exc || ""}
-              disabled={formdisabled}
+              value={payload.ws1_exc || ""}
+              disabled
             />
-            <TextField
+            <InputInline
               fullWidth
+              dcol
+              prewrap
               multiline
               rows={7}
-              name="ws2"
+              name="ws1"
               onChange={handlePayload}
-              value={payload.ws2 || blank_ws}
-              disabled={formdisabled}
+              value={payload.ws1 || blank_ws}
+              disabled
             />
 
-            <TextField
+            <InputInline
               fullWidth
+              dcol
+              prewrap
               multiline
               rows={4}
-              name="ws2_footer"
+              name="ws1_footer"
               onChange={handlePayload}
-              value={payload.ws2_footer || blank_ws_footer}
-              disabled={formdisabled}
+              value={payload.ws1_footer || blank_ws_footer}
+              disabled
             />
 
             <Stack

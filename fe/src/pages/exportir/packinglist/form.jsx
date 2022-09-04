@@ -16,6 +16,7 @@ import Header from "../_partial/exportirHeader";
 import Sign from "@component/apps/sign";
 import { RInvoice } from "@component/apps/selectRef";
 import BackIcon from "@/component/ui/backIcon";
+import Approval from "@/component/apps/approval";
 
 export default function App({ refdata }) {
   const [formdata, setformdata] = useState({});
@@ -104,10 +105,18 @@ function Form({ refdata, formdata }) {
                 disabled={formdisabled}
                 value={payload.no || ""}
               />
-              <Stack direction={"row"} justifyContent="space-between">
+              <InputInline
+                lb={"Date"}
+                name="date"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.date || ""}
+              />
+              {/* <Stack direction={"row"} justifyContent="space-between">
                 <Typography color="initial" width={180}>
                   Date
                 </Typography>
+
                 <InputDate
                   disabled={formdisabled}
                   inputFormat="dd MMM yyyy"
@@ -115,7 +124,7 @@ function Form({ refdata, formdata }) {
                   value={payload.date || null}
                   onChange={(v) => setpayload({ ...payload, date: v })}
                 />
-              </Stack>
+              </Stack> */}
               <InputInline
                 lb={"SC No."}
                 name="scno"
@@ -151,12 +160,14 @@ function Form({ refdata, formdata }) {
             <InputInline
               lb={"Ship By"}
               name="ship_by"
+              lbw={180}
               onChange={handlePayload}
               value={payload.ship_by || ""}
               disabled={formdisabled}
             />
             <InputInline
               lb={"Ship On"}
+              lbw={180}
               name="ship_on"
               onChange={handlePayload}
               value={payload.ship_on || ""}
@@ -165,6 +176,7 @@ function Form({ refdata, formdata }) {
             <InputInline
               lb={"Destination"}
               name="destination"
+              lbw={180}
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.destination || ""}
@@ -203,7 +215,14 @@ function Form({ refdata, formdata }) {
           onChange={handlePayload}
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
-          filter="fasilitator-cargo"
+          filter="fasilitator-bank"
+        />
+      )}
+      {refdata && auth.user.role.includes("fasilitator") && (
+        <Approval
+          model="MD_packinglist"
+          id={refdata.id}
+          callback_url="/exportir/packinglist"
         />
       )}
     </Stack>

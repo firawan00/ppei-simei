@@ -1,5 +1,5 @@
 import * as React from "react";
-import TextField from "@mui/material/TextField";
+import { TextField, Typography, Stack } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
@@ -13,7 +13,9 @@ export default function DatePickerText({
 }) {
   // delete props.inputFormat;
   return (
-    <>
+    <Stack direction={"row"}>
+      <Typography pr={1}>{`: `}</Typography>
+
       {!disabled && (
         <TextField
           placeholder={placeholder}
@@ -49,7 +51,7 @@ export default function DatePickerText({
         </LocalizationProvider>
       )} */}
       {disabled && value}
-    </>
+    </Stack>
   );
 }
 

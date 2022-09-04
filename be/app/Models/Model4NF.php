@@ -28,6 +28,11 @@ class Model4NF extends Model
             $query->Where('from', $request['from']);
         }
 
+        if (isset($request['status'])) {
+
+            $query->Where('status', $request['status']);
+        }
+
     }
 
     public function from()

@@ -76,12 +76,12 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              {/* <Typography color="initial">Jakata,</Typography> */}
-              <InputDate
-                label={""}
-                value={payload.date || null}
+              <InputInline
+                placeholder={fdate.format(fdate.today)}
+                name="date"
+                onChange={handlePayload}
+                value={payload.date || ""}
                 disabled={formdisabled}
-                onChange={(v) => setpayload({ ...payload, nodate: v })}
               />
             </Stack>
           </Stack>
@@ -95,8 +95,8 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
                 placeholder="No . . . Date . . . "
                 label={""}
-                value={payload.date || null}
-                onChange={(v) => setpayload({ ...payload, date: v })}
+                value={payload.nodate || null}
+                onChange={(v) => setpayload({ ...payload, nodate: v })}
               />
             </Stack>
             <Stack>

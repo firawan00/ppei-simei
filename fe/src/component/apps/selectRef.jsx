@@ -22,13 +22,15 @@ export function RInvoice(props) {
         method: "get",
         url: auth.user.role.includes("fasilitator")
           ? `md_invoice`
-          : `md_invoice?from=${auth.user.id}`,
+          : `md_invoice?from=${auth.user.id}&status=approved`,
       })
     );
   }
 
   if (!data.length)
-    return <Typography color={"error"}>Anda belum membuat invoice</Typography>;
+    return (
+      <Typography color={"error"}>Anda belum memiliki valid invoice</Typography>
+    );
   return (
     <Stack direction={"row"}>
       <TextField
@@ -83,14 +85,14 @@ export function RShippingInstruction(props) {
         method: "get",
         url: auth.user.role.includes("fasilitator")
           ? `md_shippinginstruction`
-          : `md_shippinginstruction?from=${auth.user.id}`,
+          : `md_shippinginstruction?from=${auth.user.id}&status=approved`,
       })
     );
   }
   if (!data.length)
     return (
       <Typography color={"error"}>
-        Anda belum membuat shipping instruction
+        Anda belum memiliki valid shipping instruction
       </Typography>
     );
 
@@ -134,13 +136,15 @@ export function RPackingList(props) {
         method: "get",
         url: auth.user.role.includes("fasilitator")
           ? `md_packinglist`
-          : `md_packinglist?from=${auth.user.id}`,
+          : `md_packinglist?from=${auth.user.id}&status=approved`,
       })
     );
   }
   if (!data.length)
     return (
-      <Typography color={"error"}>Anda belum membuat Packing List</Typography>
+      <Typography color={"error"}>
+        Anda belum memiliki valid Packing List
+      </Typography>
     );
 
   return (
@@ -203,7 +207,7 @@ export function RBillOfLading(props) {
   if (!data.length)
     return (
       <Typography color={"error"}>
-        Anda belum memiliki Bill of Lading
+        Anda belum memiliki valid Bill of Lading
       </Typography>
     );
 
@@ -265,7 +269,9 @@ export function RNPE(props) {
     );
   }
   if (!data.length)
-    return <Typography color={"error"}>Anda belum memiliki NPE</Typography>;
+    return (
+      <Typography color={"error"}>Anda belum memiliki valid NPE</Typography>
+    );
 
   return (
     <Stack direction={"row"}>
@@ -445,7 +451,7 @@ export function RDO(props) {
   if (!data.length)
     return (
       <Typography color={"error"}>
-        Anda belum memiliki Delivery Order
+        Anda belum memiliki valid Delivery Order
       </Typography>
     );
 
@@ -463,7 +469,7 @@ export function RDO(props) {
       >
         {data.map((d) => (
           <MenuItem key={d.id} value={d}>
-            {`DO ${d.no} - to ${d.to.name}`}
+            {`# ${d.no} - to ${d.to.name}`}
           </MenuItem>
         ))}
       </TextField>

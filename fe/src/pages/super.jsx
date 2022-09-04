@@ -11,6 +11,10 @@ import { useNavigate, useLocation, Navigate } from "react-router-dom";
 export default function App(params) {
   const { auth } = React.useContext(Context);
 
+  React.useEffect(() => {
+    if (auth.user.role != "admin") auth.logout();
+  }, []);
+
   if (auth.user.id) return <Navigate to="/" />;
 
   return (

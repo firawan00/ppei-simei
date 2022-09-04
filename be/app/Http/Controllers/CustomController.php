@@ -15,7 +15,7 @@ class CustomController extends BaseController
     {
         if ((Auth::user()->role == 'user-export' || Auth::user()->role == 'user-import') && class_basename($this->model) != 'AdminConfig') {
             $data = $this->model::Filter($r->all())
-            // ->whereDate('created_at', Carbon::today())
+                ->whereDate('created_at', Carbon::today())
                 ->where(function ($q) {
                     $q->where('from', Auth::id())->orWhere('to', Auth::id());
                 })

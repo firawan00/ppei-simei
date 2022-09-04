@@ -20,6 +20,7 @@ class md_shippinginstruction_controller extends CustomController
         $payload = $r->except(['product_list']);
         $payload['from'] = Auth::user()->id;
         $payload['product_list'] = json_encode($r->product_list);
+        $payload['status'] = 'pending';
 
         $data = MD_shippinginstruction::updateOrCreate(
             [

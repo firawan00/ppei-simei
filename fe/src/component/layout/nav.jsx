@@ -74,12 +74,12 @@ const exportir = [
   {
     name: "Invoice",
     path: "/exportir/invoice",
-    role: ["user-export", "admin"],
+    role: ["user-export", "fasilitator-bank", "admin"],
   },
   {
     name: "Packing List",
     path: "/exportir/packinglist",
-    role: ["user-export", "admin"],
+    role: ["user-export", "fasilitator-bank", "admin"],
   },
   {
     name: "Shipping Instruction",

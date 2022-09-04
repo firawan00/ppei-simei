@@ -3,23 +3,27 @@ import { TextField, Stack, Typography } from "@mui/material";
 export default function App(props) {
   function getWidth(params) {
     if (props.dcol) return "auto";
-    return props.lbw || 180;
+    return props.lbw || 170;
   }
   return (
     <Stack
       direction={props.dcol ? "column" : "row"}
-      alignItems={props.dcol ? "left" : "center"}
-      my={props.dcol ? 0 : 0.5}
+      alignItems={props.dcol ? "left" : props.ai || "flex-start"}
+      my={props.dcol ? 0.2 : 0.5}
       justifyContent={props.jc ? props.jc : "space-between"}
+      height="100%"
     >
       {props.lb && (
-        <Typography
-          width={getWidth()}
-          color="initial"
-          variant={props.var || "body1"}
-        >
-          {`${props.lb} :`}
-        </Typography>
+        <Stack direction={"row"}>
+          <Typography
+            width={getWidth()}
+            color="initial"
+            variant={props.var || "body1"}
+          >
+            {`${props.lb}`}
+          </Typography>
+          <Typography pr={1}>{`: `}</Typography>
+        </Stack>
       )}
 
       {!props.disabled && (

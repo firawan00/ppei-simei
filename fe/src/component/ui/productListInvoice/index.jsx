@@ -32,10 +32,7 @@ const meta = [
     name: "qty",
     w: "7%",
   },
-  // {
-  //   name: "CARTON",
-  //   w: "10%",
-  // },
+
   {
     name: "unit",
     w: "10%",
@@ -51,25 +48,16 @@ const meta = [
     w: "20%",
   },
 ];
-const blank = {
-  name: "item name",
-  qty: 1,
-  carton: 1,
-
-  unit: "pcs",
-  unitprice: 10000,
-};
 
 export default function BasicTable({ initvalue, onChange, disabled }) {
   const [data, setdata] = useState(
     initvalue || [
       {
         name: "",
-        qty: 0,
+        // qty: 0,
         carton: 0,
-
         unit: "pcs",
-        unitprice: 0,
+        // unitprice: 0,
       },
     ]
   );
@@ -83,7 +71,7 @@ export default function BasicTable({ initvalue, onChange, disabled }) {
   function handleAdd() {
     let temp = data;
     temp.push({
-      name: "item name",
+      name: "",
     });
     setdata([...temp]);
   }

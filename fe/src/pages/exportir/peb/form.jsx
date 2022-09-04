@@ -183,7 +183,11 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
             <RenderFixed t="PENERIMA" B />
             <RenderFixed t="Identitas" v={"01.234.567.8-910.111"} w={60} />
             <RenderFixed t="nama" v={formdata.invoice.consignee} w={60} />
-            <RenderFixed t="alamat" v={formdata.invoice.destination} w={60} />
+            <RenderFixed
+              t="alamat"
+              v={formdata.invoice.consignee_address}
+              w={60}
+            />
           </Stack>
         </Stack>
         <Divider />
@@ -198,7 +202,11 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
             <RenderFixed t="PEMBELI" B />
             <RenderFixed t="Identitas" v={"01.234.567.8-910.111"} w={60} />
             <RenderFixed t="nama" v={formdata.invoice.consignee} w={60} />
-            <RenderFixed t="nama" v={formdata.invoice.destination} w={60} />
+            <RenderFixed
+              t="nama"
+              v={formdata.invoice.consignee_address}
+              w={60}
+            />
           </Stack>
         </Stack>
         <Divider />
@@ -263,7 +271,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
             <RenderFixed t="DOKUMEN PELENGKAP PABEAN" B />
             <RenderFixed
               t="27.	Nomor & Tgl Invoice"
-              v={fdate.format(formdata.invoice.date)}
+              v={formdata.invoice.date}
               w={210}
             />
             <RenderFixed

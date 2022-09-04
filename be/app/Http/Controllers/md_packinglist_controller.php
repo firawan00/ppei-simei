@@ -20,6 +20,7 @@ class md_packinglist_controller extends CustomController
         $payload = $r->except(['product_list']);
         $payload['from'] = Auth::user()->id;
         $payload['product_list'] = json_encode($r->product_list);
+        $payload['status'] = 'pending';
 
         $data = MD_packinglist::updateOrCreate(
             [
@@ -37,7 +38,7 @@ class md_packinglist_controller extends CustomController
             "ref-model" => get_class($data),
             "ref-id" => $data->id,
             'title' => 'Packing List from ' . Auth::user()->name,
-            'link' => '/importir/lkn/' . $data->id,
+            'link' => '/exportir/packinglist/' . $data->id,
         ]
         );
 

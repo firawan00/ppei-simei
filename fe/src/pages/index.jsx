@@ -127,8 +127,8 @@ function UserExportStatus({ data }) {
         User Export Progress
       </Typography>
       <Stack direction={"row"} flexWrap={"wrap"}>
-        {exportItem.map((d) => (
-          <Stack mx={4} my={2}>
+        {exportItem.map((d, ix) => (
+          <Stack mx={4} my={2} key={ix}>
             <Stack
               width={size}
               height={size}

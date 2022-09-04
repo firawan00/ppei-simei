@@ -14,6 +14,7 @@ import Sentto from "@/component/apps/sentto";
 import Header from "../_partial/exportirHeader";
 import Sign from "@component/apps/sign";
 import InputDate from "@component/gip-useForm/inputDate";
+import Approval from "@/component/apps/approval";
 
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
@@ -46,14 +47,36 @@ export default function App({ refdata }) {
           <Typography variant="h6" align="center" color="initial">
             INVOICE
           </Typography>
-          <Stack direction={"row"} alignItems="flex-start" spacing={2}>
-            <InputInline
-              lb={"Consignee"}
-              name="consignee"
-              onChange={handlePayload}
-              disabled={formdisabled}
-              value={payload.consignee || ""}
-            />
+          <Stack direction={"row"} alignItems="flex-start" spacing={1}>
+            <Stack width={"50%"}>
+              <InputInline
+                lb={"Consignee"}
+                name="consignee"
+                lbw={140}
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.consignee || ""}
+                ai="flex-start"
+              />
+              <InputInline
+                lb={"Consignee's Address"}
+                lbw={140}
+                name="consignee_address"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.consignee_address || ""}
+                ai="flex-start"
+              />
+              <InputInline
+                lb={"Consignee's Country"}
+                lbw={140}
+                name="consignee_country"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.consignee_country || ""}
+                ai="flex-start"
+              />
+            </Stack>
             <Stack width={"50%"}>
               <InputInline
                 lb={"Invoice No."}
@@ -62,9 +85,15 @@ export default function App({ refdata }) {
                 disabled={formdisabled}
                 value={payload.no || ""}
               />
-
-              <Stack direction={"row"} justifyContent="space-between">
-                <Typography color="initial" width={180}>
+              <InputInline
+                lb={"Date"}
+                name="date"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.date || ""}
+              />
+              {/* <Stack direction={"row"} justifyContent="space-between">
+                <Typography color="initial" width={220}>
                   Date
                 </Typography>
                 <InputDate
@@ -74,7 +103,7 @@ export default function App({ refdata }) {
                   value={payload.date || null}
                   onChange={(v) => setpayload({ ...payload, date: v })}
                 />
-              </Stack>
+              </Stack> */}
 
               <InputInline
                 lb={"SC No."}
@@ -111,31 +140,38 @@ export default function App({ refdata }) {
             <InputInline
               lb={"Ship By"}
               name="ship_by"
+              lbw={140}
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.ship_by || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"Ship on date"}
+              lbw={140}
               name="ship_on"
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.ship_on || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"Destination"}
+              lbw={140}
               name="destination"
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.destination || ""}
+              jc="flex-start"
             />
             <InputInline
               lb={"Shipping Marks"}
-              lbw={180}
+              lbw={140}
               name="shipping_mark"
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.shipping_mark || ""}
+              jc="flex-start"
             />
           </Stack>
           <ProductList
@@ -158,7 +194,14 @@ export default function App({ refdata }) {
           onChange={handlePayload}
           disabled={formdisabled}
           setEdit={() => setformdisabled(false)}
-          filter="fasilitator-cargo"
+          filter="fasilitator-bank"
+        />
+      )}
+      {refdata && auth.user.role.includes("fasilitator") && (
+        <Approval
+          model="MD_invoice"
+          id={refdata.id}
+          callback_url="/exportir/invoice"
         />
       )}
     </Stack>

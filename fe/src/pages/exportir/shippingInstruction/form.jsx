@@ -23,6 +23,7 @@ import Sign from "@component/apps/sign";
 import BackIcon from "@/component/ui/backIcon";
 import Header from "../_partial/exportirHeader";
 import ProductList from "@/component/ui/productListPackingList";
+import Approval from "@/component/apps/approval";
 
 import {
   RInvoice,
@@ -154,13 +155,20 @@ function MainForm({ refdata, formdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <InputDate
+              <InputInline
+                name="date"
+                onChange={handlePayload}
+                value={payload.date || ""}
+                disabled={formdisabled}
+              />
+
+              {/* <InputDate
                 inputFormat="dd MMM yyyy"
                 label={""}
                 value={payload.date || null}
                 onChange={(v) => setpayload({ ...payload, date: v })}
                 disabled={formdisabled}
-              />
+              /> */}
             </Stack>
           </Stack>
 
@@ -389,7 +397,7 @@ function MainForm({ refdata, formdata }) {
             <InputInline
               lb={"Original/copy/bill of Lading"}
               name="copy_bl"
-              lbw={280}
+              lbw={180}
               onChange={handlePayload}
               value={payload.copy_bl || ""}
               disabled={formdisabled}
@@ -410,6 +418,13 @@ function MainForm({ refdata, formdata }) {
           setEdit={() => setformdisabled(false)}
           filter="fasilitator-cargo"
           btn_disabled={!payload.to}
+        />
+      )}
+      {refdata && auth.user.role.includes("fasilitator") && (
+        <Approval
+          model="MD_shippinginstruction"
+          id={refdata.id}
+          callback_url="/exportir/shippinginstruction"
         />
       )}
     </Stack>
