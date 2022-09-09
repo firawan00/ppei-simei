@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Stack, Divider, Typography, Button } from "@mui/material";
 import { fetcher } from "@component/gip-useForm/fetcher";
 import { Link, useNavigate } from "react-router-dom";
+import { fdate } from "@/component/helper/formating";
 
 export default function App(props) {
   const [data, setdata] = useState([]);
@@ -10,8 +11,9 @@ export default function App(props) {
 
   const field = [
     { data: "from", label: "From", w: "20%" },
-    { data: "to", label: "To", w: "20%" },
-    { data: "from", label: "Message", w: "40%" },
+    { data: "from", label: "Message", w: "35%" },
+    { data: "ref", label: "ref", w: "15%" },
+    { data: "updated_at", label: "Time", w: "15%" },
     { data: "from", label: "Action", w: "5%" },
   ];
 
@@ -67,9 +69,10 @@ export default function App(props) {
             fontWeight={d.hasread ? "" : "bold"}
           >
             <Stack width={field[0].w}>{d.from.name}</Stack>
-            <Stack width={field[1].w}>{d.to.name}</Stack>
-            <Stack width={field[2].w}>{d.title}</Stack>
-            <Stack width={field[3].w}>
+            <Stack width={field[1].w}>{d.title}</Stack>
+            <Stack width={field[2].w}>{d.ref_id}</Stack>
+            <Stack width={field[3].w}>{fdate.format_time(d.updated_at)}</Stack>
+            <Stack width={field[4].w}>
               <Button variant="text" onClick={() => doRead(d.id, d.link)}>
                 view
               </Button>

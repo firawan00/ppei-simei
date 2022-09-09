@@ -7,6 +7,9 @@ export default function Footer(params) {
       <Typography variant="caption" color="accgrey.sec">
         {import.meta.env.VITE_APPNAME} @ {new Date().getFullYear()}{" "}
       </Typography>
+      <Typography variant="caption" color="grey.b">
+        v1.0 Alpha
+      </Typography>
     </Stack>
   );
 }

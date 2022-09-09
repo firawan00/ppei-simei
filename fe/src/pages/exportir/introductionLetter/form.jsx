@@ -112,7 +112,7 @@ export default function App({ refdata }) {
               prewrap
               rows={6}
             />
-            <InputInline
+            {/* <InputInline
               lb={"Type"}
               name="type"
               lbw={180}
@@ -120,7 +120,7 @@ export default function App({ refdata }) {
               value={payload.type || ""}
               disabled={formdisabled}
               jc="flex-start"
-            />
+            /> */}
             <InputInline
               lb={"Price FOB Tg Priok"}
               name="price_fob"

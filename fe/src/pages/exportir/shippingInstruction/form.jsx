@@ -160,6 +160,7 @@ function MainForm({ refdata, formdata }) {
                 onChange={handlePayload}
                 value={payload.date || ""}
                 disabled={formdisabled}
+                placeholder={fdate.format(fdate.today)}
               />
 
               {/* <InputDate
@@ -353,6 +354,7 @@ function MainForm({ refdata, formdata }) {
               onChange={handlePayload}
               value={payload.gross_weight || ""}
               // disabled={formdisabled}
+              jc="flex-start"
               disabled
             />
 
@@ -363,6 +365,7 @@ function MainForm({ refdata, formdata }) {
               onChange={handlePayload}
               value={payload.nett_weight || ""}
               // disabled={formdisabled}
+              jc="flex-start"
               disabled
             />
 
@@ -374,6 +377,7 @@ function MainForm({ refdata, formdata }) {
               value={payload.lc_ref || ""}
               // disabled={formdisabled}
               disabled
+              jc="flex-start"
             />
 
             <InputInline
@@ -383,6 +387,7 @@ function MainForm({ refdata, formdata }) {
               onChange={handlePayload}
               value={payload.stuffing_date || ""}
               disabled={formdisabled}
+              jc="flex-start"
             />
 
             <InputInline
@@ -392,6 +397,7 @@ function MainForm({ refdata, formdata }) {
               onChange={handlePayload}
               value={payload.freight_term || ""}
               disabled={formdisabled}
+              jc="flex-start"
             />
 
             <InputInline
@@ -401,6 +407,7 @@ function MainForm({ refdata, formdata }) {
               onChange={handlePayload}
               value={payload.copy_bl || ""}
               disabled={formdisabled}
+              jc="flex-start"
             />
           </Stack>
 

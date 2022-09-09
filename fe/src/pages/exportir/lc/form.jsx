@@ -114,7 +114,7 @@ export default function NewSkaForm({ refdata }) {
             onChange={handlePayload}
             disabled={formdisabled}
             inputProps={{ style: { fontSize: 12 } }}
-            value={payload.body || blankbody}
+            value={payload.body}
             sx={{
               "&textarea": {
                 py: "1px",

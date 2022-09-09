@@ -39,6 +39,8 @@ class md_shippinginstruction_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Shipping Instruction from ' . Auth::user()->name,
             'link' => '/exportir/shippinginstruction/' . $data->id,
+            'ref_id' => $r->docref,
+
         ]
         );
 

@@ -40,6 +40,8 @@ class md_billoflading_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Bill of lading  from ' . Auth::user()->name,
             'link' => '/exportir/billoflanding/' . $data->id,
+            'ref_id' => $r->blno,
+
         ]
         );
         return response()->json($data);

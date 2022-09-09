@@ -133,20 +133,20 @@ DATE OF SHIPMENT :`,
   }
 
   React.useEffect(() => {
-    console.log(formdata.invoice);
-    setpayload({
-      ...payload,
-      gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
-      gct: `${formdata.invoice.consignee},${formdata.invoice.consignee_address},${formdata.invoice.consignee_country}`,
-      f7: formdata.invoice.product_list.reduce(
-        (a, b) => a.concat(`${b.hs}, `),
-        ""
-      ),
-      invoice_id: formdata.invoice.id,
-      pl_id: formdata.pl.id,
-      bl_id: formdata.bl.id,
-      npe_id: formdata.npe.id,
-    });
+    if (!refdata)
+      setpayload({
+        ...payload,
+        gcf: `${formdata.invoice.from.name},${formdata.invoice.from.address}`,
+        gct: `${formdata.invoice.consignee},${formdata.invoice.consignee_address},${formdata.invoice.consignee_country}`,
+        f7: formdata.invoice.product_list.reduce(
+          (a, b) => a.concat(`${b.hs}, `),
+          ""
+        ),
+        invoice_id: formdata.invoice.id,
+        pl_id: formdata.pl.id,
+        bl_id: formdata.bl.id,
+        npe_id: formdata.npe.id,
+      });
   }, [formdata]);
 
   return (

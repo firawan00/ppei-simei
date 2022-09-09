@@ -19,6 +19,11 @@ class StatusController extends Controller
 
         if ($r->status == 'approved' && ($r->model == 'MD_invoice' || $r->model == 'MD_packinglist' || $r->model == 'MD_shippinginstruction')) {
             $data->to = User::where('role', 'fasilitator-cargo')->first()->id;
+            if ($r->model == 'MD_invoice' || $r->model == 'MD_packinglist') {
+
+                $data->status_notes = 'Approved by Fasilitator Bank, Forward to Fasilitator Cargo';
+            }
+
         }
 
         $data->save();

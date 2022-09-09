@@ -37,6 +37,7 @@ class md_introductionletter_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Introduction Letter from ' . Auth::user()->name,
             'link' => '/exportir/introductionletter/' . $data->id,
+            'ref_id' => $r->docref,
         ]
         );
         return response()->json($data);

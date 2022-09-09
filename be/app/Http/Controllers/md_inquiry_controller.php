@@ -35,6 +35,8 @@ class md_inquiry_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Inquiry Letter from ' . Auth::user()->name,
             'link' => '/importir/inquiry/' . $data->id,
+            'ref_id' => $r->no,
+
         ]
         );
         return response()->json($data);

@@ -24,8 +24,16 @@ class AuthController extends Controller
         $pwddate = substr($r->password, -2, 2);
 
         if (Auth::attempt(['username' => $r->username, 'password' => $pwd]) && $todate == $pwddate) {
-            $user = Auth::user();
+            $user = User::where('id', Auth::id())->first();
+
+            if (($user->role == "user-import" || $user->role == "user-import") && $user->updated_at < Carbon::today()) {
+                $user->name = "PT {$user->username}";
+                $user->address = "{$user->username} address";
+                $user->save();
+
+            }
             return response()->json($user);
+
         } else {
             return response()->json([
                 'error' => 'invalid login',

@@ -105,14 +105,28 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack spacing={1}>
-            <InputInline
-              lb={"Commodity"}
+            {/* <InputInline
+              lb={"Product"}
               lbw={180}
               name="commodity"
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.commodity || ""}
+            /> */}
+
+            <InputInline
+              lb={"Desc. of goods "}
+              name="commodity"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.commodity || ""}
+              disabled={formdisabled}
+              dcol
+              multiline
+              prewrap
+              rows={6}
             />
+
             <InputInline
               lb={"Quantity"}
               lbw={180}
@@ -122,15 +136,29 @@ export default function App({ refdata }) {
               value={payload.qty || ""}
             />
 
-            <InputSelect
-              lb={"Unit FOB Price"}
-              name="fob"
-              onChange={handlePayload}
-              value={payload.fob || ""}
-              disabled={formdisabled}
-              options={["CFR price ", "CIF price "]}
-              fullWid
-            />
+            <Stack direction={"row"} justifyContent="space-between">
+              <InputSelect
+                lb={""}
+                name="fob"
+                onChange={handlePayload}
+                value={payload.fob || ""}
+                disabled={formdisabled}
+                options={[
+                  "Unit FOB price",
+                  "Unit CFR price",
+                  "Unit  CIF price",
+                ]}
+                fullWid
+              />
+              <InputInline
+                lb={""}
+                lbw={180}
+                name="fob_value"
+                onChange={handlePayload}
+                disabled={formdisabled}
+                value={payload.qty || ""}
+              />
+            </Stack>
 
             <InputInline
               lb={"Packing"}
@@ -148,6 +176,16 @@ export default function App({ refdata }) {
               disabled={formdisabled}
               value={payload.shipment || ""}
             />
+
+            <InputSelect
+              lb={"Shipment Method"}
+              name="shipment_method"
+              onChange={handlePayload}
+              value={payload.shipment_method || ""}
+              disabled={formdisabled}
+              options={["Air Freight", "Sea Freight"]}
+              jc="space-between"
+            />
             <InputInline
               lb={"Term of Payment "}
               lbw={180}
@@ -157,7 +195,7 @@ export default function App({ refdata }) {
               value={payload.top || ""}
             />
             <InputInline
-              lb={"Validity"}
+              lb={"Offer valid until"}
               lbw={180}
               name="validity"
               onChange={handlePayload}

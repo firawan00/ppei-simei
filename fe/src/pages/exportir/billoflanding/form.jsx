@@ -52,7 +52,11 @@ export default function App({ refdata }) {
                 name="shipper"
                 onChange={handlePayload}
                 value={payload.shipper || ""}
+                multiline
+                prewrap
+                rows={3}
               />
+
               <Divider />
 
               <InputInline
@@ -63,6 +67,9 @@ export default function App({ refdata }) {
                 name="consignee"
                 onChange={handlePayload}
                 value={payload.consignee || ""}
+                multiline
+                prewrap
+                rows={3}
               />
               <Divider />
 
@@ -74,6 +81,9 @@ export default function App({ refdata }) {
                 name="notify_party"
                 onChange={handlePayload}
                 value={payload.notify_party || ""}
+                multiline
+                prewrap
+                rows={3}
               />
               <Divider />
 
@@ -106,10 +116,10 @@ export default function App({ refdata }) {
             </Stack>
             <Divider orientation="vertical" />
 
-            <Stack width={"40%"}>
+            <Stack width={"auto"}>
               <InputInline
                 lb={"B/L No."}
-                lbw={180}
+                lbw={80}
                 disabled={formdisabled}
                 name="blno"
                 onChange={handlePayload}
@@ -286,7 +296,20 @@ export default function App({ refdata }) {
               var="body2"
             />
             <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
-
+            <InputInline
+              dcol
+              lb={"Nett Weight"}
+              lbw={180}
+              disabled={formdisabled}
+              name="nw"
+              onChange={handlePayload}
+              value={payload.nw || ""}
+              multiline
+              prewrap
+              rows={3}
+              var="body2"
+            />
+            <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
             <InputInline
               dcol
               lb={"Measurement"}
@@ -549,10 +572,10 @@ function Header(params) {
         NED LLOYD LINE
       </Typography>
       <Typography variant="subtitle1" color="initial">
-        BILL OF LANDING
+        BILL OF LADING
       </Typography>
       <Typography variant="h3" color="initial">
-        COPY
+        ORIGINAL
       </Typography>
     </Stack>
   );

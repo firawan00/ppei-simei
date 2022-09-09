@@ -39,6 +39,8 @@ class md_ordering_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Ordering Letter from ' . Auth::user()->name,
             'link' => '/importir/ordering/' . $data->id,
+            'ref_id' => $r->doc_no,
+
         ]
         );
         return response()->json($data);

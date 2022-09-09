@@ -98,7 +98,7 @@ export default function BasicTable({ initvalue, onChange, disabled }) {
           <Typography
             key={ix}
             variant="overline"
-            align={ix == 4 ? "right" : "left"}
+            align={ix == 0 ? "left" : "center"}
             width={d.w}
             fontWeight="bold"
           >
@@ -120,11 +120,32 @@ export default function BasicTable({ initvalue, onChange, disabled }) {
               }}
               onClick={() => handleDelete(ix)}
             />
+
+            {/* <InputInline
+              lb={"Desc. of goods "}
+              name="desc_of_goods"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.desc_of_goods || ""}
+              disabled={formdisabled}
+              dcol
+              multiline
+              prewrap
+              rows={6}
+            /> */}
+
             <TextField
               value={d.name}
-              sx={inputStyle}
+              // sx={inputStyle}
               onChange={(e) => handleChange(e.target.value, "name", ix)}
               disabled={disabled}
+              multiline
+              rows={2}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  py: 0.5,
+                },
+              }}
             />
           </Stack>
           <Stack width={meta[1].w}>

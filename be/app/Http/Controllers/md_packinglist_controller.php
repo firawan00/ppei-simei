@@ -39,6 +39,8 @@ class md_packinglist_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Packing List from ' . Auth::user()->name,
             'link' => '/exportir/packinglist/' . $data->id,
+            'ref_id' => $r->no,
+
         ]
         );
 

@@ -24,7 +24,7 @@ class Inbox extends Migration
 
             $table->string('title');
             $table->string('link');
-
+            $table->string('ref_id')->nullable();
             $table->boolean('hasread')->default(0);
 
             $table->timestamps();

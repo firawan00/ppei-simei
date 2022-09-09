@@ -46,6 +46,8 @@ class md_ska_d_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Pengajuan SKA-D from ' . Auth::user()->name,
             'link' => '/exportir/ska-a/' . $data->id,
+            'ref_id' => $r->refno,
+
         ]
         );
         return response()->json($data);

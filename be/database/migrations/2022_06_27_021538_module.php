@@ -66,8 +66,12 @@ class Module extends Migration
             $table->string('commodity')->nullable();
             $table->string('qty')->nullable();
             $table->string('fob')->nullable();
+            $table->string('fob_value')->nullable();
+
             $table->string('packing')->nullable();
             $table->string('shipment')->nullable();
+            $table->string('shipment_method')->nullable();
+
             $table->string('top')->nullable();
             $table->string('validity')->nullable();
 

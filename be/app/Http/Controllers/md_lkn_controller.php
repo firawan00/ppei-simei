@@ -38,6 +38,7 @@ class md_lkn_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Lembar Kerja Negosiasi  from ' . Auth::user()->name,
             'link' => '/importir/lkn/' . $data->id,
+
         ]
         );
         return response()->json($data);

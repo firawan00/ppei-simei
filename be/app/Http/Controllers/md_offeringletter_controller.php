@@ -37,6 +37,8 @@ class md_offeringletter_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Offering Letter from ' . Auth::user()->name,
             'link' => '/exportir/offeringletter/' . $data->id,
+            'ref_id' => $r->doc_no,
+
         ]
         );
         return response()->json($data);

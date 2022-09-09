@@ -40,6 +40,8 @@ class md_invoice_controller extends CustomController
             "ref-id" => $data->id,
             'title' => 'Invoice from ' . Auth::user()->name,
             'link' => '/exportir/invoice/' . $data->id,
+            'ref_id' => $r->no,
+
         ]
         );
 

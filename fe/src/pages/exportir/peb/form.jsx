@@ -155,7 +155,17 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
           <Stack pt={"18px"}>
             <RenderFixed t="H. KOLOM KHUSUS BEA DAN CUKAI" B />
             <RenderFixed t="1.	Nomor Pendaftaran" v="000001" />
-            <RenderFixed t="Tanggal" v={formdata.invoice.date} />
+            <Stack>
+              <InputInline
+                lb={"Tanggal"}
+                name="htanggal"
+                onChange={handlePayload}
+                value={payload.htanggal || ""}
+                var="caption"
+                disabled={formdisabled}
+              />
+            </Stack>
+            {/* <RenderFixed t="Tanggal" v={formdata.invoice.date} /> */}
             <RenderFixed t="2.	Nomor BC 1.1" />
             <RenderFixed t="Tanggal" />
             <RenderFixed t="Pos/ Sub Pos" />
@@ -299,10 +309,14 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               w={210}
             />
             <RenderFixed t="DATA PENYERAHAN" />
-            <RenderFixed
-              t="32. Cara Penyerahan Barang"
-              // v={formdata.si.date}
-              w={210}
+
+            <InputInline
+              lb={"32. Cara Penyerahan Barang"}
+              name="i32"
+              onChange={handlePayload}
+              value={payload.i32 || ""}
+              var="caption"
+              disabled={formdisabled}
             />
           </Stack>
         </Stack>
@@ -310,7 +324,6 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
         <Stack direction={"row"} spacing={2} justifyContent="space-between">
           <Stack>
             <RenderFixed t="DATA TRANSAKSI EKSPOR" B />
-            {/* <RenderFixed t="33.	Bank Devisa Hasil Ekspor" v={"123 – BANKDEV"} /> */}
             <InputInline
               lb={"33.	Bank Devisa Hasil Ekspor"}
               name="i33"
@@ -326,9 +339,31 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
             />
           </Stack>
           <Stack pt={"18px"} width="50%">
-            <RenderFixed t="36.	Freight" v={""} w={210} />
-            <RenderFixed t="37.	Asuransi (LN/DN)" v={""} w={210} />
-            <RenderFixed t="38.	Nilai Maklon (Jika Ada)" v={""} w={210} />
+            <InputInline
+              lb={"36.	Freight"}
+              name="i36"
+              onChange={handlePayload}
+              value={payload.i36 || ""}
+              var="caption"
+              disabled={formdisabled}
+            />
+            <InputInline
+              lb={"37.	Asuransi (LN/DN)"}
+              name="i37"
+              onChange={handlePayload}
+              value={payload.i37 || ""}
+              var="caption"
+              disabled={formdisabled}
+            />
+
+            <InputInline
+              lb={"38.	Nilai Maklon (Jika Ada)"}
+              name="i38"
+              onChange={handlePayload}
+              value={payload.i38 || ""}
+              var="caption"
+              disabled={formdisabled}
+            />
           </Stack>
         </Stack>
         <Divider />
@@ -354,10 +389,18 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
             />
           </Stack>
           <Stack pt={"18px"} width="50%">
-            <RenderFixed
-              t="41.Jenis, Jumlah dan Merek Kemasan "
-              v={""}
-              w={210}
+            <InputInline
+              lb={"41.Jenis, Jumlah dan Merek Kemasan"}
+              name="i41"
+              onChange={handlePayload}
+              value={payload.i41 || ""}
+              var="caption"
+              dcol
+              disabled={formdisabled}
+              multiline
+              prewrap
+              rows={3}
+              jc="flex-start"
             />
           </Stack>
         </Stack>

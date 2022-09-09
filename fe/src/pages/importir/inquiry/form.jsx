@@ -41,7 +41,7 @@ export default function App({ refdata }) {
   return (
     <Stack component={"form"} onSubmit={formSubmit}>
       <PaperA4>
-        <Stack spacing={3}>
+        <Stack spacing={1}>
           <Header refdata={refdata} />
           <Divider />
 
@@ -50,7 +50,7 @@ export default function App({ refdata }) {
           </Typography>
 
           <Stack direction={"row"} justifyContent="space-between">
-            <Stack spacing={1}>
+            <Stack spacing={0}>
               <InputInline
                 lb={"No"}
                 name="no"
@@ -115,14 +115,27 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack spacing={1}>
-            <InputInline
+            {/* <InputInline
               lb={"Article"}
               lbw={120}
               onChange={handlePayload}
               value={payload.article || ""}
               disabled={formdisabled}
               jc="flex-start"
+            /> */}
+            <InputInline
+              lb={"Article"}
+              name="article"
+              lbw={180}
+              onChange={handlePayload}
+              value={payload.article || ""}
+              disabled={formdisabled}
+              dcol
+              multiline
+              prewrap
+              rows={3}
             />
+
             <InputInline
               lb={"Shipment"}
               lbw={120}

@@ -59,6 +59,15 @@ export default function App(props) {
         <Typography variant="overline" color="initial">
           Simulasi Export & Import
         </Typography>
+        <Typography variant="body1" color="initial" mt={2}>
+          SiMei adalah platform belajar terpadu berbasis elektronik di
+          lingkungan Kementerian Perdagangan dengan pembelajaran yang
+          menggunakan teknologi komunikasi dan informasi (TIK) untuk mempermudah
+          kegiatan simulasi ekspor impor di PPEJP. Namun ini hanya bersifat
+          simulasi untuk kepentingan pembelajarn. Sehingga untuk proses ekspor
+          impor sebenarnya tidak menggunakan platform ini dan menggunakan
+          platform lain dari Instansi yang berwenang.
+        </Typography>
       </Stack>
       {data && auth.user.role == "user-export" && (
         <UserExportStatus data={data} />
@@ -80,7 +89,7 @@ function UserImportStatus({ data }) {
         align="center"
         className="f-uppercase"
       >
-        User Export Progress
+        User Import Progress
       </Typography>
       <Stack direction={"row"} flexWrap={"wrap"}>
         {importItem.map((d) => (

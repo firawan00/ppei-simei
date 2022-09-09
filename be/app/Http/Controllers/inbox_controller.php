@@ -12,13 +12,13 @@ class inbox_controller extends Controller
 
     public function from()
     {
-        $data = inbox::whereFrom(Auth::user()->id)->whereDate('created_at', Carbon::today())->get();
+        $data = inbox::whereFrom(Auth::user()->id)->whereDate('created_at', Carbon::today())->orderBy('updated_at', 'DESC')->get();
         return response()->json($data);
     }
 
     public function to()
     {
-        $data = inbox::whereTo(Auth::user()->id)->whereDate('created_at', Carbon::today())->orderBy('updated_at', 'ASC')->get();
+        $data = inbox::whereTo(Auth::user()->id)->whereDate('created_at', Carbon::today())->orderBy('updated_at', 'DESC')->get();
         return response()->json($data);
     }
 

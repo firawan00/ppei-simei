@@ -34,12 +34,12 @@ const meta = [
   },
 
   {
-    name: "GROSS WEIGHT (KG)",
+    name: "GROSS WEIGHT (KGs)",
     w: "15%",
   },
 
   {
-    name: "NETT. WEIGHT (KG)",
+    name: "NETT. WEIGHT (KGs)",
     w: "15%",
   },
   {
@@ -97,7 +97,7 @@ export default function BasicTable({ initvalue, onChange, refitem, disabled }) {
           <Typography
             key={ix}
             variant="overline"
-            align={ix == 4 ? "right" : "left"}
+            align={ix == 0 ? "left" : "center"}
             width={d.w}
             fontWeight="bold"
           >
@@ -108,21 +108,18 @@ export default function BasicTable({ initvalue, onChange, refitem, disabled }) {
       {data.map((d, ix) => (
         <Stack direction={"row"} spacing={1} key={ix}>
           <Stack width={meta[0].w} direction="row" alignItems={"center"}>
-            {/* <ClearIcon
-              fontSize="8px"
-              sx={{
-                marginRight: 1,
-                ":hover": {
-                  color: "error.main",
-                },
-              }}
-              onClick={() => handleDelete(ix)}
-            /> */}
             <TextField
               value={d.name}
-              sx={inputStyle}
+              // sx={inputStyle}
               onChange={(e) => handleChange(e.target.value, "name", ix)}
               disabled
+              multiline
+              rows={2}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  py: 0.5,
+                },
+              }}
             />
           </Stack>
           <Stack width={meta[1].w}>
@@ -175,16 +172,60 @@ export default function BasicTable({ initvalue, onChange, refitem, disabled }) {
       ))}
 
       <Stack
-        justifyContent={"space-between"}
         direction="row"
         width={"100%"}
         pt={1}
         borderTop="1px solid grey"
+        spacing={1}
       >
-        <Typography variant="body2" fontWeight={"bold"} color="initial">
+        <Typography
+          variant="body2"
+          fontWeight={"bold"}
+          color="initial"
+          width={meta[0].w}
+        >
           Total
         </Typography>
-        <Typography variant="body2" fontWeight={"bold"} color="initial">
+        <Typography
+          variant="body2"
+          fontWeight={"bold"}
+          color="initial"
+          width={meta[1].w}
+          align="right"
+        >
+          {`${data.reduce((a, b) => a + Number(b.qty), 0)} `}
+        </Typography>
+        <Typography
+          variant="body2"
+          fontWeight={"bold"}
+          color="initial"
+          minWidth={meta[2].w}
+        ></Typography>
+        <Typography
+          variant="body2"
+          fontWeight={"bold"}
+          color="initial"
+          width={meta[3].w}
+          align="right"
+        >
+          {`${data.reduce((a, b) => a + Number(b.gweight), 0)} `}
+        </Typography>
+        <Typography
+          variant="body2"
+          fontWeight={"bold"}
+          color="initial"
+          width={meta[4].w}
+          align="right"
+        >
+          {`${data.reduce((a, b) => a + Number(b.nweight), 0)} `}
+        </Typography>
+        <Typography
+          variant="body2"
+          fontWeight={"bold"}
+          color="initial"
+          align="right"
+          width={meta[5].w}
+        >
           {`${data.reduce((a, b) => a + Number(b.measurement), 0)} (M³)`}
         </Typography>
       </Stack>
