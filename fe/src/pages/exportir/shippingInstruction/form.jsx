@@ -144,6 +144,7 @@ function MainForm({ refdata, formdata }) {
                 name="docref"
                 onChange={handlePayload}
                 value={payload.docref || ""}
+                jc="flex-start"
                 disabled={formdisabled}
               />
               <InputInline
@@ -151,6 +152,7 @@ function MainForm({ refdata, formdata }) {
                 name="docto"
                 onChange={handlePayload}
                 value={payload.docto || ""}
+                jc="flex-start"
                 disabled={formdisabled}
               />
             </Stack>
@@ -187,6 +189,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.shipper || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
                 <InputInline
@@ -195,6 +198,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.consignee || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
@@ -204,6 +208,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.notify_party || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
                 <InputInline
@@ -212,17 +217,10 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.feeder_vessel || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
-                <InputInline
-                  lb={"Place of Receipt "}
-                  name="por"
-                  lbw={180}
-                  onChange={handlePayload}
-                  value={payload.por || ""}
-                  disabled={formdisabled}
-                />
                 <InputInline
                   lb={"Ocean Vessel"}
                   name="ocean_vessel"
@@ -234,11 +232,21 @@ function MainForm({ refdata, formdata }) {
               </Stack>
               <Stack>
                 <InputInline
+                  lb={"Place of Receipt "}
+                  name="por"
+                  lbw={180}
+                  onChange={handlePayload}
+                  value={payload.por || ""}
+                  disabled={formdisabled}
+                  jc="flex-start"
+                />
+                <InputInline
                   lb={"Port of Loading"}
                   name="pol"
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.pol || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
@@ -248,6 +256,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.pod || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
@@ -257,6 +266,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.podelivery || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
@@ -266,6 +276,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.finaldestination || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
@@ -275,6 +286,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.etd || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
                 <InputInline
@@ -283,6 +295,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.eta || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
 
@@ -292,6 +305,7 @@ function MainForm({ refdata, formdata }) {
                   lbw={180}
                   onChange={handlePayload}
                   value={payload.qoc || ""}
+                  jc="flex-start"
                   disabled={formdisabled}
                 />
               </Stack>

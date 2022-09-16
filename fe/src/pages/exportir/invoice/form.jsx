@@ -56,7 +56,7 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 disabled={formdisabled}
                 value={payload.consignee || ""}
-                ai="flex-start"
+                jc="flex-start"
               />
               <InputInline
                 lb={"Consignee's Address"}
@@ -65,7 +65,7 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 disabled={formdisabled}
                 value={payload.consignee_address || ""}
-                ai="flex-start"
+                jc="flex-start"
               />
               <InputInline
                 lb={"Consignee's Country"}
@@ -74,7 +74,7 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 disabled={formdisabled}
                 value={payload.consignee_country || ""}
-                ai="flex-start"
+                jc="flex-start"
               />
             </Stack>
             <Stack width={"50%"}>
@@ -84,12 +84,14 @@ export default function App({ refdata }) {
                 onChange={handlePayload}
                 disabled={formdisabled}
                 value={payload.no || ""}
+                jc="flex-start"
               />
               <InputInline
                 lb={"Date"}
                 name="date"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.date || ""}
               />
               {/* <Stack direction={"row"} justifyContent="space-between">
@@ -110,6 +112,7 @@ export default function App({ refdata }) {
                 name="scno"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.scno || ""}
               />
               <InputInline
@@ -117,6 +120,7 @@ export default function App({ refdata }) {
                 name="lcno"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.lcno || ""}
               />
               <InputInline
@@ -124,6 +128,7 @@ export default function App({ refdata }) {
                 name="issuing_bank"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.issuing_bank || ""}
               />
               <InputInline
@@ -131,6 +136,7 @@ export default function App({ refdata }) {
                 name="tod"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.tod || ""}
               />
             </Stack>

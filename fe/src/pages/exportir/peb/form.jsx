@@ -162,6 +162,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
                 onChange={handlePayload}
                 value={payload.htanggal || ""}
                 var="caption"
+                jc="flex-start"
                 disabled={formdisabled}
               />
             </Stack>
@@ -242,6 +243,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               value={payload.i18 || ""}
               disabled={formdisabled}
               var="caption"
+              jc="flex-start"
             />
             <InputInline
               lb={"19.	No.Pengangkut (Voy/ Flight/Nopol)"}
@@ -249,6 +251,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               onChange={handlePayload}
               value={payload.i19 || ""}
               disabled={formdisabled}
+              jc="flex-start"
               var="caption"
             />
 
@@ -258,6 +261,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               onChange={handlePayload}
               value={payload.i20 || ""}
               var="caption"
+              jc="flex-start"
               disabled={formdisabled}
             />
           </Stack>
@@ -278,16 +282,17 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
 
         <Stack direction={"row"} spacing={2} justifyContent="space-between">
           <Stack>
+            {console.log(formdata)}
             <RenderFixed t="DOKUMEN PELENGKAP PABEAN" B />
             <RenderFixed
               t="27.	Nomor & Tgl Invoice"
-              v={formdata.invoice.date}
-              w={210}
+              v={`${formdata.invoice.no}\u00a0\u00a0\u00a0${formdata.invoice.date}`}
+              w={160}
             />
             <RenderFixed
               t="28.	Nomor & Tgl Packing"
-              v={formdata.si.date}
-              w={210}
+              v={`${formdata.si.docref}\u00a0\u00a0\u00a0${formdata.si.date}`}
+              w={160}
             />
             <RenderFixed t="29.	Jenis, No & Tgl Dok. lainnya" v={"-"} w={210} />
             <RenderFixed
@@ -317,6 +322,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               value={payload.i32 || ""}
               var="caption"
               disabled={formdisabled}
+              jc="flex-start"
             />
           </Stack>
         </Stack>
@@ -330,6 +336,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               onChange={handlePayload}
               value={payload.i33 || ""}
               var="caption"
+              jc="flex-start"
               disabled={formdisabled}
             />
             <RenderFixed t="34.	Jenis Valuta Asing" v={"USD"} />
@@ -346,6 +353,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               value={payload.i36 || ""}
               var="caption"
               disabled={formdisabled}
+              jc="flex-start"
             />
             <InputInline
               lb={"37.	Asuransi (LN/DN)"}
@@ -353,6 +361,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               onChange={handlePayload}
               value={payload.i37 || ""}
               var="caption"
+              jc="flex-start"
               disabled={formdisabled}
             />
 
@@ -361,13 +370,14 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               name="i38"
               onChange={handlePayload}
               value={payload.i38 || ""}
+              jc="flex-start"
               var="caption"
               disabled={formdisabled}
             />
           </Stack>
         </Stack>
         <Divider />
-        <Stack direction={"row"} spacing={2} justifyContent="space-between">
+        <Stack direction={"row"} justifyContent="space-between">
           <Stack>
             <RenderFixed t="DATA PETI KEMAS" B />
             <RenderFixed t="39.	Jumlah Peti Kemas" v={formdata.si.qoc} />
@@ -375,6 +385,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               t="40.	Nomor,Ukuran "
               v={`${formdata.do.container_no} |
                ${formdata.do.seal_no}`}
+              w={200}
             />
             {/* <RenderFixed t="Status peti Kemas " v={"FCL "} /> */}
 
@@ -385,6 +396,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
               value={payload.ispk || ""}
               var="caption"
               disabled={formdisabled}
+              jc="flex-start"
               options={["fcl", "lcl"]}
             />
           </Stack>

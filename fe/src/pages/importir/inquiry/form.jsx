@@ -81,11 +81,11 @@ export default function App({ refdata }) {
               />
             </Stack>
             <Stack direction={"row"}>
-              <InputDate
-                inputFormat="dd MMM yyyy"
-                label={""}
+              <InputInline
+                placeholder={fdate.format(fdate.today)}
+                name="date"
+                onChange={handlePayload}
                 value={payload.date || ""}
-                onChange={(v) => setpayload({ ...payload, date: v })}
                 disabled={formdisabled}
               />
             </Stack>

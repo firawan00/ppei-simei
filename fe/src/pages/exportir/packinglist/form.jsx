@@ -96,20 +96,23 @@ function Form({ refdata, formdata }) {
               onChange={handlePayload}
               disabled={formdisabled}
               value={payload.consignee || ""}
+              jc="flex-start"
             />
-            <Stack width={"50%"}>
+            <Stack width={"55%"}>
               <InputInline
                 lb={"Packing List No."}
                 name="no"
                 onChange={handlePayload}
                 disabled={formdisabled}
                 value={payload.no || ""}
+                jc="flex-start"
               />
               <InputInline
                 lb={"Date"}
                 name="date"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.date || ""}
               />
               {/* <Stack direction={"row"} justifyContent="space-between">
@@ -130,12 +133,14 @@ function Form({ refdata, formdata }) {
                 name="scno"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.scno || ""}
               />
               <InputInline
                 lb={" L/C No."}
                 name="lcno"
                 onChange={handlePayload}
+                jc="flex-start"
                 disabled={formdisabled}
                 value={payload.lcno || ""}
               />
@@ -143,6 +148,7 @@ function Form({ refdata, formdata }) {
                 lb={"Issuing Bank"}
                 name="issuing_bank"
                 onChange={handlePayload}
+                jc="flex-start"
                 disabled={formdisabled}
                 value={payload.issuing_bank || ""}
               />
@@ -151,6 +157,7 @@ function Form({ refdata, formdata }) {
                 name="tod"
                 onChange={handlePayload}
                 disabled={formdisabled}
+                jc="flex-start"
                 value={payload.tod || ""}
               />
             </Stack>
@@ -163,6 +170,7 @@ function Form({ refdata, formdata }) {
               lbw={180}
               onChange={handlePayload}
               value={payload.ship_by || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -171,6 +179,7 @@ function Form({ refdata, formdata }) {
               name="ship_on"
               onChange={handlePayload}
               value={payload.ship_on || ""}
+              jc="flex-start"
               disabled={formdisabled}
             />
             <InputInline
@@ -179,6 +188,7 @@ function Form({ refdata, formdata }) {
               lbw={180}
               onChange={handlePayload}
               disabled={formdisabled}
+              jc="flex-start"
               value={payload.destination || ""}
             />
             <InputInline
@@ -187,6 +197,7 @@ function Form({ refdata, formdata }) {
               name="shipping_mark"
               onChange={handlePayload}
               disabled={formdisabled}
+              jc="flex-start"
               value={payload.shipping_mark || ""}
             />
           </Stack>

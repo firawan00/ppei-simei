@@ -156,7 +156,7 @@ export default function App({ refdata }) {
                 name="fob_value"
                 onChange={handlePayload}
                 disabled={formdisabled}
-                value={payload.qty || ""}
+                value={payload.fob_value || ""}
               />
             </Stack>
 
