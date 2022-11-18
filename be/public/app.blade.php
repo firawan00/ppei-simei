@@ -9,10 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="manifest" href="https://simei.sm-indonesia.id/public/site.webmanifest" />
+    <link rel="manifest" href="/public/site.webmanifest" />
     <title>PPEJP - SimEI</title>
-    <script type="module" crossorigin src="https://simei.sm-indonesia.id/public/assets/index.95458c44.js"></script>
-    <link rel="stylesheet" href="https://simei.sm-indonesia.id/public/assets/index.b399a524.css">
+    <script type="module" crossorigin src="/public/assets/index.95458c44.js"></script>
+    <link rel="stylesheet" href="/public/assets/index.b399a524.css">
   </head>
   <body>
     <div id="root"></div>
