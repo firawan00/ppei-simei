@@ -41,6 +41,7 @@ import Sentto from "@/component/apps/sentto";
 import Approval from "@/component/apps/approval";
 import InputInline from "@component/gip-useForm/inputInline";
 import InputSelect from "@component/gip-useForm/inputSelect";
+import Sign from "@component/apps/sign";
 
 export default function App({ refdata }) {
   const [formdata, setformdata] = useState({});
@@ -424,10 +425,7 @@ function NewPEBForm({ formdata, refdata, handleRef, onEdit }) {
 function NewPEBForm2({ formdata, formdata2, refdata, onEdit }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
-
-  React.useEffect(() => {
-    onEdit(formdisabled);
-  }, [formdisabled]);
+  const nav = useNavigate();
 
   const [payload, setpayload] = useState(
     refdata
@@ -443,10 +441,24 @@ function NewPEBForm2({ formdata, formdata2, refdata, onEdit }) {
           rawhead: formdata2,
         }
   );
-  const nav = useNavigate();
+
+  React.useEffect(() => {
+    onEdit(formdisabled);
+  }, [formdisabled]);
+
+  // React.useEffect(() => {
+  //   console.log(payload);
+  // }, [payload]);
 
   function handlePayload(e) {
     setpayload({ ...payload, [e.target.name]: e.target.value });
+  }
+
+  function handleRawhead(e) {
+    setpayload({
+      ...payload,
+      rawhead: { ...payload.rawhead, [e.target.name]: e.target.value },
+    });
   }
 
   async function formSubmit(e) {
@@ -494,6 +506,84 @@ function NewPEBForm2({ formdata, formdata2, refdata, onEdit }) {
           }
           onChange={(v) => setpayload({ ...payload, product_list: v })}
         />
+
+        <Stack direction={"row"} spacing={1}>
+          <Stack width={"50%"}>
+            <InputInline
+              lb={"52 Nilai Tukar Mata Uang"}
+              name="i52"
+              onChange={handleRawhead}
+              value={payload.rawhead?.i52 || ""}
+              var="caption"
+              dcol
+              disabled={formdisabled}
+              multiline
+              prewrap
+              rows={3}
+              jc="flex-start"
+            />
+          </Stack>
+          <Stack>
+            <Typography variant="body2" color="initial">
+              DATA PENERIMAAN NEGARA
+            </Typography>
+            <InputInline
+              lb={"53. Nilai Bea Keluar"}
+              name="i53"
+              onChange={handleRawhead}
+              value={payload?.rawhead?.i53 || ""}
+              var="caption"
+              disabled={formdisabled}
+              prewrap
+              jc="flex-start"
+            />
+            <InputInline
+              lb={"54. PPh Pasal 22 Ekspor"}
+              name="i54"
+              onChange={handleRawhead}
+              value={payload?.rawhead?.i54 || ""}
+              var="caption"
+              disabled={formdisabled}
+              prewrap
+              jc="flex-start"
+            />
+            <InputInline
+              lb={"55. Pungutan Sawit"}
+              name="i55"
+              onChange={handleRawhead}
+              value={payload.rawhead?.i55 || ""}
+              var="caption"
+              disabled={formdisabled}
+              prewrap
+              jc="flex-start"
+            />
+          </Stack>
+        </Stack>
+
+        <Stack>
+          <Typography variant="body2" color="initial">
+            G. TANDA TANGAN EKSPORTIR / PPJK
+          </Typography>
+          <Typography variant="body2" color="initial">
+            Dengan ini saya menyatakan bertanggung jawab atas kebenaran hal-hal
+            yang diberitahukan dalam Pemberitahuan Export Barang ini, serta
+            bersedia dikenakan sanksi sesuai dengan ketentuan di bidang
+            kepabeanan apabila terdapat kesalahan.
+          </Typography>
+        </Stack>
+        <Stack alignItems={"flex-end"}>
+          <Typography variant="body2" color="initial">
+            {/* G. TANDA TANGAN EKSPORTIR / PPJK */}
+          </Typography>
+          <InputInline
+            placeholder={fdate.format(fdate.today)}
+            name="isigndate"
+            onChange={handleRawhead}
+            value={payload.rawhead?.isigndate || ""}
+            disabled={formdisabled}
+          />
+          <Sign text="Exportir" />
+        </Stack>
       </PaperA4>
 
       {(!refdata || (refdata && refdata.from.id == auth.user.id)) && (
