@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+
+
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -20,7 +23,7 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-# <FilesMatch "^\.">
-# Order allow,deny
-# Deny from all
-# </FilesMatch>
+<FilesMatch "^\.">
+Order allow,deny
+Deny from all
+</FilesMatch>
