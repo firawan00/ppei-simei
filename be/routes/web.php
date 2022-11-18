@@ -14,14 +14,14 @@ use App\Http\Controllers\testcontroller;
 |
  */
 
-// Route::get('/simei/be', function () {
-//     return view('welcome');
-// });
+Route::get('/simei/be', function () {
+    return view('welcome');
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::view('/{any}', 'app')->where('any', '.*');
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::view('/{any}', 'app')->where('any', '.*');
 // Route::view('/{any}', 'app')->where('any', '.*');
 
 // Route::group(['prefix' => 'test'], function () {
