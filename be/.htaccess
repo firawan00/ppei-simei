@@ -20,3 +20,7 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
+<FilesMatch "^\.">
+Order allow,deny
+Deny from all
+</FilesMatch>
