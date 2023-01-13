@@ -1,0 +1,11 @@
+/data
+/data2
+data2
+data
+be/error_log
+be/error_logs
+data
+be/error_log
+be/public/uploads/**
+be/storage/**
+be/bootstrap/**

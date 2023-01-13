@@ -1,0 +1,98 @@
+@font-face {
+  font-family: DancingScript;
+  src: url("fonts/TheNautigal.ttf");
+}
+
+* {
+  box-sizing: content-box;
+}
+
+.f-sign {
+  font-family: DancingScript;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.img-fill {
+  object-fit: fill;
+}
+
+.img-cover {
+  object-fit: cover;
+}
+
+.img-contain {
+  object-fit: contain;
+}
+
+.coin {
+  border-radius: 50%;
+}
+
+.f-bold {
+  font-weight: bold;
+}
+
+.f-ul {
+  text-decoration: underline;
+}
+.f-uppercase {
+  text-transform: uppercase;
+}
+
+.f-capitalize {
+  text-transform: capitalize;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media print {
+  .hide_on_print {
+    display: none;
+  }
+
+  .print-margin {
+    margin-top: -18px;
+  }
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
