@@ -8,4 +8,3 @@ data
 be/error_log
 be/public/uploads/**
 be/storage/**
-be/bootstrap/**
