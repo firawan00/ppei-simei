@@ -1,6 +1,6 @@
 # SIMEI - SIMULASI EXPORT IMPORT
 
-##@PPEJP - Kementerian Perdagangan
+@PPEJP - Kementerian Perdagangan
 
 simulasi export import adalah aplikasi yang membantu Pusat Pelatihan Sumber Daya Manusia Ekspor dan Jasa Perdagangan (PPEJP) dalam menyelengarakan pelatihan export dan import.
 
@@ -51,7 +51,7 @@ DB_USERNAME=postgres
 DB_PASSWORD=root
 ```
 
-- jika menggunakan postgree/psql recheck php.ini
+- jika menggunakan postgree/psql recheck php.ini, dan enable fitur pendukung psql
 
 ```
 extension=pdo_pgsql
@@ -66,5 +66,5 @@ extension=pgsql
 ## 3. routing
 
 - karena aplikikasi seluruhnya di handle oleh BE,
-  ubah root folder ke dalam folder, semisalah ,
+  ubah document root folder ke dalam folder be, semisal :
   `/var/www/simei/be`
