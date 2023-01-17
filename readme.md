@@ -24,10 +24,19 @@ aplikasi ini terdiri dari 2 folder utama, frontend (FE) dan backend (BE)
 
 - masuk kedalam folder fe, dan lakukan instalasi pakage melalui terminal dengan commnand :
   `npm i`
-- buka file .env dalam folder fe, ganti domaian pada bagian :
-  `VITE_BEURL='https://simei.sm-indonesia.id'`
-  dengan domain yang yang akan digunakan, semisal :
-  `VITE_BEURL='https://simei.kemendag.go.id'`
+- buka file .env dalam folder fe, ganti configurasi pada bagian :
+
+```
+VITE_BEURL='https://simei.sm-indonesia.id'
+VITE_RECAPTCHAKEY=6Ldw9wIkAAAAAB8saYPT7km9gnYY7O_3a6VTO3cE
+```
+
+dengan configurasi yang yang akan digunakan, semisal :
+
+```
+VITE_BEURL='https://simei.kemendag.go.id'
+VITE_RECAPTCHAKEY=6Ldw9wIkAAAAAB8saYPT7km9gnYY7O_3a6VTO3cE
+```
 
 - seteleah dilakukan configurasi pada `env`, compile ulang dengan command :
   `npm run lb`

@@ -25,6 +25,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-easy-crop": "^4.2.0",
+    "react-google-recaptcha": "^2.1.0",
     "react-router-dom": "^6.3.0",
     "react-to-print": "^2.14.7",
     "yup": "^0.32.11"

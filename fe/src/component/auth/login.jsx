@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+
 import Context from "@context";
 
-import {
-  Stack,
-  Typography,
-  Button,
-  TextField,
-  MenuItem,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import { Stack, Typography, Button, TextField, MenuItem, InputAdornment, IconButton } from "@mui/material";
 import SocialLogin from "@component/gip-sociallogin";
 import useForm, { Input } from "@/component/useForm";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +13,7 @@ import * as yup from "yup";
 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Recaptcha from "react-google-recaptcha";
 
 const userList = [
   "user-export1",
@@ -45,11 +39,30 @@ export default function Login({ isAdminLogin }) {
 }
 
 export function LoginForm({ isAdminLogin }) {
+  const recaptchaRef = React.createRef();
+
   let navigate = useNavigate();
   const [err, seterr] = React.useState("");
   const [pwdshow, setpwdshow] = React.useState(false);
-
+  const [hasCaptaca, sethasCaptaca] = useState(false);
   const { auth } = React.useContext(Context);
+
+  async function onChangeCaptcha(value) {
+    if (value) {
+      sethasCaptaca(true);
+      const res = await fetcher({
+        method: "post",
+        url: "auth/signin",
+        data: formik.values,
+      });
+      if (res.error) seterr(res.error);
+      else {
+        await auth.update(res);
+        navigate("/", true);
+      }
+    }
+    // console.log("Captcha value:", value);
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -60,26 +73,22 @@ export function LoginForm({ isAdminLogin }) {
     },
     validationSchema: validationSchema,
     onSubmit: async (payload) => {
-      const res = await fetcher({
-        method: "post",
-        url: "auth/signin",
-        data: payload,
-      });
-      if (res.error) seterr(res.error);
-      else {
-        await auth.update(res);
-        navigate("/", true);
-      }
+      recaptchaRef.current.execute();
+      // const res = await fetcher({
+      //   method: "post",
+      //   url: "auth/signin",
+      //   data: payload,
+      // });
+      // if (res.error) seterr(res.error);
+      // else {
+      //   await auth.update(res);
+      //   navigate("/", true);
+      // }
     },
   });
 
   return (
-    <Stack
-      component={"form"}
-      onSubmit={formik.handleSubmit}
-      noValidate
-      autoComplete="off"
-    >
+    <Stack component={"form"} onSubmit={formik.handleSubmit} noValidate autoComplete="off">
       {!isAdminLogin && (
         <TextField
           fullWidth
@@ -88,9 +97,7 @@ export function LoginForm({ isAdminLogin }) {
           value={formik.values.username}
           onChange={formik.handleChange}
           error={formik.touched.username && Boolean(formik.errors.username)}
-          helperText={
-            (formik.touched.username && formik.errors.username) || " "
-          }
+          helperText={(formik.touched.username && formik.errors.username) || " "}
           select
         >
           {userList.map((d) => (
@@ -108,9 +115,7 @@ export function LoginForm({ isAdminLogin }) {
           value={formik.values.username}
           onChange={formik.handleChange}
           error={formik.touched.username && Boolean(formik.errors.username)}
-          helperText={
-            (formik.touched.username && formik.errors.username) || " "
-          }
+          helperText={(formik.touched.username && formik.errors.username) || " "}
         />
       )}
       <TextField
@@ -137,8 +142,20 @@ export function LoginForm({ isAdminLogin }) {
           ),
         }}
       />
-      <Stack spacing={2}>
-        <Input.Submit t="sign in" />
+      <Stack alignItems={"flex-end"}>
+        <Recaptcha
+          ref={recaptchaRef}
+          size="invisible"
+          sitekey={import.meta.env.VITE_RECAPTCHAKEY}
+          onChange={onChangeCaptcha}
+        />
+      </Stack>
+
+      <Stack mt={2}>
+        <Input.Submit
+          t="sign in"
+          // disabled={!hasCaptaca}
+        />
         {/* <Typography
           variant="overline"
           align="center"
@@ -149,12 +166,7 @@ export function LoginForm({ isAdminLogin }) {
           user Register
         </Typography> */}
 
-        <Typography
-          variant="caption"
-          align="center"
-          color="error"
-          minHeight={24}
-        >
+        <Typography variant="caption" align="center" color="error" minHeight={24}>
           {err}
         </Typography>
       </Stack>
@@ -164,7 +176,5 @@ export function LoginForm({ isAdminLogin }) {
 
 const validationSchema = yup.object({
   username: yup.string("Enter your email").required("This field is required"),
-  password: yup
-    .string("Enter your password")
-    .required("This field is required"),
+  password: yup.string("Enter your password").required("This field is required"),
 });
