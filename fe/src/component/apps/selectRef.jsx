@@ -20,17 +20,12 @@ export function RInvoice(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: auth.user.role.includes("fasilitator")
-          ? `md_invoice`
-          : `md_invoice?from=${auth.user.id}&status=approved`,
+        url: auth.user.role.includes("fasilitator") ? `md_invoice` : `md_invoice?from=${auth.user.id}&status=approved`,
       })
     );
   }
 
-  if (!data.length)
-    return (
-      <Typography color={"error"}>Anda belum memiliki valid invoice</Typography>
-    );
+  if (!data.length) return <Typography color={"error"}>Anda belum memiliki valid invoice</Typography>;
   return (
     <Stack direction={"row"}>
       <TextField
@@ -89,12 +84,7 @@ export function RShippingInstruction(props) {
       })
     );
   }
-  if (!data.length)
-    return (
-      <Typography color={"error"}>
-        Anda belum memiliki valid shipping instruction
-      </Typography>
-    );
+  if (!data.length) return <Typography color={"error"}>Anda belum memiliki valid shipping instruction</Typography>;
 
   return (
     <Stack direction={"row"}>
@@ -140,12 +130,7 @@ export function RPackingList(props) {
       })
     );
   }
-  if (!data.length)
-    return (
-      <Typography color={"error"}>
-        Anda belum memiliki valid Packing List
-      </Typography>
-    );
+  if (!data.length) return <Typography color={"error"}>Anda belum memiliki valid Packing List</Typography>;
 
   return (
     <Stack direction={"row"}>
@@ -198,18 +183,11 @@ export function RBillOfLading(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: auth.user.role.includes("fasilitator")
-          ? `md_billoflading`
-          : `md_billoflading?to=${auth.user.id}`,
+        url: auth.user.role.includes("fasilitator") ? `md_billoflading` : `md_billoflading?to=${auth.user.id}`,
       })
     );
   }
-  if (!data.length)
-    return (
-      <Typography color={"error"}>
-        Anda belum memiliki valid Bill of Lading
-      </Typography>
-    );
+  if (!data.length) return <Typography color={"error"}>Anda belum memiliki valid Bill of Lading</Typography>;
 
   return (
     <Stack direction={"row"}>
@@ -262,16 +240,11 @@ export function RNPE(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: auth.user.role.includes("fasilitator")
-          ? `md_npe`
-          : `md_npe?to=${auth.user.id}`,
+        url: auth.user.role.includes("fasilitator") ? `md_npe` : `md_npe?to=${auth.user.id}`,
       })
     );
   }
-  if (!data.length)
-    return (
-      <Typography color={"error"}>Anda belum memiliki valid NPE</Typography>
-    );
+  if (!data.length) return <Typography color={"error"}>Anda belum memiliki valid NPE</Typography>;
 
   return (
     <Stack direction={"row"}>
@@ -324,9 +297,7 @@ export function RSKAA(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: auth.user.role.includes("fasilitator")
-          ? `md_ska_a`
-          : `md_ska_a?from=${auth.user.id}`,
+        url: auth.user.role.includes("fasilitator") ? `md_ska_a` : `md_ska_a?from=${auth.user.id}`,
       })
     );
   }
@@ -383,9 +354,7 @@ export function RSKAD(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: auth.user.role.includes("fasilitator")
-          ? `md_ska_d`
-          : `md_ska_d?from=${auth.user.id}`,
+        url: auth.user.role.includes("fasilitator") ? `md_ska_d` : `md_ska_d?from=${auth.user.id}`,
       })
     );
   }
@@ -442,18 +411,11 @@ export function RDO(props) {
     setdata(
       await fetcher({
         method: "get",
-        url: auth.user.role.includes("fasilitator")
-          ? `md_deliveryorder`
-          : `md_deliveryorder?to=${auth.user.id}`,
+        url: auth.user.role.includes("fasilitator") ? `md_deliveryorder` : `md_deliveryorder?to=${auth.user.id}`,
       })
     );
   }
-  if (!data.length)
-    return (
-      <Typography color={"error"}>
-        Anda belum memiliki valid Delivery Order
-      </Typography>
-    );
+  if (!data.length) return <Typography color={"error"}>Anda belum memiliki valid Delivery Order</Typography>;
 
   return (
     <Stack direction={"row"}>

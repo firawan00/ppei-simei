@@ -15,10 +15,8 @@ class testcontroller extends Controller
         $this->hris = 'https://localhost/bakamlahris/be/api/hcdp/auth';
     }
 
-
     public function apicall(Request $r)
     {
-
 
         dd($data);
         // return response()->json($response);

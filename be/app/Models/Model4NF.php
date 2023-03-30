@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Model4NF extends Model
 {
@@ -14,6 +15,21 @@ class Model4NF extends Model
     ];
 
     public $with = ['from', 'to'];
+
+    public function setIdAttribute($value)
+    {
+        if (is_null($value)) {
+            $latest = DB::table($this->getTable())->latest('id')->first();
+            if ($latest) {
+                $latest = $latest->id + 1;
+            } else {
+                $latest = 1;
+            }
+
+            $this->attributes['id'] = $latest;
+        }
+
+    }
 
     // public function setDateAttribute($value)
     // {

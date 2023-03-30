@@ -1,14 +1,7 @@
 import React, { useState, useContext } from "react";
 import Context from "@context";
 
-import {
-  Stack,
-  Typography,
-  Divider,
-  TextField,
-  MenuItem,
-  Button,
-} from "@mui/material";
+import { Stack, Typography, Divider, TextField, MenuItem, Button } from "@mui/material";
 import PaperA4 from "@component/paperA4";
 import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
@@ -25,11 +18,7 @@ import Header from "../_partial/exportirHeader";
 import ProductList from "@/component/ui/productListPackingList";
 import Approval from "@/component/apps/approval";
 
-import {
-  RInvoice,
-  RShippingInstruction,
-  RPackingList,
-} from "@component/apps/selectRef";
+import { RInvoice, RShippingInstruction, RPackingList } from "@component/apps/selectRef";
 
 export default function App({ refdata }) {
   const [formdata, setformdata] = useState({});
@@ -43,10 +32,7 @@ export default function App({ refdata }) {
 
   return (
     <Stack>
-      <Stack
-        alignItems={"center"}
-        display={auth.user.role.includes("fasilitator") ? "none" : ""}
-      >
+      <Stack alignItems={"center"} display={auth.user.role.includes("fasilitator") ? "none" : ""}>
         <Stack width={"210mm"} className="hide_on_print">
           <BackIcon />
 
@@ -75,38 +61,20 @@ function MainForm({ refdata, formdata }) {
       : {
           product_list: formdata.pl.product_list,
           pl_id: formdata.pl.id,
-          gross_weight:
-            formdata.pl.product_list.reduce(
-              (a, b) => a + parseInt(b.gweight),
-              0
-            ) + " kg",
-          nett_weight:
-            formdata.pl.product_list.reduce(
-              (a, b) => a + parseInt(b.nweight),
-              0
-            ) + " kg",
+          gross_weight: formdata.pl.product_list.reduce((a, b) => a + parseInt(b.gweight), 0) + " kg",
+          nett_weight: formdata.pl.product_list.reduce((a, b) => a + parseInt(b.nweight), 0) + " kg",
           lc_ref: formdata.pl.lcno,
-          desc_goods: formdata.pl.product_list.reduce(
-            (a, b) => a.concat(`${b.name}, `),
-            ""
-          ),
+          desc_goods: formdata.pl.product_list.reduce((a, b) => a.concat(`${b.name}, `), ""),
         }
   );
 
   React.useEffect(() => {
     setpayload({
       ...payload,
-      gross_weight:
-        formdata.pl.product_list.reduce((a, b) => a + parseInt(b.gweight), 0) +
-        " kg",
-      nett_weight:
-        formdata.pl.product_list.reduce((a, b) => a + parseInt(b.nweight), 0) +
-        " kg",
+      gross_weight: formdata.pl.product_list.reduce((a, b) => a + parseInt(b.gweight), 0) + " kg",
+      nett_weight: formdata.pl.product_list.reduce((a, b) => a + parseInt(b.nweight), 0) + " kg",
       lc_ref: formdata.pl.lcno,
-      desc_goods: formdata.pl.product_list.reduce(
-        (a, b) => a.concat(`${b.name}, `),
-        ""
-      ),
+      desc_goods: formdata.pl.product_list.reduce((a, b) => a.concat(`${b.name}, `), ""),
     });
   }, [formdata]);
 
@@ -176,8 +144,7 @@ function MainForm({ refdata, formdata }) {
           </Stack>
 
           <Stack>
-            We hereby request you to reserve space and kindly issue the B/L for
-            our cargo with following details:
+            We hereby request you to reserve space and kindly issue the B/L for our cargo with following details:
           </Stack>
 
           <Stack spacing={0}>
@@ -317,11 +284,7 @@ function MainForm({ refdata, formdata }) {
               disabled={formdisabled}
               initvalue={payload.product_list}
               onChange={(v) => setpayload({ ...payload, product_list: v })}
-              refitem={
-                payload.product_list
-                  ? payload.product_list
-                  : formdata.invoice.product_list
-              }
+              refitem={payload.product_list ? payload.product_list : formdata.invoice.product_list}
             />
 
             {/* 
@@ -442,11 +405,7 @@ function MainForm({ refdata, formdata }) {
         />
       )}
       {refdata && auth.user.role.includes("fasilitator") && (
-        <Approval
-          model="MD_shippinginstruction"
-          id={refdata.id}
-          callback_url="/exportir/shippinginstruction"
-        />
+        <Approval model="MD_shippinginstruction" id={refdata.id} callback_url="/exportir/shippinginstruction" />
       )}
     </Stack>
   );
