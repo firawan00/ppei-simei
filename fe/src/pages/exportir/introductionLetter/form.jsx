@@ -1,14 +1,7 @@
 import React, { useState, useContext } from "react";
 import Context from "@context";
 
-import {
-  Stack,
-  Typography,
-  Divider,
-  TextField,
-  MenuItem,
-  Button,
-} from "@mui/material";
+import { Stack, Typography, Divider, TextField, MenuItem, Button } from "@mui/material";
 import PaperA4 from "@component/paperA4";
 import { logo } from "@ui/logo";
 import Circle from "@ui/circle";
@@ -26,9 +19,7 @@ import { fdate } from "@component/helper/formating";
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
-  const [payload, setpayload] = useState(
-    refdata ? { ...refdata, to: refdata.to.id } : {}
-  );
+  const [payload, setpayload] = useState(refdata ? { ...refdata, to: refdata.to.id } : {});
   const nav = useNavigate();
 
   function handlePayload(e) {
@@ -94,9 +85,8 @@ export default function App({ refdata }) {
           </Stack>
 
           <Stack>
-            Dear Sir, Allow us herewith to introduce our company as an export
-            company. With this letter, we would like to offer our best selling
-            items as following details.
+            Dear Sir, Allow us herewith to introduce our company as an export company. With this letter, we would like
+            to offer our best selling items as following details.
           </Stack>
 
           <Stack spacing={1}>
@@ -110,7 +100,7 @@ export default function App({ refdata }) {
               dcol
               multiline
               prewrap
-              rows={6}
+              rows={12}
             />
             {/* <InputInline
               lb={"Type"}
@@ -149,10 +139,8 @@ export default function App({ refdata }) {
           </Stack> */}
 
           <Stack>
-            We do hope you will be interested and we shall be pleased to have
-            your inquiry and trial order in due time. In case you need
-            information, please do not hesitate to contact us by fax or email.
-            Thank you.
+            We do hope you will be interested and we shall be pleased to have your inquiry and trial order in due time.
+            In case you need information, please do not hesitate to contact us by fax or email. Thank you.
           </Stack>
 
           <Stack>
