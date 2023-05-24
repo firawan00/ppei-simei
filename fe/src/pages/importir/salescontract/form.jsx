@@ -167,7 +167,7 @@ export default function App({ refdata }) {
             value={payload.payment || ""}
             jc="flex-start"
             disabled={formdisabled}
-            placeholder="fob tanjong priok $99.99 / L/C at sight"
+            placeholder="FOB Tanjung Priok $99 / L/C at Sight"
             sx={{
               minWidth: 320,
             }}
