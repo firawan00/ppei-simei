@@ -16,9 +16,7 @@ import Header from "../_partial/headerImportir";
 export default function App({ refdata }) {
   const { auth } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
-  const [payload, setpayload] = useState(
-    refdata ? { ...refdata, to: refdata.to.id } : {}
-  );
+  const [payload, setpayload] = useState(refdata ? { ...refdata, to: refdata.to.id } : {});
   const nav = useNavigate();
 
   function handlePayload(e) {
@@ -75,12 +73,10 @@ export default function App({ refdata }) {
           </Stack>
 
           <Typography variant="body1" color="initial">
-            The seller confirms having concluded this contract with the buyer
-            covering the under mentioned merchandise on the terms and the
-            conditions stated here under and on the reverse. The buyer is hereby
-            requested to sign and return the original attached here to, and if
-            any discrepancy found by the Buyer, the seller should be informed
-            immediately by cable.
+            The seller confirms having concluded this contract with the buyer covering the under mentioned merchandise
+            on the terms and the conditions stated here under and on the reverse. The buyer is hereby requested to sign
+            and return the original attached here to, and if any discrepancy found by the Buyer, the seller should be
+            informed immediately by cable.
           </Typography>
           <ProductList
             initvalue={payload.product_list}
@@ -98,6 +94,9 @@ export default function App({ refdata }) {
             value={payload.shipment_date || ""}
             disabled={formdisabled}
             jc="flex-start"
+            sx={{
+              minWidth: 320,
+            }}
           />
           <InputInline
             lb={"1.2	Partial – Shipment  "}
@@ -107,6 +106,9 @@ export default function App({ refdata }) {
             value={payload.partial_shipment || ""}
             jc="flex-start"
             disabled={formdisabled}
+            sx={{
+              minWidth: 320,
+            }}
           />
           <InputInline
             lb={"1.3	Transshipment "}
@@ -116,6 +118,9 @@ export default function App({ refdata }) {
             value={payload.transshipment || ""}
             jc="flex-start"
             disabled={formdisabled}
+            sx={{
+              minWidth: 320,
+            }}
           />
           <InputInline
             lb={"1.4	Destination "}
@@ -125,6 +130,9 @@ export default function App({ refdata }) {
             value={payload.destination || ""}
             jc="flex-start"
             disabled={formdisabled}
+            sx={{
+              minWidth: 320,
+            }}
           />
           <InputInline
             lb={"1.5	Notify address "}
@@ -134,6 +142,9 @@ export default function App({ refdata }) {
             value={payload.notify_address || ""}
             jc="flex-start"
             disabled={formdisabled}
+            sx={{
+              minWidth: 320,
+            }}
           />
           <InputInline
             lb={"1.6	Shipping Marks "}
@@ -143,16 +154,23 @@ export default function App({ refdata }) {
             value={payload.shipping_marks || ""}
             jc="flex-start"
             disabled={formdisabled}
+            sx={{
+              minWidth: 320,
+            }}
           />
 
           <InputInline
-            lb={"II. Payment"}
+            lb={"II. Price / Payment"}
             lbw={180}
             name="payment"
             onChange={handlePayload}
             value={payload.payment || ""}
             jc="flex-start"
             disabled={formdisabled}
+            placeholder="fob tanjong priok $99.99 / L/C at sight"
+            sx={{
+              minWidth: 320,
+            }}
           />
         </Stack>
 

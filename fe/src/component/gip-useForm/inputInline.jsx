@@ -15,11 +15,7 @@ export default function App(props) {
     >
       {props.lb && (
         <Stack direction={"row"}>
-          <Typography
-            width={getWidth()}
-            color="initial"
-            variant={props.var || "body1"}
-          >
+          <Typography width={getWidth()} color="initial" variant={props.var || "body1"}>
             {`${props.lb}`}
           </Typography>
           <Typography pr={1}>{`: `}</Typography>
@@ -31,6 +27,7 @@ export default function App(props) {
           {...props}
           name={props.name ? props.name.toLowerCase() : props.lb.toLowerCase()}
           sx={{
+            ...props.sx,
             "&:hover": {
               fieldset: {
                 borderColor: "rgba(0, 0, 0, 0.23)",
