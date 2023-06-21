@@ -45,4 +45,12 @@ class inbox_controller extends Controller
 
         # code...
     }
+
+    public function all()
+    {
+        $data = inbox::all();
+        return response()->json($data);
+
+        # code...
+    }
 }

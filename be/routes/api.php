@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::get('to', [inbox_controller::class, 'to']);
         Route::post('read', [inbox_controller::class, 'read']);
         Route::get('check', [inbox_controller::class, 'check']);
+        Route::get('all', [inbox_controller::class, 'all']);
 
     });
     Route::post('status_handler', [StatusController::class, 'status_handler']);
