@@ -10,7 +10,7 @@ class Model4NF extends Model
 {
     protected $guarded = [];
     protected $hidden = [
-        'created_at',
+        // 'created_at',
         'deleted_at',
     ];
 
