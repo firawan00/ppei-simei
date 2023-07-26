@@ -21,7 +21,7 @@ export default function App(props) {
   useEffect(() => {
     async function fetchData() {
       let res = await fetcher({
-        url: `inbox/to?all=1`,
+        url: `inbox/to`,
         method: "get",
       });
       setdata(res);
