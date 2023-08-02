@@ -31,8 +31,8 @@ export default function App(props) {
   function mailFilter(d) {
     if (showAll) return true;
     var today = new Date().getDate();
-    let refdate = new Date(d.created_at).getDate();
-    return refdate >= today;
+    let refdate = new Date(d.updated_at).getDate();
+    return refdate <= today;
   }
 
   return (
