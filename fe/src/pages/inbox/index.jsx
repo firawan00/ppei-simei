@@ -44,7 +44,7 @@ export default function App(props) {
     if (showAll) return true;
     var today = new Date().getDate();
     let refdate = new Date(d.created_at).getDate();
-    return refdate >= today;
+    return refdate <= today;
   }
 
   return (
