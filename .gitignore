@@ -8,3 +8,6 @@ data
 be/error_log
 be/public/uploads/**
 be/storage/**
+
+.env.production
+.env
