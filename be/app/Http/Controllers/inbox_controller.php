@@ -13,7 +13,7 @@ class inbox_controller extends Controller
     public function from()
     {
         $data = inbox::whereFrom(Auth::user()->id)
-        // ->whereDate('created_at', Carbon::today())
+            // ->whereDate('created_at', Carbon::today())
             ->orderBy('updated_at', 'DESC')->get();
         return response()->json($data);
     }
@@ -21,7 +21,7 @@ class inbox_controller extends Controller
     public function to()
     {
         $data = inbox::whereTo(Auth::user()->id)
-        // ->whereDate('created_at', Carbon::today())
+            // ->whereDate('created_at', Carbon::today())
             ->orderBy('updated_at', 'DESC')->get();
         return response()->json($data);
     }
@@ -50,6 +50,14 @@ class inbox_controller extends Controller
     {
         $data = inbox::all();
         return response()->json($data);
+
+        # code...
+    }
+
+    public function clear()
+    {
+        $data = inbox::whereNotNull('id')->delete();
+        return response()->json('ok');
 
         # code...
     }

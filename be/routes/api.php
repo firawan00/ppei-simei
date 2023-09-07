@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('read', [inbox_controller::class, 'read']);
         Route::get('check', [inbox_controller::class, 'check']);
         Route::get('all', [inbox_controller::class, 'all']);
-
+        Route::post('clear', [inbox_controller::class, 'clear']);
     });
     Route::post('status_handler', [StatusController::class, 'status_handler']);
     Route::post('dashboard', [AppController::class, 'dashboard']);

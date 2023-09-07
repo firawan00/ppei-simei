@@ -6,6 +6,7 @@ import { Stack, Button, Typography } from "@mui/material";
 
 export default function AdminPage(params) {
   const [data, setfirst] = useState();
+  const [clearMsg, setclearMsg] = useState();
 
   React.useEffect(() => {
     fetching();
@@ -20,16 +21,25 @@ export default function AdminPage(params) {
     );
   }
 
-  function clearMsg() {}
+  async function doClearMsg() {
+    await fetcher({
+      method: "post",
+      url: `inbox/clear`,
+    });
+    setclearMsg("Inbox Cleared");
+  }
 
   return (
     <Stack spacing={3}>
-      {/* <Typography variant="h2" color="primary" className="f-capitalize">
+      <Typography variant="h2" color="primary" className="f-capitalize">
         Clear Data
       </Typography>
-      <Stack>
-        <Button onClick={clearMsg}>Crear Inbox / Outbox</Button>
-      </Stack> */}
+      <Stack direction={"row"}>
+        <Button onClick={doClearMsg} variant="outlined">
+          {clearMsg || "Clear Inbox"}
+        </Button>
+      </Stack>
+
       <Datatable data={data} meta={meta} isRefetch={fetching} disableNew />
     </Stack>
   );
