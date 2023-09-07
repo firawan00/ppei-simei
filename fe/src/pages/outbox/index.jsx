@@ -30,9 +30,9 @@ export default function App(props) {
 
   function mailFilter(d) {
     if (showAll) return true;
-    var today = new Date().getDate();
-    let refdate = new Date(d.updated_at).getDate();
-    return refdate <= today;
+    var today = new Date().setHours(0, 0, 0, 0);
+    let refdate = new Date(d.updated_at).setHours(0, 0, 0, 0);
+    return refdate >= today;
   }
 
   return (
