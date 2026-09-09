@@ -18,10 +18,14 @@ export const fetcher = async (param) => {
     });
     return res.data;
   } catch (error) {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       localStorage.clear();
       window.location.href = "/signin";
-    } else return error;
+    }
+
+    return {
+      error: error.response?.data?.error || error.response?.data?.message || error.message,
+    };
   }
 };
 
@@ -42,9 +46,13 @@ export const fetcherMultipart = async (param) => {
     const res = await axios(config);
     return res.data;
   } catch (error) {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       localStorage.clear();
       window.location.href = "/signin";
-    } else return error;
+    }
+
+    return {
+      error: error.response?.data?.error || error.response?.data?.message || error.message,
+    };
   }
 };

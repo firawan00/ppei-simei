@@ -61,7 +61,6 @@ export function LoginForm({ isAdminLogin }) {
         navigate("/", true);
       }
     }
-    // console.log("Captcha value:", value);
   }
 
   const formik = useFormik({
@@ -72,18 +71,8 @@ export function LoginForm({ isAdminLogin }) {
       passcode: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (payload) => {
+    onSubmit: async () => {
       recaptchaRef.current.execute();
-      // const res = await fetcher({
-      //   method: "post",
-      //   url: "auth/signin",
-      //   data: payload,
-      // });
-      // if (res.error) seterr(res.error);
-      // else {
-      //   await auth.update(res);
-      //   navigate("/", true);
-      // }
     },
   });
 
@@ -150,11 +139,9 @@ export function LoginForm({ isAdminLogin }) {
           onChange={onChangeCaptcha}
         />
       </Stack>
-
       <Stack mt={2}>
         <Input.Submit
           t="sign in"
-          // disabled={!hasCaptaca}
         />
         {/* <Typography
           variant="overline"

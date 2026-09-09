@@ -17,7 +17,7 @@ import Sign from "@component/apps/sign";
 import { fdate } from "@component/helper/formating";
 
 export default function App({ refdata }) {
-  const { auth } = useContext(Context);
+  const { auth, snackbar } = useContext(Context);
   const [formdisabled, setformdisabled] = useState(refdata ? true : false);
   const [payload, setpayload] = useState(refdata ? { ...refdata, to: refdata.to.id } : {});
   const nav = useNavigate();
@@ -34,6 +34,12 @@ export default function App({ refdata }) {
       method: "post",
       data: payload,
     });
+
+    if (res.error) {
+      snackbar.setError(res.error);
+      return;
+    }
+
     nav("/exportir/introductionletter", true);
   }
   return (

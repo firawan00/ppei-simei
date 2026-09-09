@@ -79,7 +79,7 @@ export function RShippingInstruction(props) {
       await fetcher({
         method: "get",
         url: auth.user.role.includes("fasilitator")
-          ? `md_shippinginstruction`
+          ? `md_shippinginstruction?available=1`
           : `md_shippinginstruction?from=${auth.user.id}&status=approved`,
       })
     );
@@ -100,7 +100,7 @@ export function RShippingInstruction(props) {
       >
         {data.map((d) => (
           <MenuItem key={d.id} value={d}>
-            {`#${d.docref} - to ${d.to.name}`}
+            {`#${d.docref} · ${d.date || d.created_at?.slice(0, 10)} · from ${d.from.name} · ID ${d.id}`}
           </MenuItem>
         ))}
       </TextField>
