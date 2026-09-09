@@ -15,4 +15,9 @@ class MD_shippinginstruction extends Model4NF
 
     }
 
+    public function deliveryOrder()
+    {
+        return $this->hasOne(MD_deliveryorder::class, 'si_id');
+    }
+
 }

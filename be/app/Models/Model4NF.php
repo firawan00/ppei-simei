@@ -18,17 +18,13 @@ class Model4NF extends Model
 
     public function setIdAttribute($value)
     {
-        if (is_null($value)) {
-            $latest = DB::table($this->getTable())->latest('id')->first();
-            if ($latest) {
-                $latest = $latest->id + 1;
-            } else {
-                $latest = 1;
-            }
-
-            $this->attributes['id'] = $latest;
+        if (!is_null($value)) {
+            $this->attributes['id'] = $value;
+            return;
         }
 
+        $latest = DB::table($this->getTable())->latest('id')->first();
+        $this->attributes['id'] = $latest ? $latest->id + 1 : 1;
     }
 
     // public function setDateAttribute($value)
@@ -39,12 +35,14 @@ class Model4NF extends Model
     public function scopeFilter($query, $request)
     {
         if (isset($request['from'])) {
-
             $query->Where('from', $request['from']);
         }
 
-        if (isset($request['status'])) {
+        if (isset($request['to'])) {
+            $query->where('to', $request['to']);
+        }
 
+        if (isset($request['status'])) {
             $query->Where('status', $request['status']);
         }
 
